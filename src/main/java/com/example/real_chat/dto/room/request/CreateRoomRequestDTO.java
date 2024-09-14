@@ -1,4 +1,4 @@
-package com.example.real_chat.dto;
+package com.example.real_chat.dto.room.request;
 
 import lombok.Getter;
 

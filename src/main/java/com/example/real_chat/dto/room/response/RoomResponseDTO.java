@@ -1,4 +1,4 @@
-package com.example.real_chat.dto;
+package com.example.real_chat.dto.room.response;
 
 import com.example.real_chat.entity.Room;
 import lombok.AllArgsConstructor;

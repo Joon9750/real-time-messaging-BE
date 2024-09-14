@@ -1,19 +1,17 @@
 package com.example.real_chat.controller;
 
-import com.example.real_chat.dto.CreateRoomRequestDTO;
-import com.example.real_chat.dto.CreateRoomResponseDTO;
-import com.example.real_chat.dto.RoomResponseDTO;
+import com.example.real_chat.dto.room.request.CreateRoomRequestDTO;
+import com.example.real_chat.dto.room.response.CreateRoomResponseDTO;
+import com.example.real_chat.dto.room.response.RoomResponseDTO;
 import com.example.real_chat.entity.Room;
 import com.example.real_chat.service.RoomService;
 
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 @RestController
 @RequiredArgsConstructor
