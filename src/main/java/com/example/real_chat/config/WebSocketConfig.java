@@ -20,9 +20,12 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
+//        registry.addEndpoint("/ws-real-chat")
+//                .setAllowedOrigins("http://localhost:8080")
+//                .withSockJS();
+
         registry.addEndpoint("/ws-real-chat")
-                .setAllowedOrigins("http://localhost:8080")
-                .withSockJS();
+                .setAllowedOriginPatterns("*");
         // 주소 : ws://localhost:8080/ws-real-chat
     }
 }

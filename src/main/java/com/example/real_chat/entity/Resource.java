@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 @Entity
@@ -22,5 +23,6 @@ public abstract class Resource<T> extends BaseTimeEntity {
 
     private String sender;
 
+    @Setter
     private T data;
 }
