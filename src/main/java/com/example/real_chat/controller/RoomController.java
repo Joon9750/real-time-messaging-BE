@@ -19,7 +19,7 @@ public class RoomController {
 
     private final RoomService roomService;
 
-    @PostMapping("api/v1/room")
+    @PostMapping("api/v1/room") // localhost:8080/api/v1/room
     public ResponseEntity<CreateRoomResponseDTO> saveRoom(
             @RequestBody @Valid CreateRoomRequestDTO createRoomRequestDTO
     ) {
