@@ -25,8 +25,14 @@ public class RoomRespoitoryImpl implements RoomRepository {
     }
 
     @Override
-    public void delete(Long id) {
-        entityManager.remove(entityManager.find(Room.class, id));
+    public void delete(Long id) throws RuntimeException {
+        Room room = entityManager.find(Room.class, id);
+        if (room.isDeleted()) throw new RuntimeException();
+        else {
+            room.delete();
+        }
+        // entityManager에서는 지우지 않고 isdeleted로만 판별
+        // entityManager.remove(entityManager.find(Room.class, id));
     }
 
     @Override

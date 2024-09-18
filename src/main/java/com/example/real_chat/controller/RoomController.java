@@ -15,11 +15,12 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping(value = "api/v1/room")
 public class RoomController {
 
     private final RoomService roomService;
 
-    @PostMapping("api/v1/room") // localhost:8080/api/v1/room
+    @PostMapping() // localhost:8080/api/v1/room
     public ResponseEntity<CreateRoomResponseDTO> saveRoom(
             @RequestBody CreateRoomRequestDTO createRoomRequestDTO
     ) {
@@ -28,7 +29,7 @@ public class RoomController {
         return ResponseEntity.ok().body(new CreateRoomResponseDTO(roomId));
     }
 
-    @GetMapping("api/v1/room/{id}") // localhost:8080/api/v1/room/1
+    @GetMapping("/{id}") // localhost:8080/api/v1/room/1
     public ResponseEntity<RoomResponseDTO> getRoom(
             @PathVariable Long id
     ) {
@@ -36,7 +37,7 @@ public class RoomController {
         return ResponseEntity.ok().body(RoomResponseDTO.from(room));
     }
 
-    @GetMapping("api/v1/room") // localhost:8080/api/v1/room
+    @GetMapping() // localhost:8080/api/v1/room
     public ResponseEntity<List<RoomResponseDTO>> getAllRooms() {
         List<Room> rooms = roomService.getAllRooms();
         List<RoomResponseDTO> collect =  rooms.stream()
@@ -44,5 +45,14 @@ public class RoomController {
                 .map(m-> RoomResponseDTO.from(m))
                 .toList();
         return ResponseEntity.ok().body(collect);
+    }
+
+    @DeleteMapping("/{id}") // localhost:8080/api/v1/room/1
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity deleteRoom(
+            @PathVariable Long id
+    ) {
+        roomService.deleteRoom(id);
+        return ResponseEntity.ok().build();
     }
 }
