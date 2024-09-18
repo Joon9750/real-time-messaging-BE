@@ -45,6 +45,4 @@ public class RoomController {
                 .toList();
         return ResponseEntity.ok().body(collect);
     }
-
-
 }

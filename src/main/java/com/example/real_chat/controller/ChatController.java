@@ -1,6 +1,5 @@
 package com.example.real_chat.controller;
 
-import com.example.real_chat.dto.ChatMessageRequestDTO;
 import com.example.real_chat.entity.Message;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -9,7 +8,7 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 @RequiredArgsConstructor
-public class MessageController {
+public class ChatController {
 
     private final SimpMessagingTemplate simpMessagingTemplate;
 

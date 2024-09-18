@@ -1,4 +1,4 @@
-package com.example.real_chat.dto;
+package com.example.real_chat.dto.chat;
 
 import com.example.real_chat.entity.Resource;
 import lombok.Getter;
@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ChatMessageRequestDTO<T> {
+public class ChatRequestDTO<T> {
 
     private Long roomId;
     private String sender;
