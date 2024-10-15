@@ -1,5 +1,6 @@
 package com.example.real_chat.controller;
 
+import com.example.real_chat.dto.Result;
 import com.example.real_chat.dto.room.request.CreateRoomRequestDTO;
 import com.example.real_chat.dto.room.response.CreateRoomResponseDTO;
 import com.example.real_chat.dto.room.response.RoomResponseDTO;
@@ -38,13 +39,13 @@ public class RoomController {
     }
 
     @GetMapping() // localhost:8080/api/v1/room
-    public ResponseEntity<List<RoomResponseDTO>> getAllRooms() {
+    public ResponseEntity<Result<List<RoomResponseDTO>>> getAllRooms() {
         List<Room> rooms = roomService.getAllRooms();
         List<RoomResponseDTO> collect =  rooms.stream()
                 .filter(m -> !m.isDeleted())
                 .map(m-> RoomResponseDTO.from(m))
                 .toList();
-        return ResponseEntity.ok().body(collect);
+        return ResponseEntity.ok().body(new Result(collect));
     }
 
     @DeleteMapping("/{id}") // localhost:8080/api/v1/room/1
