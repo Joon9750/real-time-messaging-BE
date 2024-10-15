@@ -36,4 +36,6 @@ public abstract class BaseTimeEntity {
     public boolean isDeleted() {
         return this.deletedAt != null;
     }
+
+    public boolean isModified() { return false}
 }
