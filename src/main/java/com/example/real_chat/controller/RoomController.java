@@ -1,6 +1,6 @@
 package com.example.real_chat.controller;
 
-import com.example.real_chat.dto.Result;
+import com.example.real_chat.dto.common.Result;
 import com.example.real_chat.dto.room.request.CreateRoomRequestDTO;
 import com.example.real_chat.dto.room.response.CreateRoomResponseDTO;
 import com.example.real_chat.dto.room.response.RoomResponseDTO;

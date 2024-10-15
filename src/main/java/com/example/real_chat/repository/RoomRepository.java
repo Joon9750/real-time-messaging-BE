@@ -7,10 +7,7 @@ import java.util.List;
 public interface RoomRepository {
 
     Long save(ChatRoom chatRoom);
-
     ChatRoom findById(Long id);
-
     void delete(Long id);
-
     List<ChatRoom> findAll();
 }
