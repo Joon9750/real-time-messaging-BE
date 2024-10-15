@@ -1,6 +1,6 @@
 package com.example.real_chat.repository;
 
-import com.example.real_chat.entity.Room;
+import com.example.real_chat.entity.ChatRoom;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
@@ -14,30 +14,30 @@ public class RoomRespoitoryImpl implements RoomRepository {
     private EntityManager entityManager;
 
     @Override
-    public Long save(Room room) {
-        entityManager.persist(room);
-        return room.getId();
+    public Long save(ChatRoom chatRoom) {
+        entityManager.persist(chatRoom);
+        return chatRoom.getId();
     }
 
     @Override
-    public Room findById(Long id) {
-        return entityManager.find(Room.class, id);
+    public ChatRoom findById(Long id) {
+        return entityManager.find(ChatRoom.class, id);
     }
 
     @Override
     public void delete(Long id) throws RuntimeException {
-        Room room = entityManager.find(Room.class, id);
-        if (room.isDeleted()) throw new RuntimeException();
+        ChatRoom chatRoom = entityManager.find(ChatRoom.class, id);
+        if (chatRoom.isDeleted()) throw new RuntimeException();
         else {
-            room.delete();
+            chatRoom.delete();
         }
         // entityManager에서는 지우지 않고 isdeleted로만 판별
         // entityManager.remove(entityManager.find(Room.class, id));
     }
 
     @Override
-    public List<Room> findAll() {
-        return entityManager.createQuery("select m from Room m", Room.class)
+    public List<ChatRoom> findAll() {
+        return entityManager.createQuery("select m from ChatRoom m", ChatRoom.class)
                 .getResultList();
     }
 }

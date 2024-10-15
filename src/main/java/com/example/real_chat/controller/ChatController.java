@@ -17,11 +17,11 @@ public class ChatController {
         // Message Entity -> ChatMessageRequestDTO로 변환해서 사용해야 함
         System.out.println("연결성공");
         chatMessage.setData(chatMessage.getSender() + "님이 채팅방에 참여하셨습니다.");
-        simpMessagingTemplate.convertAndSend("/sub/chat/room/" + chatMessage.getRoom(), chatMessage);
+        simpMessagingTemplate.convertAndSend("/sub/chat/room/" + chatMessage.getChatRoom(), chatMessage);
     }
 
     @MessageMapping(value = "/chat/message")
     public void message(Message chatMessage) {
-        simpMessagingTemplate.convertAndSend("/sub/chat/room/"+chatMessage.getRoom(),chatMessage);
+        simpMessagingTemplate.convertAndSend("/sub/chat/room/"+chatMessage.getChatRoom(),chatMessage);
     }
 }

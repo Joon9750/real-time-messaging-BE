@@ -1,6 +1,6 @@
 package com.example.real_chat.dto.room.response;
 
-import com.example.real_chat.entity.Room;
+import com.example.real_chat.entity.ChatRoom;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -11,7 +11,7 @@ public class RoomResponseDTO {
     private Long id;
     private String name;
 
-    public static RoomResponseDTO from(Room room) {
-        return new RoomResponseDTO(room.getId(), room.getName());
+    public static RoomResponseDTO from(ChatRoom chatRoom) {
+        return new RoomResponseDTO(chatRoom.getId(), chatRoom.getName());
     }
 }

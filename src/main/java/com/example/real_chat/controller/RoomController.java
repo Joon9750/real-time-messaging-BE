@@ -4,7 +4,7 @@ import com.example.real_chat.dto.Result;
 import com.example.real_chat.dto.room.request.CreateRoomRequestDTO;
 import com.example.real_chat.dto.room.response.CreateRoomResponseDTO;
 import com.example.real_chat.dto.room.response.RoomResponseDTO;
-import com.example.real_chat.entity.Room;
+import com.example.real_chat.entity.ChatRoom;
 import com.example.real_chat.service.RoomService;
 
 import lombok.RequiredArgsConstructor;
@@ -25,8 +25,8 @@ public class RoomController {
     public ResponseEntity<CreateRoomResponseDTO> saveRoom(
             @RequestBody CreateRoomRequestDTO createRoomRequestDTO
     ) {
-        Room room = Room.createRoom(createRoomRequestDTO.getName());
-        Long roomId = roomService.addRoom(room);
+        ChatRoom chatRoom = ChatRoom.createRoom(createRoomRequestDTO.getName());
+        Long roomId = roomService.addRoom(chatRoom);
         return ResponseEntity.ok().body(new CreateRoomResponseDTO(roomId));
     }
 
@@ -34,14 +34,14 @@ public class RoomController {
     public ResponseEntity<RoomResponseDTO> getRoom(
             @PathVariable Long id
     ) {
-        Room room = roomService.getRoom(id);
-        return ResponseEntity.ok().body(RoomResponseDTO.from(room));
+        ChatRoom chatRoom = roomService.getRoom(id);
+        return ResponseEntity.ok().body(RoomResponseDTO.from(chatRoom));
     }
 
     @GetMapping() // localhost:8080/api/v1/room
     public ResponseEntity<Result<List<RoomResponseDTO>>> getAllRooms() {
-        List<Room> rooms = roomService.getAllRooms();
-        List<RoomResponseDTO> collect =  rooms.stream()
+        List<ChatRoom> chatRooms = roomService.getAllRooms();
+        List<RoomResponseDTO> collect =  chatRooms.stream()
                 .filter(m -> !m.isDeleted())
                 .map(m-> RoomResponseDTO.from(m))
                 .toList();

@@ -1,7 +1,6 @@
 package com.example.real_chat.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,11 +14,12 @@ import lombok.experimental.SuperBuilder;
 public abstract class Resource<T> extends BaseTimeEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "resoure_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "room_id")
-    private Room room;
+    private ChatRoom chatRoom;
 
     private String sender;
 

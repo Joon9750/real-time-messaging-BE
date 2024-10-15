@@ -8,16 +8,11 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @SuperBuilder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class Message extends Resource<String> {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "chat_id")
-    private Long id;
-
-    public static Message createMessage(Room room, String sender, String textData) {
+    public static Message createMessage(ChatRoom chatRoom, String sender, String textData) {
         return Message.builder()
-                .room(room)
+                .chatRoom(chatRoom)
                 .sender(sender)
                 .data(textData)
                 .build();

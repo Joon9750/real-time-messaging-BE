@@ -1,6 +1,6 @@
 package com.example.real_chat.service;
 
-import com.example.real_chat.entity.Room;
+import com.example.real_chat.entity.ChatRoom;
 import com.example.real_chat.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,11 +15,11 @@ public class RoomService {
 
     private final RoomRepository roomRepository;
 
-    public Long addRoom(Room room) {
-        return roomRepository.save(room);
+    public Long addRoom(ChatRoom chatRoom) {
+        return roomRepository.save(chatRoom);
     }
 
-    public Room getRoom(Long roomId) {
+    public ChatRoom getRoom(Long roomId) {
         return roomRepository.findById(roomId);
     }
 
@@ -27,7 +27,7 @@ public class RoomService {
         roomRepository.delete(roomId);
     }
 
-    public List<Room> getAllRooms() {
+    public List<ChatRoom> getAllRooms() {
         return roomRepository.findAll();
     }
 }
