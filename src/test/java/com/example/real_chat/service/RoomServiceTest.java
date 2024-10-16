@@ -8,7 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 @Transactional
@@ -38,15 +42,36 @@ class RoomServiceTest {
 
     @Test
     void deleteRoom() {
+        // when
+        roomService.deleteRoom(chatRoom1.getId());
+
+        // then
+        assertTrue(chatRoom1.isDeleted());
+        assertFalse(chatRoom2.isDeleted());
+        assertNotNull(roomService.getRoom(chatRoom1.getId()).getDeletedAt());
+        assertThat(roomService.getRoom(chatRoom1.getId()).getId()).isEqualTo(chatRoom1.getId());
     }
 
     @Test
     void getAllRooms() {
+        // when
+        roomService.deleteRoom(chatRoom1.getId());
+        ChatRoom chatRoom3 = ChatRoom.createRoom("thirdRoom");
+        roomService.addRoom(chatRoom3);
+
+        // then
+        List<ChatRoom> rooms = roomService.getAllRooms();
+        assertThat(rooms.size()).isEqualTo(3);
     }
 
     @Test
     void getUnDeletedRooms() {
+        // when
+        roomService.deleteRoom(chatRoom1.getId());
 
+        // then
+        List<ChatRoom> rooms = roomService.getUnDeletedRooms();
+        assertThat(rooms.size()).isEqualTo(1);
     }
 
     @Test
