@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @Transactional
 class RootClientRepositoryImplTest {
 
-    @Autowired RootClientRepositoryImpl rootClientRepository;
+    @Autowired RootClientRepository rootClientRepository;
 
     private RootClient rootClient1;
     private RootClient rootClient2;

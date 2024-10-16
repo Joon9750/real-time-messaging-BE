@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class RoomRespoitoryImpl implements RoomRepository {
+public class RoomRepositoryImpl implements RoomRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
