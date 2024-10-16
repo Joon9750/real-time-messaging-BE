@@ -1,6 +1,6 @@
 package com.example.real_chat.api;
 
-import com.example.real_chat.entity.Message;
+import com.example.real_chat.entity.chat.Message;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;

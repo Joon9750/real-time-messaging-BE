@@ -72,8 +72,7 @@ public class RoomApiController {
             @PathVariable Long id,
             @RequestBody @Valid UpdateRoomRequestDto requestDto
     ) {
-        ChatRoom chatRoom = roomService.getRoom(id);
-        chatRoom.update(requestDto.getName());
+        roomService.updateChatRoom(id, requestDto.getName());
 
         return ResponseEntity.ok(CommonApiResult.createOk("채팅방 이름이 정상적으로 변경되었습니다."));
     }

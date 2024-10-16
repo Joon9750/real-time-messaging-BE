@@ -23,11 +23,12 @@ public class RootClientService {
     }
 
     public void deleteRootClient(Long id) {
+        RootClient client = rootClientRepository.findById(id); // 옵셔널 처리해야해!
         rootClientRepository.deleteById(id);
     }
 
-    public void updateRootClient(Long rootClientId, String id, String passward, String name) {
+    public void updateRootClient(Long rootClientId, String id, String password, String name) {
         RootClient rootClient = rootClientRepository.findById(rootClientId);
-        rootClient.update(id, passward, name); // 이걸로 변경감지 되지 않나? -> 변경 감지 적용 안되네
+        rootClient.update(id, password, name); // 이걸로 변경감지 되지 않나? -> 변경 감지 적용 안되네
     }
 }

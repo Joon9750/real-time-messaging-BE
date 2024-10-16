@@ -56,13 +56,13 @@ public class RootClientApiController {
     @PatchMapping("/{id}")
     public ResponseEntity<CommonApiResult> updateRootClient(
             @PathVariable Long id,
-            @RequestBody @Valid UpdateRootClientRequestDto requstDto
+            @RequestBody @Valid UpdateRootClientRequestDto requestDto
     ) {
-        RootClient rootClient = rootClientService.getRootClient(id);
-        rootClient.update(
-                requstDto.getRootClientId(),
-                requstDto.getRootClientPassword(),
-                requstDto.getRootClientName()
+        rootClientService.updateRootClient(
+                id,
+                requestDto.getRootClientId(),
+                requestDto.getRootClientPassword(),
+                requestDto.getRootClientName()
         );
 
         return ResponseEntity.ok(CommonApiResult.createOk("루트 클라이언트가 정상적으로 수정 되었습니다."));

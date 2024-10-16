@@ -1,5 +1,6 @@
-package com.example.real_chat.entity;
+package com.example.real_chat.entity.chat;
 
+import com.example.real_chat.entity.ChatRoom;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;

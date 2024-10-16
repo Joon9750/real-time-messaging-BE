@@ -1,6 +1,6 @@
 package com.example.real_chat.dto.chat;
 
-import com.example.real_chat.entity.Resource;
+import com.example.real_chat.entity.chat.Resource;
 import lombok.Getter;
 import lombok.Setter;
 
