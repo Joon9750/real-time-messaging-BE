@@ -1,10 +1,13 @@
 package com.example.real_chat.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
+import lombok.*;
 
 @Entity
 @Getter
+@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class RootClient extends BaseTimeEntity {
 
     @Id
@@ -17,4 +20,18 @@ public class RootClient extends BaseTimeEntity {
     private String clientPassword;
 
     private String clientName;
+
+    public static RootClient createRootClient(String clientId, String clientPassword, String clientName) {
+        return RootClient.builder()
+                .clientId(clientId)
+                .clientPassword(clientPassword)
+                .clientName(clientName)
+                .build();
+    }
+
+    public void update(String clientId, String clientPassword, String clientName) {
+        this.clientId = clientId;
+        this.clientPassword = clientPassword;
+        this.clientName = clientName;
+    }
 }

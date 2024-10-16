@@ -1,4 +1,4 @@
-package com.example.real_chat.controller;
+package com.example.real_chat.api;
 
 import com.example.real_chat.entity.Message;
 import lombok.RequiredArgsConstructor;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 @RequiredArgsConstructor
-public class ChatController {
+public class ChatApiController {
 
     private final SimpMessagingTemplate simpMessagingTemplate;
 
