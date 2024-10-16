@@ -31,6 +31,10 @@ public class RoomService {
         return roomRepository.findAll();
     }
 
+    public List<ChatRoom> getUnDeletedRooms() {
+        return roomRepository.findUnDeletedRooms();
+    }
+
     public void updateChatRoom(Long roomId, String name) {
         ChatRoom room = roomRepository.findById(roomId);
         room.update(name);

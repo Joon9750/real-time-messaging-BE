@@ -38,4 +38,10 @@ public class RoomRespoitoryImpl implements RoomRepository {
         return entityManager.createQuery("select m from ChatRoom m", ChatRoom.class)
                 .getResultList();
     }
+
+    @Override
+    public List<ChatRoom> findUnDeletedRooms() {
+        return entityManager.createQuery("select m from ChatRoom m where m.deletedAt is null", ChatRoom.class)
+                .getResultList();
+    }
 }

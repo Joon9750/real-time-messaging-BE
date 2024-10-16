@@ -46,12 +46,15 @@ public class RoomApiController {
     @GetMapping() // localhost:8080/api/v1/room
     public ResponseEntity<Result<List<RoomResponseDTO>>> getAllRooms() {
         List<ChatRoom> chatRooms = roomService.getAllRooms();
-        List<RoomResponseDTO> collect =  chatRooms.stream()
-                .filter(m -> !m.isDeleted())
-                .map(m-> RoomResponseDTO.from(m))
-                .toList();
 
-        return ResponseEntity.ok().body(new Result(collect));
+        return ResponseEntity.ok().body(new Result(chatRooms));
+    }
+
+    @GetMapping("/undeleted") // localhost:8080/api/v1/room/undeleted
+    public ResponseEntity<Result<List<RoomResponseDTO>>> getUnDeleteRooms() {
+        List<ChatRoom> unDeletedRooms = roomService.getUnDeletedRooms();
+
+        return ResponseEntity.ok().body(new Result(unDeletedRooms));
     }
 
     @DeleteMapping("/{id}") // localhost:8080/api/v1/room/1

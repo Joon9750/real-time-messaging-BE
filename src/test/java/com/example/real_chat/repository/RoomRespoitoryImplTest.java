@@ -99,4 +99,14 @@ class RoomRespoitoryImplTest {
         // then
         assertThat(chatRooms).hasSize(2);
     }
+
+    @Test
+    void findUnDeletedRooms() {
+        // when
+        roomRespoitory.delete(chatRoom1.getId());
+        List<ChatRoom> chatRooms = roomRespoitory.findUnDeletedRooms();
+
+        // then
+        assertThat(chatRooms).hasSize(1);
+    }
 }

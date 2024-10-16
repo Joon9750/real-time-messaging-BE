@@ -1,6 +1,7 @@
 package com.example.real_chat.service;
 
 import com.example.real_chat.entity.ChatRoom;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +16,24 @@ class RoomServiceTest {
 
     @Autowired private RoomService roomService;
 
-    @Test
-    void addRoom() {
+    private ChatRoom chatRoom1;
+    private ChatRoom chatRoom2;
+
+    @BeforeEach
+    void setUp() {
+        // given
+        this.chatRoom1 = ChatRoom.createRoom("firstRoom");
+        this.chatRoom2 = ChatRoom.createRoom("secondRoom");
+
+        roomService.addRoom(chatRoom1);
+        roomService.addRoom(chatRoom2);
     }
 
     @Test
-    void getRoom() {
+    void addAndGetRoom() {
+        // then
+        assertThat(roomService.getRoom(chatRoom1.getId())).isEqualTo(chatRoom1);
+        assertThat(roomService.getRoom(chatRoom2.getId())).isEqualTo(chatRoom2);
     }
 
     @Test
@@ -32,20 +45,18 @@ class RoomServiceTest {
     }
 
     @Test
+    void getUnDeletedRooms() {
+
+    }
+
+    @Test
     @DisplayName("채팅방 이름이 수정되어야 성공")
     void updateChatRoom() {
-        // given
-        ChatRoom chatRoom1 = ChatRoom.createRoom("firstRoom");
-        ChatRoom chatRoom2 = ChatRoom.createRoom("secondRoom");
-        roomService.addRoom(chatRoom1);
-        roomService.addRoom(chatRoom2);
-
         // when
-        roomService.updateChatRoom(chatRoom1.getId(), "newFirstRoom");
-        roomService.updateChatRoom(chatRoom2.getId(), "newSecondRoom");
+        roomService.updateChatRoom(this.chatRoom1.getId(), "newFirstRoom");
 
         // then
-        assertThat(chatRoom1.getName()).isEqualTo("newFirstRoom");
-        assertThat(chatRoom2.getName()).isEqualTo("newSecondRoom");
+        assertThat(this.chatRoom1.getName()).isEqualTo("newFirstRoom");
+        assertThat(this.chatRoom2.getName()).isEqualTo("secondRoom");
     }
 }

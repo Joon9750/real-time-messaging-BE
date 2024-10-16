@@ -10,4 +10,5 @@ public interface RoomRepository {
     ChatRoom findById(Long id);
     void delete(Long id);
     List<ChatRoom> findAll();
+    List<ChatRoom> findUnDeletedRooms();
 }
