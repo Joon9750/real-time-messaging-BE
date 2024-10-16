@@ -24,7 +24,7 @@ public class RoomApiController {
 
     private final RoomService roomService;
 
-    @PostMapping() // localhost:8080/api/v1/room
+    @PostMapping()
     public ResponseEntity<CreateRoomResponseDTO> createRoom(
             @RequestBody @Valid CreateRoomRequestDto createRoomRequestDTO
     ) {
@@ -34,7 +34,7 @@ public class RoomApiController {
         return ResponseEntity.ok().body(new CreateRoomResponseDTO(roomId));
     }
 
-    @GetMapping("/{id}") // localhost:8080/api/v1/room/1
+    @GetMapping("/{id}")
     public ResponseEntity<RoomResponseDTO> getRoom(
             @PathVariable Long id
     ) {
@@ -43,21 +43,21 @@ public class RoomApiController {
         return ResponseEntity.ok().body(RoomResponseDTO.from(chatRoom));
     }
 
-    @GetMapping() // localhost:8080/api/v1/room
+    @GetMapping()
     public ResponseEntity<Result<List<RoomResponseDTO>>> getAllRooms() {
         List<ChatRoom> chatRooms = roomService.getAllRooms();
 
         return ResponseEntity.ok().body(new Result(chatRooms));
     }
 
-    @GetMapping("/undeleted") // localhost:8080/api/v1/room/undeleted
+    @GetMapping("/undeleted")
     public ResponseEntity<Result<List<RoomResponseDTO>>> getUnDeleteRooms() {
         List<ChatRoom> unDeletedRooms = roomService.getUnDeletedRooms();
 
         return ResponseEntity.ok().body(new Result(unDeletedRooms));
     }
 
-    @DeleteMapping("/{id}") // localhost:8080/api/v1/room/1
+    @DeleteMapping("/{id}")
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<CommonApiResult> deleteRoom(
             @PathVariable Long id
@@ -67,7 +67,7 @@ public class RoomApiController {
         return ResponseEntity.ok(CommonApiResult.createOk("채팅방이 정상적으로 삭제 되었습니다."));
     }
 
-    @PatchMapping("/{id}") // localhost:8080/api/v1/room/1
+    @PatchMapping("/{id}")
     public ResponseEntity<CommonApiResult> updateRoom(
             @PathVariable Long id,
             @RequestBody @Valid UpdateRoomRequestDto requestDto
