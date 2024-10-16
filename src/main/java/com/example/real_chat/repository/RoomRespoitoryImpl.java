@@ -31,8 +31,6 @@ public class RoomRespoitoryImpl implements RoomRepository {
         else {
             chatRoom.delete();
         }
-        // entityManager에서는 지우지 않고 isdeleted로만 판별
-        // entityManager.remove(entityManager.find(Room.class, id));
     }
 
     @Override
