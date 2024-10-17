@@ -23,7 +23,7 @@ Sendbird 채팅 솔루션의 가격이 부담되는<br/>
 - Gradle project
 - Springboot 3.x
 - Java 21
-- Spring Data Jpa
+- Jpa
 - Spring WebSocket with STOMP protocol
 - Apache Kafka for message broker
 - H2 Database for testing, 아직 배포에 사용할 DB는 미정
