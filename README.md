@@ -20,7 +20,7 @@ Sendbird 채팅 솔루션의 가격이 부담되는<br/>
 - 실시간 채팅에 참여할 회원을 등록하고 관리합니다.
 
 ## 기술 스택
-- gradle project
+- Gradle project
 - Springboot 3.x
 - Java 21
 - Spring Data Jpa
