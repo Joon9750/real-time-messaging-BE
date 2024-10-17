@@ -30,5 +30,6 @@ Sendbird 채팅 솔루션의 가격이 부담되는<br/>
 
 ## 기술적 도전
 - '실시간성'을 살리기 위해 풀링이나 롱풀링 방식이 아닌 소켓 프로그래밍으로 채팅 기능 구현
-- OSIV 설정을 끄고 Command(명령)와 Query 분리하는 CQS(Command Query Separation) Pattern 적용
+- DB 커넥션 풀이 마르지 않기 위해 OSIV OFF
+- Command(명령)와 Query 분리하는 CQS(Command Query Separation) Pattern 적용
 - 휘발성인 simpMessagingTemplate을 kafka message broker로 대체
