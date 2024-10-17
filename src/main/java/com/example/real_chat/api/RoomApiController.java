@@ -40,21 +40,21 @@ public class RoomApiController {
     ) {
         ChatRoom chatRoom = roomService.getRoom(id);
 
-        return ResponseEntity.ok().body(RoomResponseDTO.from(chatRoom));
+        return ResponseEntity.ok().body(new RoomResponseDTO(id, chatRoom.getName()));
     }
 
     @GetMapping()
-    public ResponseEntity<Result<List<RoomResponseDTO>>> getAllRooms() {
+    public ResponseEntity<Result<?>> getAllRooms() {
         List<ChatRoom> chatRooms = roomService.getAllRooms();
 
-        return ResponseEntity.ok().body(new Result(chatRooms));
+        return ResponseEntity.ok().body(new Result<>(chatRooms));
     }
 
     @GetMapping("/undeleted")
-    public ResponseEntity<Result<List<RoomResponseDTO>>> getUnDeleteRooms() {
+    public ResponseEntity<Result<?>> getUnDeleteRooms() {
         List<ChatRoom> unDeletedRooms = roomService.getUnDeletedRooms();
 
-        return ResponseEntity.ok().body(new Result(unDeletedRooms));
+        return ResponseEntity.ok().body(new Result<>(unDeletedRooms));
     }
 
     @DeleteMapping("/{id}")
