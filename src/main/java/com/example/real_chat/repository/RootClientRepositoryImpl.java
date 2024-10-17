@@ -25,11 +25,4 @@ public class RootClientRepositoryImpl implements RootClientRepository {
         RootClient rootClient = entityManager.find(RootClient.class, id);
         return Optional.ofNullable(rootClient);
     }
-
-    @Override
-    public void deleteById(Long id) {
-        RootClient rootClient = entityManager.find(RootClient.class, id);
-        if (rootClient.isDeleted()) throw new RuntimeException();
-        else rootClient.delete();
-    }
 }

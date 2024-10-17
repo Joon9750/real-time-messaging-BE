@@ -20,7 +20,7 @@ public class UserService {
     public void deleteUser(Long userId) {
         User user = userRepository.findById(userId).orElseThrow();
         if (user.isDeleted()) throw new RuntimeException();
-        else userRepository.deleteById(userId);
+        else user.delete();
     }
 
     public User getUserById(Long userId) {

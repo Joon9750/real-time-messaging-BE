@@ -9,8 +9,6 @@ public interface UserRepository {
 
     Long save(User user);
 
-    void deleteById(Long id);
-
     Optional<User> findById(Long id);
     Optional<User> findByUsername(String username);
     Optional<List<User>> findAll();
