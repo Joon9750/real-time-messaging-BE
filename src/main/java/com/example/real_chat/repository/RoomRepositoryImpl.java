@@ -30,9 +30,7 @@ public class RoomRepositoryImpl implements RoomRepository {
     public void delete(Long id) throws RuntimeException {
         ChatRoom chatRoom = entityManager.find(ChatRoom.class, id);
         if (chatRoom.isDeleted()) throw new RuntimeException();
-        else {
-            chatRoom.delete();
-        }
+        else chatRoom.delete();
     }
 
     @Override

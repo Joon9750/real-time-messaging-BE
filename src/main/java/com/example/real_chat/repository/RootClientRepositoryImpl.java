@@ -30,8 +30,6 @@ public class RootClientRepositoryImpl implements RootClientRepository {
     public void deleteById(Long id) {
         RootClient rootClient = entityManager.find(RootClient.class, id);
         if (rootClient.isDeleted()) throw new RuntimeException();
-        else {
-            rootClient.delete();
-        }
+        else rootClient.delete();
     }
 }
