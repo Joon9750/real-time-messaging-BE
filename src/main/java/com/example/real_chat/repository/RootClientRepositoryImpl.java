@@ -1,9 +1,8 @@
 package com.example.real_chat.repository;
 
-import com.example.real_chat.entity.RootClient;
+import com.example.real_chat.entity.rootClient.RootClient;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.criteria.Root;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;

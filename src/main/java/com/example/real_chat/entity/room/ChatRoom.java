@@ -1,5 +1,7 @@
-package com.example.real_chat.entity;
+package com.example.real_chat.entity.room;
 
+import com.example.real_chat.entity.rootClient.RootClient;
+import com.example.real_chat.entity.base.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.*;
 

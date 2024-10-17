@@ -1,6 +1,6 @@
 package com.example.real_chat.service;
 
-import com.example.real_chat.entity.User;
+import com.example.real_chat.entity.user.User;
 import com.example.real_chat.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
