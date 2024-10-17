@@ -27,14 +27,6 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public Optional<User> findByUsername(String userName) {
-        User user = entityManager.createQuery("select u from User u where u.userName = :userName", User.class)
-                .setParameter("userName", userName)
-                .getSingleResult();
-        return Optional.ofNullable(user);
-    }
-
-    @Override
     public Optional<List<User>> findAll() {
         List<User> users = entityManager.createQuery("select u from User u", User.class)
                 .getResultList();

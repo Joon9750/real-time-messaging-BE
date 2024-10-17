@@ -18,6 +18,12 @@ public class User extends BaseTimeEntity {
     @JoinColumn(name = "rootclient_id")
     private RootClient client;
 
+    public static User create(String name) {
+        User user = new User();
+        user.userName = name;
+        return user;
+    }
+
     public void update(String name) {
         this.userName = name;
     }

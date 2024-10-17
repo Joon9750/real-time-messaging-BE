@@ -10,8 +10,4 @@ public class RoomResponseDTO {
 
     private Long id;
     private String name;
-
-    public static RoomResponseDTO from(ChatRoom chatRoom) {
-        return new RoomResponseDTO(chatRoom.getId(), chatRoom.getName());
-    }
 }
