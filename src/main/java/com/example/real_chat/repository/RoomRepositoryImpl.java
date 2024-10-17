@@ -27,13 +27,6 @@ public class RoomRepositoryImpl implements RoomRepository {
     }
 
     @Override
-    public void delete(Long id) throws RuntimeException {
-        ChatRoom chatRoom = entityManager.find(ChatRoom.class, id);
-        if (chatRoom.isDeleted()) throw new RuntimeException();
-        else chatRoom.delete();
-    }
-
-    @Override
     public Optional<List<ChatRoom>> findAll() {
         List<ChatRoom> chatRooms = entityManager.createQuery("select m from ChatRoom m", ChatRoom.class)
                 .getResultList();

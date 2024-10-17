@@ -24,7 +24,8 @@ public class RootClientService {
 
     public void deleteRootClient(Long id) {
         RootClient client = rootClientRepository.findById(id).orElseThrow();
-        rootClientRepository.deleteById(id);
+        if (client.isDeleted()) throw new RuntimeException();
+        else client.delete();
     }
 
     public void updateRootClient(Long rootClientId, String id, String password, String name) {

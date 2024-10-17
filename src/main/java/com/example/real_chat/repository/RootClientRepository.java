@@ -8,7 +8,5 @@ public interface RootClientRepository {
 
     Long save(RootClient rootClient);
 
-    void deleteById(Long id);
-
     Optional<RootClient> findById(Long id);
 }

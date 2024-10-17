@@ -9,8 +9,6 @@ public interface RoomRepository {
 
     Long save(ChatRoom chatRoom);
 
-    void delete(Long id);
-
     Optional<ChatRoom> findById(Long id);
     Optional<List<ChatRoom>> findAll();
     Optional<List<ChatRoom>> findUnDeletedRooms();

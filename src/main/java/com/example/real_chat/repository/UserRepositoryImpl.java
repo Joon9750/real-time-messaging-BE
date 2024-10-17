@@ -21,13 +21,6 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void deleteById(Long id) {
-        User user = entityManager.find(User.class, id);
-        if (user.isDeleted()) throw new RuntimeException("user is deleted");
-        else user.delete();
-    }
-
-    @Override
     public Optional<User> findById(Long id) {
         User user = entityManager.find(User.class, id);
         return Optional.ofNullable(user);

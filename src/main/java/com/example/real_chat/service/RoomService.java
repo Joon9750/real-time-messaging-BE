@@ -24,7 +24,9 @@ public class RoomService {
     }
 
     public void deleteRoom(Long roomId) {
-        roomRepository.delete(roomId);
+        ChatRoom chatRoom = roomRepository.findById(roomId).orElseThrow();
+        if (chatRoom.isDeleted()) throw new RuntimeException();
+        else chatRoom.delete();
     }
 
     public List<ChatRoom> getAllRooms() {
