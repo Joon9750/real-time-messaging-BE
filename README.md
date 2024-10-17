@@ -1,3 +1,5 @@
+![image](https://github.com/user-attachments/assets/03503a57-1987-4747-b965-552232c90929)
+
 # 실시간 채팅 솔루션
 > _updated at 2024.10.17_
 
