@@ -27,3 +27,8 @@ Sendbird 채팅 솔루션의 가격이 부담되는<br/>
 - Spring WebSocket with STOMP protocol
 - Apache Kafka for message broker
 - H2 Database for testing, 아직 배포에 사용할 DB는 미정
+
+## 기술적 도전
+- 소켓 프로그래밍으로 '실시간' 성격을 살린 채팅방 구현
+- OSIV 설정을 끄고 Command(명령)와 Query 분리하는 CQS(Command Query Separation) Pattern 적용
+- 휘발성인 simpMessagingTemplate을 kafka message broker로 대체
