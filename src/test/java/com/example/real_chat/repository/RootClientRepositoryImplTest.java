@@ -1,7 +1,6 @@
 package com.example.real_chat.repository;
 
-import com.example.real_chat.entity.ChatRoom;
-import com.example.real_chat.entity.RootClient;
+import com.example.real_chat.entity.rootClient.RootClient;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

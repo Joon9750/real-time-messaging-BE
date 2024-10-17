@@ -1,5 +1,6 @@
-package com.example.real_chat.entity;
+package com.example.real_chat.entity.user;
 
+import com.example.real_chat.entity.room.ChatRoom;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

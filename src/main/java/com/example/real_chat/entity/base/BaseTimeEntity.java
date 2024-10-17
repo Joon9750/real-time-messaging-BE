@@ -1,4 +1,4 @@
-package com.example.real_chat.entity;
+package com.example.real_chat.entity.base;
 
 import jakarta.persistence.*;
 import lombok.Getter;

@@ -5,7 +5,7 @@ import com.example.real_chat.dto.rootClient.request.CreateRootClientRequestDto;
 import com.example.real_chat.dto.rootClient.request.UpdateRootClientRequestDto;
 import com.example.real_chat.dto.rootClient.response.CreateRootClientResponseDto;
 import com.example.real_chat.dto.rootClient.response.GetRootClientResponseDto;
-import com.example.real_chat.entity.RootClient;
+import com.example.real_chat.entity.rootClient.RootClient;
 import com.example.real_chat.service.RootClientService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

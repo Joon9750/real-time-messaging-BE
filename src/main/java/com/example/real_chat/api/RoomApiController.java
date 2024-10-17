@@ -6,7 +6,7 @@ import com.example.real_chat.dto.room.request.CreateRoomRequestDto;
 import com.example.real_chat.dto.room.request.UpdateRoomRequestDto;
 import com.example.real_chat.dto.room.response.CreateRoomResponseDTO;
 import com.example.real_chat.dto.room.response.RoomResponseDTO;
-import com.example.real_chat.entity.ChatRoom;
+import com.example.real_chat.entity.room.ChatRoom;
 import com.example.real_chat.service.RoomService;
 
 import jakarta.validation.Valid;

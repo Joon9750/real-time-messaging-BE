@@ -1,6 +1,6 @@
 package com.example.real_chat.repository;
 
-import com.example.real_chat.entity.User;
+import com.example.real_chat.entity.user.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;

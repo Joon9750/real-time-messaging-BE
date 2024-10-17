@@ -1,7 +1,7 @@
 package com.example.real_chat.entity.chat;
 
-import com.example.real_chat.entity.BaseTimeEntity;
-import com.example.real_chat.entity.ChatRoom;
+import com.example.real_chat.entity.base.BaseTimeEntity;
+import com.example.real_chat.entity.room.ChatRoom;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
