@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/03503a57-1987-4747-b965-552232c90929)
+![image](https://github.com/user-attachments/assets/f3b2fccf-4922-4ee9-841a-c038c3da09bf)
 
 # 실시간 채팅 솔루션
 > _updated at 2024.10.17_
