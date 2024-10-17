@@ -12,9 +12,13 @@ public class User extends BaseTimeEntity {
     @Column(name = "user_id")
     private Long id;
 
-    private String username;
+    private String userName;
 
     @ManyToOne
     @JoinColumn(name = "rootclient_id")
     private RootClient client;
+
+    public void update(String name) {
+        this.userName = name;
+    }
 }

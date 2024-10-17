@@ -9,6 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -46,7 +48,7 @@ class RootClientServiceTest {
         RootClient rootClient = RootClient.createRootClient("1", "11111", "hong");
 
         // mocking
-        when(rootClientRepository.findById(id)).thenReturn(rootClient);
+        when(rootClientRepository.findById(id)).thenReturn(Optional.of(rootClient));
 
         // when: 서비스 메서드 호출
         RootClient rootClient1 = rootClientService.getRootClient(id);
@@ -64,7 +66,7 @@ class RootClientServiceTest {
         RootClient rootClient = RootClient.createRootClient("1", "11111", "hong");
 
         // mocking
-        when(rootClientRepository.findById(id)).thenReturn(rootClient);
+        when(rootClientRepository.findById(id)).thenReturn(Optional.of(rootClient));
 
         // when
         rootClientService.deleteRootClient(id);
@@ -85,7 +87,7 @@ class RootClientServiceTest {
         RootClient existingRootClient = Mockito.mock(RootClient.class);
 
         // mocking
-        when(rootClientRepository.findById(id)).thenReturn(existingRootClient);
+        when(rootClientRepository.findById(id)).thenReturn(Optional.of(existingRootClient));
         doNothing().when(existingRootClient).update(newId, newPassword, newName); // mock의 update 메서드 설정
 
         // when

@@ -7,6 +7,8 @@ import java.util.Optional;
 public interface RootClientRepository {
 
     Long save(RootClient rootClient);
-    Optional<RootClient> findById(Long id);
+
     void deleteById(Long id);
+
+    Optional<RootClient> findById(Long id);
 }
