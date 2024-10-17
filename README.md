@@ -23,5 +23,5 @@ Sendbird 채팅 솔루션의 가격이 부담되는<br/>
 - Java 21
 - Spring Data Jpa
 - Spring WebSocket with STOMP protocol
-- H2 Database for testing, 아직 배포에 사용할 DB는 미정
 - Apache Kafka for message broker
+- H2 Database for testing, 아직 배포에 사용할 DB는 미정
