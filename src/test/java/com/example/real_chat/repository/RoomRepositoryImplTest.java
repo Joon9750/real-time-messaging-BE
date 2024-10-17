@@ -48,7 +48,7 @@ class RoomRepositoryImplTest {
     void delete() {
         // when
         roomRepository.delete(chatRoom1.getId());
-        ChatRoom chatRoom1 = roomRepository.findById(this.chatRoom1.getId());
+        ChatRoom chatRoom1 = roomRepository.findById(this.chatRoom1.getId()).orElseThrow();
 
         // then
         assertTrue(chatRoom1.isDeleted());
@@ -60,7 +60,7 @@ class RoomRepositoryImplTest {
     void getIdAfterDelete() {
         // when
         roomRepository.delete(chatRoom1.getId());
-        ChatRoom chatRoom1 = roomRepository.findById(this.chatRoom1.getId());
+        ChatRoom chatRoom1 = roomRepository.findById(this.chatRoom1.getId()).orElseThrow();
 
         // then
         assertEquals(chatRoom1.getId(), this.chatRoom1.getId());
@@ -73,8 +73,8 @@ class RoomRepositoryImplTest {
         roomRepository.delete(chatRoom1.getId());
 
         // then
-        assertNotNull(roomRepository.findById(this.chatRoom1.getId()).getDeletedAt());
-        assertNull(roomRepository.findById(this.chatRoom2.getId()).getDeletedAt());
+        assertNotNull(roomRepository.findById(this.chatRoom1.getId()).orElseThrow().getDeletedAt());
+        assertNull(roomRepository.findById(this.chatRoom2.getId()).orElseThrow().getDeletedAt());
     }
 
     @Test()
@@ -90,7 +90,7 @@ class RoomRepositoryImplTest {
     @Test
     void findAll() {
         // when
-        List<ChatRoom> chatRooms = roomRepository.findAll();
+        List<ChatRoom> chatRooms = roomRepository.findAll().orElseThrow();
 
         // then
         assertThat(chatRooms).hasSize(2);
@@ -100,7 +100,7 @@ class RoomRepositoryImplTest {
     void findUnDeletedRooms() {
         // when
         roomRepository.delete(chatRoom1.getId());
-        List<ChatRoom> chatRooms = roomRepository.findUnDeletedRooms();
+        List<ChatRoom> chatRooms = roomRepository.findUnDeletedRooms().orElseThrow();
 
         // then
         assertThat(chatRooms).hasSize(1);

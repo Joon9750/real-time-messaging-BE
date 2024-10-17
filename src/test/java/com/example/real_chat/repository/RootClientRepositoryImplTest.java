@@ -33,8 +33,8 @@ class RootClientRepositoryImplTest {
     @Test
     void saveAndFindById() {
         // when
-        RootClient rootClient1 = rootClientRepository.findById(this.rootClient1.getId());
-        RootClient rootClient2 = rootClientRepository.findById(this.rootClient2.getId());
+        RootClient rootClient1 = rootClientRepository.findById(this.rootClient1.getId()).orElseThrow();
+        RootClient rootClient2 = rootClientRepository.findById(this.rootClient2.getId()).orElseThrow();
 
         // then
         assertEquals(this.rootClient1.getId(), rootClient1.getId());
@@ -46,7 +46,7 @@ class RootClientRepositoryImplTest {
     void delete() {
         // when
         rootClientRepository.deleteById(rootClient1.getId());
-        RootClient rootClient1 = rootClientRepository.findById(this.rootClient1.getId());
+        RootClient rootClient1 = rootClientRepository.findById(this.rootClient1.getId()).orElseThrow();
 
         // then
         assertTrue(rootClient1.isDeleted());
@@ -58,7 +58,7 @@ class RootClientRepositoryImplTest {
     void getIdAfterDelete() {
         // when
         rootClientRepository.deleteById(rootClient1.getId());
-        RootClient rootClient1 = rootClientRepository.findById(this.rootClient1.getId());
+        RootClient rootClient1 = rootClientRepository.findById(this.rootClient1.getId()).orElseThrow();
 
         // then
         assertEquals(rootClient1.getId(), this.rootClient1.getId());
@@ -71,8 +71,8 @@ class RootClientRepositoryImplTest {
         rootClientRepository.deleteById(rootClient1.getId());
 
         // then
-        assertNotNull(rootClientRepository.findById(this.rootClient1.getId()).getDeletedAt());
-        assertNull(rootClientRepository.findById(this.rootClient2.getId()).getDeletedAt());
+        assertNotNull(rootClientRepository.findById(this.rootClient1.getId()).orElseThrow().getDeletedAt());
+        assertNull(rootClientRepository.findById(this.rootClient2.getId()).orElseThrow().getDeletedAt());
     }
 
     @Test()

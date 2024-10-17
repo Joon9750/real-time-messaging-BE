@@ -2,9 +2,11 @@ package com.example.real_chat.repository;
 
 import com.example.real_chat.entity.RootClient;
 
+import java.util.Optional;
+
 public interface RootClientRepository {
 
     Long save(RootClient rootClient);
-    RootClient findById(Long id);
+    Optional<RootClient> findById(Long id);
     void deleteById(Long id);
 }

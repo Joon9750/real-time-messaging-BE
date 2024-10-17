@@ -19,16 +19,16 @@ public class RootClientService {
     }
 
     public RootClient getRootClient(Long id) {
-        return rootClientRepository.findById(id);
+        return rootClientRepository.findById(id).orElseThrow();
     }
 
     public void deleteRootClient(Long id) {
-        RootClient client = rootClientRepository.findById(id); // 옵셔널 처리해야해!
+        RootClient client = rootClientRepository.findById(id).orElseThrow();
         rootClientRepository.deleteById(id);
     }
 
     public void updateRootClient(Long rootClientId, String id, String password, String name) {
-        RootClient rootClient = rootClientRepository.findById(rootClientId);
-        rootClient.update(id, password, name); // 이걸로 변경감지 되지 않나? -> 변경 감지 적용 안되네
+        RootClient rootClient = rootClientRepository.findById(rootClientId).orElseThrow();
+        rootClient.update(id, password, name);
     }
 }

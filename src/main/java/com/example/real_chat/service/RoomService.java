@@ -20,7 +20,7 @@ public class RoomService {
     }
 
     public ChatRoom getRoom(Long roomId) {
-        return roomRepository.findById(roomId);
+        return roomRepository.findById(roomId).orElseThrow();
     }
 
     public void deleteRoom(Long roomId) {
@@ -28,15 +28,16 @@ public class RoomService {
     }
 
     public List<ChatRoom> getAllRooms() {
-        return roomRepository.findAll();
+        return roomRepository.findAll()
+                .orElseThrow();
     }
 
     public List<ChatRoom> getUnDeletedRooms() {
-        return roomRepository.findUnDeletedRooms();
+        return roomRepository.findUnDeletedRooms().orElseThrow();
     }
 
     public void updateChatRoom(Long roomId, String name) {
-        ChatRoom room = roomRepository.findById(roomId);
+        ChatRoom room = roomRepository.findById(roomId).orElseThrow();
         room.update(name);
     }
 }
