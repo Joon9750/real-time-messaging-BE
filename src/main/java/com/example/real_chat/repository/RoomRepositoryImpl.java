@@ -21,8 +21,9 @@ public class RoomRepositoryImpl implements RoomRepository {
     }
 
     @Override
-    public ChatRoom findById(Long id) {
-        return entityManager.find(ChatRoom.class, id);
+    public Optional<ChatRoom> findById(Long id) {
+        ChatRoom chatRoom = entityManager.find(ChatRoom.class, id);
+        return Optional.ofNullable(chatRoom);
     }
 
     @Override
@@ -35,14 +36,16 @@ public class RoomRepositoryImpl implements RoomRepository {
     }
 
     @Override
-    public List<ChatRoom> findAll() {
-        return entityManager.createQuery("select m from ChatRoom m", ChatRoom.class)
+    public Optional<List<ChatRoom>> findAll() {
+        List<ChatRoom> chatRooms = entityManager.createQuery("select m from ChatRoom m", ChatRoom.class)
                 .getResultList();
+        return Optional.ofNullable(chatRooms);
     }
 
     @Override
-    public List<ChatRoom> findUnDeletedRooms() {
-        return entityManager.createQuery("select m from ChatRoom m where m.deletedAt is null", ChatRoom.class)
+    public Optional<List<ChatRoom>> findUnDeletedRooms() {
+        List<ChatRoom> chatRooms = entityManager.createQuery("select m from ChatRoom m where m.deletedAt is null", ChatRoom.class)
                 .getResultList();
+        return Optional.ofNullable(chatRooms);
     }
 }

@@ -8,8 +8,8 @@ import java.util.Optional;
 public interface RoomRepository {
 
     Long save(ChatRoom chatRoom);
-    ChatRoom findById(Long id);
+    Optional<ChatRoom> findById(Long id);
     void delete(Long id);
-    List<ChatRoom> findAll();
-    List<ChatRoom> findUnDeletedRooms();
+    Optional<List<ChatRoom>> findAll();
+    Optional<List<ChatRoom>> findUnDeletedRooms();
 }
