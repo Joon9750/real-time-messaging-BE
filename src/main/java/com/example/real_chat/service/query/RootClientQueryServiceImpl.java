@@ -13,6 +13,7 @@ public class RootClientQueryServiceImpl implements RootClientQueryService {
 
     private final RootClientRepository rootClientRepository;
 
+    @Override
     public RootClient getRootClient(Long id) {
         return rootClientRepository.findById(id).orElseThrow();
     }
