@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("api/v1/command/user")
+@RequestMapping("/api/v1/command/user")
 public class UserCommandApiController {
 
     private final UserCommandService userCommandService;
@@ -25,7 +25,6 @@ public class UserCommandApiController {
             @RequestBody CreateUserRequestDto request
     ) {
         RootClient rootClient = rootClientQueryService.getRootClient(request.getRootClientId());
-
         User user = User.create(request.getUserName(), rootClient);
         Long userId = userCommandService.addUser(user);
 
