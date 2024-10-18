@@ -25,7 +25,6 @@ public class RoomCommandApiController {
     ) {
         ChatRoom chatRoom = ChatRoom.createRoom(createRoomRequestDTO.getName());
         Long roomId = roomService.addRoom(chatRoom);
-
         return ResponseEntity.ok().body(new CreateRoomResponseDTO(roomId));
     }
 
@@ -35,7 +34,6 @@ public class RoomCommandApiController {
             @PathVariable Long id
     ) {
         roomService.deleteRoom(id);
-
         return ResponseEntity.ok(CommonApiResult.createOk("채팅방이 정상적으로 삭제 되었습니다."));
     }
 
@@ -45,7 +43,6 @@ public class RoomCommandApiController {
             @RequestBody @Valid UpdateRoomRequestDto requestDto
     ) {
         roomService.updateChatRoom(id, requestDto.getName());
-
         return ResponseEntity.ok(CommonApiResult.createOk("채팅방 이름이 정상적으로 변경되었습니다."));
     }
 }
