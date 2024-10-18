@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "api/v1/root-client/query")
+@RequestMapping(value = "api/v1/query/root-client")
 public class RootClientQueryApiController {
 
     private final RootClientQueryService rootClientQueryService;
