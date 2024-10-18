@@ -6,4 +6,5 @@ import lombok.Getter;
 public class CreateUserRequestDto {
 
     private String userName;
+    private Long rootClientId;
 }
