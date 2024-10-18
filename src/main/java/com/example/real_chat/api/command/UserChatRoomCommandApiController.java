@@ -1,6 +1,8 @@
 package com.example.real_chat.api.command;
 
+import com.example.real_chat.dto.common.CommonApiResult;
 import com.example.real_chat.dto.userChatRoom.request.CreateUserChatRoomRequest;
+import com.example.real_chat.dto.userChatRoom.request.DeleteUserChatRoomRequest;
 import com.example.real_chat.dto.userChatRoom.response.CreateUserChatRoomResponse;
 import com.example.real_chat.entity.room.ChatRoom;
 import com.example.real_chat.entity.user.User;
@@ -10,10 +12,7 @@ import com.example.real_chat.service.query.UserQueryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -36,5 +35,16 @@ public class UserChatRoomCommandApiController {
 
         Long userChatRoomId = userChatRoomCommandService.joinChatRoom(user, room);
         return ResponseEntity.ok(new CreateUserChatRoomResponse(userChatRoomId));
+    }
+
+    @DeleteMapping()
+    public ResponseEntity<CommonApiResult> deleteUserChatRoom(
+            @RequestBody @Valid DeleteUserChatRoomRequest request
+    ) {
+        User user = userQueryService.getUserById(request.getUserId());
+        ChatRoom room = roomQueryService.getRoom(request.getRoomId());
+
+        userChatRoomCommandService.leaveChatRoom(user, room);
+        return ResponseEntity.ok(CommonApiResult.createOk("정상적으로 유저가 채팅방에서 삭제되었습니다."));
     }
 }

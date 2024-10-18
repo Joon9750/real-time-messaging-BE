@@ -4,10 +4,12 @@ import com.example.real_chat.entity.room.ChatRoom;
 import com.example.real_chat.entity.user.User;
 import com.example.real_chat.entity.userChatRoom.UserChatRoom;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class UserChatRoomRepositorylmpl implements UserChatRoomRepository {
@@ -22,9 +24,24 @@ public class UserChatRoomRepositorylmpl implements UserChatRoomRepository {
     }
 
     @Override
+    public Optional<UserChatRoom> findByUserAndChatRoom(User user, ChatRoom chatRoom) {
+        try {
+            UserChatRoom userChatRoom = (UserChatRoom) entityManager.createQuery(
+                            "select uc from UserChatRoom uc where uc.user = :user and uc.chatRoom = :chatRoom")
+                    .setParameter("user", user)
+                    .setParameter("chatRoom", chatRoom)
+                    .getSingleResult();
+
+            return Optional.of(userChatRoom);
+        } catch (NoResultException e) {
+            return Optional.empty(); // 결과가 없을 때는 Optional.empty() 반환
+        }
+    }
+
+    @Override
     public List<UserChatRoom> findByUser(User user) {
         return entityManager.createQuery(
-                "SELECT uc FROM UserChatRoom uc WHERE uc.user = :user", UserChatRoom.class)
+                "select uc from UserChatRoom uc where uc.user = :user", UserChatRoom.class)
                 .setParameter("user", user)
                 .getResultList();
     }
@@ -45,5 +62,18 @@ public class UserChatRoomRepositorylmpl implements UserChatRoomRepository {
                 .setParameter("user", user)
                 .setParameter("chatRoom", chatRoom)
                 .getSingleResult();
+    }
+
+    @Override
+    public void delete(UserChatRoom userChatRoom) {
+        if (entityManager.contains(userChatRoom)) {
+            entityManager.remove(userChatRoom); // 만약 이미 영속 상태라면 제거
+        } else {
+            // 영속 상태가 아닐 경우, 해당 엔티티를 찾고 삭제
+            UserChatRoom managedUserChatRoom = entityManager.find(UserChatRoom.class, userChatRoom.getId());
+            if (managedUserChatRoom != null) {
+                entityManager.remove(managedUserChatRoom);
+            }
+        }
     }
 }

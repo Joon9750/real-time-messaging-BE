@@ -33,4 +33,9 @@ public class UserChatRoomCommandServiceImpl implements UserChatRoomCommandServic
             throw new RuntimeException();
         }
     }
+
+    @Override
+    public void leaveChatRoom(User user, ChatRoom chatRoom) {
+        userChatRoomRepository.findByUserAndChatRoom(user, chatRoom).ifPresent(userChatRoomRepository::delete);
+    }
 }
