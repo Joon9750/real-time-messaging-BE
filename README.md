@@ -30,6 +30,6 @@ Sendbird 채팅 솔루션의 가격이 부담되는<br/>
 
 ## 기술적 도전
 - '실시간성'을 살리기 위해 Pooling이나 Long-Pooling 방식이 아닌 WebSocket으로 채팅 기능 구현
-- Command(명령)와 Query 분리하는 CQS(Command Query Separation) Pattern 적용
+- Command(명령)와 Query(조회)를 분리하는 CQS(Command Query Separation) Pattern 적용
 - 휘발성인 Spring WebSocket의 simpMessagingTemplate을 kafka message broker로 대체
 - DB 커넥션 풀이 마르지 않기 위해 OSIV OFF
