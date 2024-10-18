@@ -20,9 +20,10 @@ public class User extends BaseTimeEntity {
     @JoinColumn(name = "rootclient_id")
     private RootClient client;
 
-    public static User create(String name) {
+    public static User create(String name, RootClient client) {
         User user = new User();
         user.userName = name;
+        user.client = client;
         return user;
     }
 
