@@ -11,7 +11,9 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Message extends Resource<String> {
 
-    public static Message createMessage(ChatRoom chatRoom, String sender, String textData) {
+    public static Message createMessage(
+            ChatRoom chatRoom, String sender, String textData
+    ) {
         return Message.builder()
                 .chatRoom(chatRoom)
                 .sender(sender)
