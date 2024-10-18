@@ -38,6 +38,7 @@ public class UserChatRoomCommandApiController {
     }
 
     @DeleteMapping()
+    // 그냥 userChatRoom id 값으로 삭제해도 괜찮을듯
     public ResponseEntity<CommonApiResult> deleteUserChatRoom(
             @RequestBody @Valid DeleteUserChatRoomRequest request
     ) {
