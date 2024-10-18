@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "api/v1/root-client/command")
+@RequestMapping(value = "api/v1/command/root-client")
 public class RootClientCommandApiController {
 
     private final RootClientCommandService rootClientCommandService;
