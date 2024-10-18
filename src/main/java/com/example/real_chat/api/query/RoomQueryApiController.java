@@ -24,21 +24,18 @@ public class RoomQueryApiController {
             @PathVariable Long id
     ) {
         ChatRoom chatRoom = roomService.getRoom(id);
-
         return ResponseEntity.ok().body(new RoomResponseDTO(id, chatRoom.getName()));
     }
 
     @GetMapping()
     public ResponseEntity<Result<?>> getAllRooms() {
         List<ChatRoom> chatRooms = roomService.getAllRooms();
-
         return ResponseEntity.ok().body(new Result<>(chatRooms));
     }
 
     @GetMapping("/undeleted")
     public ResponseEntity<Result<?>> getUnDeleteRooms() {
         List<ChatRoom> unDeletedRooms = roomService.getUnDeletedRooms();
-
         return ResponseEntity.ok().body(new Result<>(unDeletedRooms));
     }
 }
