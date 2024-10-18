@@ -1,36 +1,31 @@
-package com.example.real_chat.service;
+package com.example.real_chat.service.query;
 
 import com.example.real_chat.entity.user.User;
 import com.example.real_chat.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class UserService {
+public class UserQueryServiceImpl implements UserQueryService {
 
     private final UserRepository userRepository;
 
-    public Long addUser(User user) {
-        return userRepository.save(user);
-    }
-
-    public void deleteUser(Long userId) {
-        User user = userRepository.findById(userId).orElseThrow();
-        if (user.isDeleted()) throw new RuntimeException();
-        else user.delete();
-    }
-
+    @Override
     public User getUserById(Long userId) {
         return userRepository.findById(userId).orElseThrow();
     }
 
+    @Override
     public List<User> getAllUsers() {
         return userRepository.findAll().orElseThrow();
     }
 
+    @Override
     public List<User> getUndeletedUsers() {
         return userRepository.findUnDeletedUsers().orElseThrow();
     }
