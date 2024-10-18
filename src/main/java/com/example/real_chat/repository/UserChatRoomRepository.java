@@ -2,7 +2,7 @@ package com.example.real_chat.repository;
 
 import com.example.real_chat.entity.room.ChatRoom;
 import com.example.real_chat.entity.user.User;
-import com.example.real_chat.entity.user.UserChatRoom;
+import com.example.real_chat.entity.userChatRoom.UserChatRoom;
 
 import java.util.List;
 
