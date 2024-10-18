@@ -1,30 +1,28 @@
-package com.example.real_chat.api;
+package com.example.real_chat.api.command;
 
 import com.example.real_chat.dto.common.CommonApiResult;
 import com.example.real_chat.dto.rootClient.request.CreateRootClientRequestDto;
 import com.example.real_chat.dto.rootClient.request.UpdateRootClientRequestDto;
 import com.example.real_chat.dto.rootClient.response.CreateRootClientResponseDto;
-import com.example.real_chat.dto.rootClient.response.GetRootClientResponseDto;
 import com.example.real_chat.entity.rootClient.RootClient;
-import com.example.real_chat.service.RootClientService;
+import com.example.real_chat.service.command.RootClientCommandService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "api/v1/root/client")
-public class RootClientApiController {
+@RequestMapping(value = "api/v1/command/root-client")
+public class RootClientCommandApiController {
 
-    private final RootClientService rootClientService;
+    private final RootClientCommandService rootClientCommandService;
 
     @PostMapping()
     public ResponseEntity<CreateRootClientResponseDto> createRootClient(
             @RequestBody @Valid CreateRootClientRequestDto requestDto
     ) {
-        Long rootClientId = rootClientService.addRootClient(
+        Long rootClientId = rootClientCommandService.addRootClient(
                 RootClient.createRootClient(
                         requestDto.getRootClientId(),
                         requestDto.getRootClientPassword(),
@@ -35,20 +33,11 @@ public class RootClientApiController {
         return ResponseEntity.ok().body(new CreateRootClientResponseDto(rootClientId));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<GetRootClientResponseDto> getRootClient(
-            @PathVariable Long id
-    ) {
-        RootClient rootClient = rootClientService.getRootClient(id);
-
-        return ResponseEntity.ok().body(new GetRootClientResponseDto(rootClient));
-    }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<CommonApiResult> deleteRootClient(
             @PathVariable Long id
     ) {
-        rootClientService.deleteRootClient(id);
+        rootClientCommandService.deleteRootClient(id);
 
         return ResponseEntity.ok(CommonApiResult.createOk("루트 클라이언트가 정상적으로 삭제 되었습니다."));
     }
@@ -58,7 +47,7 @@ public class RootClientApiController {
             @PathVariable Long id,
             @RequestBody @Valid UpdateRootClientRequestDto requestDto
     ) {
-        rootClientService.updateRootClient(
+        rootClientCommandService.updateRootClient(
                 id,
                 requestDto.getRootClientId(),
                 requestDto.getRootClientPassword(),
