@@ -5,8 +5,10 @@ import com.example.real_chat.dto.room.request.CreateRoomRequestDto;
 import com.example.real_chat.dto.room.request.UpdateRoomRequestDto;
 import com.example.real_chat.dto.room.response.CreateRoomResponseDTO;
 import com.example.real_chat.entity.room.ChatRoom;
+import com.example.real_chat.entity.rootClient.RootClient;
 import com.example.real_chat.service.command.RoomCommandService;
 
+import com.example.real_chat.service.query.RootClientQueryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,13 +20,17 @@ import org.springframework.web.bind.annotation.*;
 public class RoomCommandApiController {
 
     private final RoomCommandService roomService;
+    private final RootClientQueryService rootClientQueryService;
 
     @PostMapping()
     public ResponseEntity<CreateRoomResponseDTO> createRoom(
-            @RequestBody @Valid CreateRoomRequestDto createRoomRequestDTO
+            @RequestBody @Valid CreateRoomRequestDto request
     ) {
-        ChatRoom chatRoom = ChatRoom.createRoom(createRoomRequestDTO.getName());
+        RootClient rootClient = rootClientQueryService.getRootClient(request.getRootClientId());
+
+        ChatRoom chatRoom = ChatRoom.createRoom(request.getName(), rootClient);
         Long roomId = roomService.addRoom(chatRoom);
+
         return ResponseEntity.ok().body(new CreateRoomResponseDTO(roomId));
     }
 
