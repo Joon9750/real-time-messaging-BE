@@ -5,5 +5,5 @@ import com.example.real_chat.entity.user.User;
 
 public interface UserChatRoomCommandService {
 
-    void joinChatRoom(User user, ChatRoom chatRoom);
+    Long joinChatRoom(User user, ChatRoom chatRoom);
 }
