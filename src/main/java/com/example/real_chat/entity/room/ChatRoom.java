@@ -22,9 +22,10 @@ public class ChatRoom extends BaseTimeEntity {
     @JoinColumn(name = "rootclient_id")
     private RootClient rootClient;
 
-    public static ChatRoom createRoom(String name) {
+    public static ChatRoom createRoom(String name, RootClient rootClient) {
         return ChatRoom.builder()
                 .name(name)
+                .rootClient(rootClient)
                 .build();
     }
 
