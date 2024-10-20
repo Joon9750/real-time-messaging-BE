@@ -10,6 +10,6 @@ public interface UserRepository {
     Long save(User user);
 
     Optional<User> findById(Long id);
-    Optional<List<User>> findAll();
-    Optional<List<User>> findUnDeletedUsers();
+    List<User> findAll();
+    List<User> findUnDeletedUsers();
 }
