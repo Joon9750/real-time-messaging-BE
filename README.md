@@ -33,3 +33,4 @@ Sendbird 채팅 솔루션의 가격이 부담되는<br/>
 - Command(명령)와 Query(조회)를 분리하는 CQS(Command Query Separation) Pattern 적용
 - 휘발성인 Spring WebSocket의 SimpMessagingTemplate을 kafka message broker로 대체
 - DB 커넥션 풀이 마르지 않기 위해 OSIV OFF
+- Mock을 사용하여 단위 테스트 작성
