@@ -22,11 +22,11 @@ public class UserQueryServiceImpl implements UserQueryService {
 
     @Override
     public List<User> getAllUsers() {
-        return userRepository.findAll().orElseThrow();
+        return userRepository.findAll();
     }
 
     @Override
     public List<User> getUndeletedUsers() {
-        return userRepository.findUnDeletedUsers().orElseThrow();
+        return userRepository.findUnDeletedUsers();
     }
 }
