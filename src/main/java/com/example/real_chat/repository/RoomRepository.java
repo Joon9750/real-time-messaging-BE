@@ -10,6 +10,6 @@ public interface RoomRepository {
     Long save(ChatRoom chatRoom);
 
     Optional<ChatRoom> findById(Long id);
-    Optional<List<ChatRoom>> findAll();
-    Optional<List<ChatRoom>> findUnDeletedRooms();
+    List<ChatRoom> findAll();
+    List<ChatRoom> findUnDeletedRooms();
 }
