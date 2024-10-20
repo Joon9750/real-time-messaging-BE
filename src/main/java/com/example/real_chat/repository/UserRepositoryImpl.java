@@ -27,16 +27,14 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public Optional<List<User>> findAll() {
-        List<User> users = entityManager.createQuery("select u from User u", User.class)
+    public List<User> findAll() {
+        return entityManager.createQuery("select u from User u", User.class)
                 .getResultList();
-        return Optional.ofNullable(users);
     }
 
     @Override
-    public Optional<List<User>> findUnDeletedUsers() {
-        List<User> undeletedUsers = entityManager.createQuery("select u from User u where u.deletedAt is null", User.class)
+    public List<User> findUnDeletedUsers() {
+        return entityManager.createQuery("select u from User u where u.deletedAt is null", User.class)
                 .getResultList();
-        return Optional.ofNullable(undeletedUsers);
     }
 }
