@@ -38,7 +38,6 @@ public class RootClientCommandApiController {
             @PathVariable Long id
     ) {
         rootClientCommandService.deleteRootClient(id);
-
         return ResponseEntity.ok(CommonApiResult.createOk("루트 클라이언트가 정상적으로 삭제 되었습니다."));
     }
 
