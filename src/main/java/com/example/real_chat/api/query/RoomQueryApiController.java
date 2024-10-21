@@ -24,14 +24,14 @@ public class RoomQueryApiController {
             @PathVariable Long id
     ) {
         ChatRoom chatRoom = roomService.getRoom(id);
-        return ResponseEntity.ok().body(new RoomResponse(id, chatRoom.getName()));
+        return ResponseEntity.ok().body(new RoomResponse(chatRoom));
     }
 
     @GetMapping()
     public ResponseEntity<Result<List<RoomResponse>>> getAllRooms() {
         List<ChatRoom> chatRooms = roomService.getAllRooms();
         List<RoomResponse> response = chatRooms.stream()
-                .map(m -> new RoomResponse(m.getId(), m.getName()))
+                .map(RoomResponse::new)
                 .toList();
 
         return ResponseEntity.ok().body(new Result<>(response));
@@ -41,7 +41,7 @@ public class RoomQueryApiController {
     public ResponseEntity<Result<List<RoomResponse>>> getUnDeleteRooms() {
         List<ChatRoom> unDeletedRooms = roomService.getUnDeletedRooms();
         List<RoomResponse> response = unDeletedRooms.stream()
-                .map(m -> new RoomResponse(m.getId(), m.getName()))
+                .map(RoomResponse::new)
                 .toList();
 
         return ResponseEntity.ok().body(new Result<>(response));

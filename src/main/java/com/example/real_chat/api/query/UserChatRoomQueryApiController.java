@@ -31,8 +31,9 @@ public class UserChatRoomQueryApiController {
             @RequestBody @Valid GetUserChatRoomRequest request
     ) {
         UserChatRoom userChatRoom = userChatRoomQueryService.getUserInChatRoom(request.getUserId(), request.getRoomId());
-        GetUserReseponse getUserReseponse = new GetUserReseponse(userChatRoom.getUser().getId(), userChatRoom.getChatRoom().getName());
-        GetChatRoomResponse getChatRoomResponse = new GetChatRoomResponse(userChatRoom.getChatRoom().getId(), userChatRoom.getChatRoom().getName());
+
+        GetUserReseponse getUserReseponse = new GetUserReseponse(userChatRoom);
+        GetChatRoomResponse getChatRoomResponse = new GetChatRoomResponse(userChatRoom);
 
         return ResponseEntity.ok(
                 new GetUserChatRoomResponse(userChatRoom.getId(), getUserReseponse, getChatRoomResponse)
@@ -44,8 +45,9 @@ public class UserChatRoomQueryApiController {
             @RequestBody @Valid GetChatRoomsRequest request
     ) {
         List<UserChatRoom> chatRoomList = userChatRoomQueryService.getChatRoomsUserParticipatesIn(request.getUserId());
+
         List<GetChatRoomResponse> response = chatRoomList.stream()
-                .map(m -> new GetChatRoomResponse(m.getChatRoom().getId(), m.getChatRoom().getName()))
+                .map(GetChatRoomResponse::new)
                 .toList();
 
         return  ResponseEntity.ok(new Result<>(response));
@@ -56,8 +58,9 @@ public class UserChatRoomQueryApiController {
             @RequestBody @Valid GetChatRoomsRequest request
     ) {
         List<UserChatRoom> userList = userChatRoomQueryService.getParticipantsInChatRoom(request.getUserId());
+
         List<GetUserReseponse> response = userList.stream()
-                .map(m -> new GetUserReseponse(m.getUser().getId(), m.getUser().getUserName()))
+                .map(GetUserReseponse::new)
                 .toList();
 
         return ResponseEntity.ok(new Result<>(response));
