@@ -44,6 +44,7 @@ public class UserChatRoomCommandServiceImpl implements UserChatRoomCommandServic
     @Override
     public void deleteChatRoom(ChatRoom chatRoom) {
         List<UserChatRoom> usersInChatRoom = userChatRoomRepository.findByChatRoom(chatRoom);
+        if (usersInChatRoom.isEmpty()) { return; }
         for (UserChatRoom userChatRoom : usersInChatRoom) {
             userChatRoomRepository.delete(userChatRoom);
         }

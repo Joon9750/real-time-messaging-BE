@@ -2,6 +2,7 @@ package com.example.real_chat.api.command;
 
 import com.example.real_chat.dto.common.CommonApiResult;
 import com.example.real_chat.dto.userChatRoom.request.CreateUserChatRoomRequest;
+import com.example.real_chat.dto.userChatRoom.request.DeleteChatRoomRequest;
 import com.example.real_chat.dto.userChatRoom.request.DeleteUserChatRoomRequest;
 import com.example.real_chat.dto.userChatRoom.response.CreateUserChatRoomResponse;
 import com.example.real_chat.entity.room.ChatRoom;
@@ -37,8 +38,8 @@ public class UserChatRoomCommandApiController {
         return ResponseEntity.ok(new CreateUserChatRoomResponse(userChatRoomId));
     }
 
-    @DeleteMapping()
-    // 그냥 userChatRoom id 값으로 삭제해도 괜찮을듯
+    @DeleteMapping("user")
+    // 특정 유저를 특정 채팅방에서 삭제할 때
     public ResponseEntity<CommonApiResult> leaveChatRoom(
             @RequestBody @Valid DeleteUserChatRoomRequest request
     ) {
@@ -48,4 +49,15 @@ public class UserChatRoomCommandApiController {
         userChatRoomCommandService.leaveChatRoom(user, room);
         return ResponseEntity.ok(CommonApiResult.createOk("정상적으로 유저가 채팅방에서 삭제되었습니다."));
     }
+
+    @DeleteMapping("room")
+    // 특정 채팅방의 모든 유저를 삭제할 때, 이때 방도 삭제
+    public ResponseEntity<CommonApiResult> deleteChatRoom(
+            @RequestBody @Valid DeleteChatRoomRequest request
+    ) {
+        ChatRoom room = roomQueryService.getRoom(request.getChatRoomId());
+        userChatRoomCommandService.deleteChatRoom(room);
+        return ResponseEntity.ok(CommonApiResult.createOk("정상적으로 채팅방이 삭제되었습니다."));
+    }
+
 }
