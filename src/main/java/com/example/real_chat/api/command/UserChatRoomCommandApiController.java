@@ -42,12 +42,12 @@ public class UserChatRoomCommandApiController {
         return ResponseEntity.ok(CommonApiResult.createOk("정상적으로 유저가 채팅방에서 삭제되었습니다."));
     }
 
-    @DeleteMapping("room")
-    // 특정 채팅방의 모든 유저를 삭제할 때, 이때 방도 삭제
-    public ResponseEntity<CommonApiResult> deleteChatRoom(
-            @RequestBody @Valid DeleteChatRoomRequest request
-    ) {
-        userChatRoomCommandService.deleteChatRoom(request.getChatRoomId());
-        return ResponseEntity.ok(CommonApiResult.createOk("정상적으로 채팅방이 삭제되었습니다."));
-    }
+//    @DeleteMapping("room")
+//    // 특정 채팅방의 모든 유저를 삭제할 때, 이때 방도 삭제
+//    public ResponseEntity<CommonApiResult> deleteChatRoom(
+//            @RequestBody @Valid DeleteChatRoomRequest request
+//    ) {
+//        userChatRoomCommandService.deleteChatRoom(request.getChatRoomId());
+//        return ResponseEntity.ok(CommonApiResult.createOk("정상적으로 채팅방이 삭제되었습니다."));
+//    }
 }
