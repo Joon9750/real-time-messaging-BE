@@ -40,6 +40,7 @@ public class UserChatRoomCommandServiceImpl implements UserChatRoomCommandServic
 
             // 연관관계 편의 메소드
             chatRoom.addUserChatRoom(userChatRoom);
+            user.addUserChatRoom(userChatRoom);
 
             userChatRoomRepository.save(userChatRoom);
             return userChatRoom.getId();
@@ -59,6 +60,7 @@ public class UserChatRoomCommandServiceImpl implements UserChatRoomCommandServic
 
         // 연관관계 편의 메소드
         chatRoom.removeUserChatRoom(userChatRoom);
+        user.removeUserChatRoom(userChatRoom);
 
         userChatRoomRepository.delete(userChatRoom);
     }

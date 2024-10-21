@@ -25,7 +25,7 @@ public class UserCommandServiceImpl implements UserCommandService {
     }
 
     @Override
-    public void deleteUser(Long userId) {
+    public void delete(Long userId) {
         User user = userRepository.findById(userId).orElseThrow();
         userRepository.delete(user);
     }
