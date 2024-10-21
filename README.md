@@ -20,17 +20,18 @@ Sendbird 채팅 솔루션의 가격이 부담되는<br/>
 - 실시간 채팅에 참여할 회원을 등록하고 관리합니다.
 
 ## 기술 스택
-- Gradle project
-- Springboot 3.x
+- Gradle 프로젝트
+- Spring Boot 3.x
 - Java 21
-- Jpa
-- Spring WebSocket with STOMP protocol
-- Apache Kafka for message broker
-- H2 Database for testing, 아직 배포에 사용할 DB는 미정
+- JPA (Java Persistence API)
+- Spring WebSocket (STOMP 프로토콜 사용)
+- Apache Kafka (메시지 브로커)
+- H2 Database (테스트용), 배포용 DB는 아직 미정
 
-## 기술적 도전
-- '실시간성'을 살리기 위해 Pooling이나 Long-Pooling 방식이 아닌 WebSocket으로 채팅 기능 구현
-- Command(명령)와 Query(조회)를 분리하는 CQS(Command Query Separation) Pattern 적용
-- 휘발성인 Spring WebSocket의 SimpMessagingTemplate을 kafka message broker로 대체
-- DB 커넥션 풀이 마르지 않기 위해 OSIV OFF
-- Mock을 사용하여 단위 테스트 작성
+## 핵심 기술 구현
+- 실시간성: Polling이나 Long-Polling 방식 대신 WebSocket을 사용해 실시간 채팅 기능을 구현했습니다.
+- CQS 패턴: Command(명령)와 Query(조회)를 분리하는 Command Query Separation (CQS) 패턴을 적용했습니다.
+- 메시지 브로커: 휘발성인 Spring WebSocket의 SimpMessagingTemplate 대신, Kafka를 사용하여 안정적인 메시지 처리를 구현했습니다.
+- DB 연결 관리: 데이터베이스 커넥션 풀이 고갈되지 않도록 OSIV (Open Session In View) 설정을 OFF하여 효율적인 DB 연결 관리를 수행했습니다.
+- 단위 테스트: Mock을 활용해 단위 테스트를 작성하여 비즈니스 로직의 안정성을 확보했습니다.
+- API 문서화: Swagger를 통해 API 문서를 자동으로 생성하고 관리했습니다.
