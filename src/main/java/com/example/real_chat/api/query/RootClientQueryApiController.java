@@ -19,7 +19,6 @@ public class RootClientQueryApiController {
             @PathVariable Long id
     ) {
         RootClient rootClient = rootClientQueryService.getRootClient(id);
-
         return ResponseEntity.ok().body(new GetRootClientResponse(rootClient));
     }
 }
