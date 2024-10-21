@@ -1,12 +1,9 @@
 package com.example.real_chat.api.command;
 
 import com.example.real_chat.dto.common.CommonApiResult;
-import com.example.real_chat.dto.user.request.CreateUserRequestDto;
-import com.example.real_chat.dto.user.response.CreateUserResponseDto;
-import com.example.real_chat.entity.rootClient.RootClient;
-import com.example.real_chat.entity.user.User;
+import com.example.real_chat.dto.user.request.CreateUserRequest;
+import com.example.real_chat.dto.user.response.CreateUserResponse;
 import com.example.real_chat.service.command.UserCommandService;
-import com.example.real_chat.service.query.RootClientQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,11 +17,11 @@ public class UserCommandApiController {
     private final UserCommandService userCommandService;
 
     @PostMapping()
-    public ResponseEntity<CreateUserResponseDto> createUser(
-            @RequestBody CreateUserRequestDto request
+    public ResponseEntity<CreateUserResponse> createUser(
+            @RequestBody CreateUserRequest request
     ) {
         Long userId = userCommandService.addUser(request.getUserName(), request.getRootClientId());
-        return ResponseEntity.ok().body(new CreateUserResponseDto(userId));
+        return ResponseEntity.ok().body(new CreateUserResponse(userId));
     }
 
     @DeleteMapping("/{id}")
