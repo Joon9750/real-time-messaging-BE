@@ -33,7 +33,6 @@ public class RoomCommandServiceImpl implements RoomCommandService {
     @Override
     public void deleteRoom(Long roomId) {
         ChatRoom chatRoom = roomRepository.findById(roomId).orElseThrow();
-        if (chatRoom.isDeleted()) throw new RuntimeException();
-        else chatRoom.delete();
+        roomRepository.delete(chatRoom);
     }
 }

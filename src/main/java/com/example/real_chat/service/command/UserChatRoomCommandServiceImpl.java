@@ -38,31 +38,15 @@ public class UserChatRoomCommandServiceImpl implements UserChatRoomCommandServic
             userChatRoom.setUser(user);
             userChatRoom.setChatRoom(chatRoom);
 
+            // 연관관계 편의 메소드
+            chatRoom.addUserChatRoom(userChatRoom);
+            user.addUserChatRoom(userChatRoom);
+
             userChatRoomRepository.save(userChatRoom);
             return userChatRoom.getId();
         } else {
             // 이미 참여 중이라면 필요한 다른 로직 처리 (에러 반환, 메시지 출력 등)
             throw new RuntimeException();
-        }
-    }
-
-    @Override
-    public void leaveChatRoom(Long userId, Long chatRoomId) {
-        User user = getUser(userId);
-        ChatRoom chatRoom = getChatRoom(chatRoomId);
-
-        userChatRoomRepository.findByUserAndChatRoom(user, chatRoom).ifPresent(userChatRoomRepository::delete);
-    }
-
-    @Override
-    public void deleteChatRoom(Long chatRoomId) {
-        ChatRoom chatRoom = getChatRoom(chatRoomId);
-
-        roomCommandService.deleteRoom(chatRoomId);
-
-        List<UserChatRoom> usersInChatRoom = userChatRoomRepository.findByChatRoom(chatRoom);
-        for (UserChatRoom userChatRoom : usersInChatRoom) {
-            userChatRoomRepository.delete(userChatRoom);
         }
     }
 

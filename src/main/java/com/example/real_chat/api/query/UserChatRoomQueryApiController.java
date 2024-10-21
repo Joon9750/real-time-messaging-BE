@@ -66,7 +66,7 @@ public class UserChatRoomQueryApiController {
         return ResponseEntity.ok(new Result<>(response));
     }
 
-    @GetMapping("/dose-user-exist")
+    @GetMapping("/does-user-exist")
     public ResponseEntity<Result<Boolean>> doseUserExist(
             @RequestBody @Valid GetUserExistRequest request
     ) {
