@@ -1,12 +1,16 @@
 package com.example.real_chat.dto.user.response;
 
-import lombok.AllArgsConstructor;
+import com.example.real_chat.entity.user.User;
 import lombok.Getter;
 
 @Getter
-@AllArgsConstructor
 public class GetUserResponse {
 
-    private Long id;
-    private String userName;
+    private final Long id;
+    private final String userName;
+
+    public GetUserResponse(User user) {
+        this.id = user.getId();
+        this.userName = user.getUserName();
+    }
 }

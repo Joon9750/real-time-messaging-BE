@@ -25,14 +25,14 @@ public class UserQueryApiController {
             @PathVariable Long id
     ) {
         User user = userQueryService.getUserById(id);
-        return ResponseEntity.ok().body(new GetUserResponse(user.getId(), user.getUserName()));
+        return ResponseEntity.ok().body(new GetUserResponse(user));
     }
 
     @GetMapping("/all")
     public ResponseEntity<Result<List<GetUserResponse>>> getAllUsers() {
         List<User> users = userQueryService.getAllUsers();
         List<GetUserResponse> response = users.stream()
-                .map(m -> new GetUserResponse(m.getId(), m.getUserName()))
+                .map(GetUserResponse::new)
                 .toList();
 
         return ResponseEntity.ok().body(new Result<>(response));
@@ -42,7 +42,7 @@ public class UserQueryApiController {
     public ResponseEntity<Result<List<GetUserResponse>>> getUndeletedUsers() {
         List<User> users = userQueryService.getUndeletedUsers();
         List<GetUserResponse> response = users.stream()
-                .map(m -> new GetUserResponse(m.getId(), m.getUserName()))
+                .map(GetUserResponse::new)
                 .toList();
 
         return ResponseEntity.ok().body(new Result<>(response));

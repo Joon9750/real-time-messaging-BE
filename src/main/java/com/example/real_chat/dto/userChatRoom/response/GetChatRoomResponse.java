@@ -1,11 +1,16 @@
 package com.example.real_chat.dto.userChatRoom.response;
 
-import lombok.AllArgsConstructor;
+import com.example.real_chat.entity.userChatRoom.UserChatRoom;
 import lombok.Getter;
 
 @Getter
-@AllArgsConstructor
 public class GetChatRoomResponse {
-    private Long roomId;
-    private String roomName;
+
+    private final Long roomId;
+    private final String roomName;
+
+    public GetChatRoomResponse(UserChatRoom userChatRoom) {
+        this.roomId = userChatRoom.getChatRoom().getId();
+        this.roomName = userChatRoom.getChatRoom().getName();
+    }
 }

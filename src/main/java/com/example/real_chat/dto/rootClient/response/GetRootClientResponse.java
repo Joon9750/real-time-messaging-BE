@@ -8,5 +8,15 @@ import lombok.Getter;
 @AllArgsConstructor
 public class GetRootClientResponse {
 
-    private RootClient rootClient;
+    private Long id;
+
+    private Long rootClientId;
+    private Long rootClientPassword;
+    private String rootClientName;
+
+    public GetRootClientResponse(RootClient rootClient) {
+        this.id = rootClient.getId();
+        this.rootClientId = rootClient.getId();
+        this.rootClientName = rootClient.getClientName();
+    }
 }
