@@ -10,13 +10,15 @@ public class GetRootClientResponse {
 
     private Long id;
 
-    private Long rootClientId;
-    private Long rootClientPassword;
+    private String rootClientId;
+    private String rootClientPassword;
     private String rootClientName;
 
     public GetRootClientResponse(RootClient rootClient) {
         this.id = rootClient.getId();
-        this.rootClientId = rootClient.getId();
+
+        this.rootClientId = rootClient.getClientId();
+        this.rootClientPassword = rootClient.getClientPassword();
         this.rootClientName = rootClient.getClientName();
     }
 }
