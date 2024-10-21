@@ -3,7 +3,10 @@ package com.example.real_chat.service.command;
 import com.example.real_chat.entity.room.ChatRoom;
 import com.example.real_chat.entity.user.User;
 import com.example.real_chat.entity.userChatRoom.UserChatRoom;
+import com.example.real_chat.repository.RoomRepository;
 import com.example.real_chat.repository.UserChatRoomRepository;
+import com.example.real_chat.service.query.RoomQueryService;
+import com.example.real_chat.service.query.UserQueryService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,8 +20,15 @@ public class UserChatRoomCommandServiceImpl implements UserChatRoomCommandServic
 
     private final UserChatRoomRepository userChatRoomRepository;
 
+    private final RoomCommandService roomCommandService;
+    private final UserQueryService userQueryService;
+    private final RoomQueryService roomQueryService;
+
     @Override
-    public Long joinChatRoom(User user, ChatRoom chatRoom) {
+    public Long joinChatRoom(Long userId, Long chatRoomId) {
+        User user = getUser(userId);
+        ChatRoom chatRoom = getChatRoom(chatRoomId);
+
         // 유저가 이미 해당 채팅방에 속해 있는지 확인
         boolean isUserInChatRoom = userChatRoomRepository.existsByUserAndChatRoom(user, chatRoom);
 
@@ -37,16 +47,30 @@ public class UserChatRoomCommandServiceImpl implements UserChatRoomCommandServic
     }
 
     @Override
-    public void leaveChatRoom(User user, ChatRoom chatRoom) {
+    public void leaveChatRoom(Long userId, Long chatRoomId) {
+        User user = getUser(userId);
+        ChatRoom chatRoom = getChatRoom(chatRoomId);
+
         userChatRoomRepository.findByUserAndChatRoom(user, chatRoom).ifPresent(userChatRoomRepository::delete);
     }
 
     @Override
-    public void deleteChatRoom(ChatRoom chatRoom) {
+    public void deleteChatRoom(Long chatRoomId) {
+        ChatRoom chatRoom = getChatRoom(chatRoomId);
+
+        roomCommandService.deleteRoom(chatRoomId);
+
         List<UserChatRoom> usersInChatRoom = userChatRoomRepository.findByChatRoom(chatRoom);
-        if (usersInChatRoom.isEmpty()) { return; }
         for (UserChatRoom userChatRoom : usersInChatRoom) {
             userChatRoomRepository.delete(userChatRoom);
         }
+    }
+
+    private User getUser(Long userId) {
+        return userQueryService.getUserById(userId);
+    }
+
+    private ChatRoom getChatRoom(Long chatRoomId) {
+        return roomQueryService.getRoom(chatRoomId);
     }
 }

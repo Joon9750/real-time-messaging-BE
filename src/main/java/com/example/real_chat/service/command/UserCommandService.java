@@ -4,6 +4,6 @@ import com.example.real_chat.entity.user.User;
 
 public interface UserCommandService {
 
-    Long addUser(User user);
+    Long addUser(String userName, Long clientId);
     void deleteUser(Long userId);
 }
