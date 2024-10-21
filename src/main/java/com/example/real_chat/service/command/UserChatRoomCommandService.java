@@ -5,6 +5,7 @@ import com.example.real_chat.entity.user.User;
 
 public interface UserChatRoomCommandService {
 
-    Long joinChatRoom(User user, ChatRoom chatRoom);
-    void leaveChatRoom(User user, ChatRoom chatRoom);
+    Long joinChatRoom(Long userId, Long chatRoomId);
+    void leaveChatRoom(Long userId, Long chatRoomId);
+    void deleteChatRoom(Long chatRoomId);
 }

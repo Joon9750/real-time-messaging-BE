@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/v1/query/user")
+@RequestMapping("/api/v1/query/user")
 public class UserQueryApiController {
 
     private final UserQueryService userQueryService;
