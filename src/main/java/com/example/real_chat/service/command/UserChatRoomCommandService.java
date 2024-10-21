@@ -7,4 +7,5 @@ public interface UserChatRoomCommandService {
 
     Long joinChatRoom(User user, ChatRoom chatRoom);
     void leaveChatRoom(User user, ChatRoom chatRoom);
+    void deleteChatRoom(ChatRoom chatRoom);
 }

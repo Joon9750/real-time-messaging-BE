@@ -38,4 +38,9 @@ public class UserChatRoomCommandServiceImpl implements UserChatRoomCommandServic
     public void leaveChatRoom(User user, ChatRoom chatRoom) {
         userChatRoomRepository.findByUserAndChatRoom(user, chatRoom).ifPresent(userChatRoomRepository::delete);
     }
+
+    @Override
+    public void deleteChatRoom(ChatRoom chatRoom) {
+
+    }
 }
