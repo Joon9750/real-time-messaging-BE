@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "api/v1/query/room")
+@RequestMapping(value = "/api/v1/query/room")
 public class RoomQueryApiController {
 
     private final RoomQueryService roomService;
