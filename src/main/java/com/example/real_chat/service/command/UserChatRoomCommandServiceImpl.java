@@ -38,6 +38,9 @@ public class UserChatRoomCommandServiceImpl implements UserChatRoomCommandServic
             userChatRoom.setUser(user);
             userChatRoom.setChatRoom(chatRoom);
 
+            // 연관관계 편의 메소드
+            chatRoom.addUserChatRoom(userChatRoom);
+
             userChatRoomRepository.save(userChatRoom);
             return userChatRoom.getId();
         } else {
@@ -51,9 +54,16 @@ public class UserChatRoomCommandServiceImpl implements UserChatRoomCommandServic
         User user = getUser(userId);
         ChatRoom chatRoom = getChatRoom(chatRoomId);
 
-        userChatRoomRepository.findByUserAndChatRoom(user, chatRoom).ifPresent(userChatRoomRepository::delete);
+        UserChatRoom userChatRoom = userChatRoomRepository.findByUserAndChatRoom(user, chatRoom)
+                        .orElseThrow();
+
+        // 연관관계 편의 메소드
+        chatRoom.removeUserChatRoom(userChatRoom);
+
+        userChatRoomRepository.delete(userChatRoom);
     }
 
+    // 삭제 예정
     @Override
     public void deleteChatRoom(Long chatRoomId) {
         ChatRoom chatRoom = getChatRoom(chatRoomId);

@@ -39,4 +39,14 @@ public class ChatRoom extends BaseTimeEntity {
     public void update(String name) {
         this.name = name;
     }
+
+    public void addUserChatRoom(UserChatRoom userChatRoom) {
+        userChatRooms.add(userChatRoom);
+        userChatRoom.setChatRoom(this); // 양방향 관계 설정
+    }
+
+    public void removeUserChatRoom(UserChatRoom userChatRoom) {
+        userChatRooms.remove(userChatRoom);
+        userChatRoom.setChatRoom(null); // 양방향 관계 해제
+    }
 }
