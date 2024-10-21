@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ChatRequestDTO<T> {
+public class ChatRequest<T> {
 
     private Long roomId;
     private String sender;
