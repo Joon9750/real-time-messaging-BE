@@ -8,6 +8,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -41,6 +43,9 @@ public class UserChatRoomCommandServiceImpl implements UserChatRoomCommandServic
 
     @Override
     public void deleteChatRoom(ChatRoom chatRoom) {
-
+        List<UserChatRoom> usersInChatRoom = userChatRoomRepository.findByChatRoom(chatRoom);
+        for (UserChatRoom userChatRoom : usersInChatRoom) {
+            userChatRoomRepository.delete(userChatRoom);
+        }
     }
 }
