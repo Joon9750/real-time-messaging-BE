@@ -21,7 +21,7 @@ public class UserChatRoomQueryServiceImpl implements UserChatRoomQueryService {
     private final RoomQueryService roomQueryService;
 
     @Override
-    public UserChatRoom findUserInChatRoom(Long userId, Long chatRoomId) {
+    public UserChatRoom getUserInChatRoom(Long userId, Long chatRoomId) {
         return userChatRoomRepository.findByUserAndChatRoom(findUserById(userId), findChatRoomById(chatRoomId))
                 .orElseThrow();
     }
