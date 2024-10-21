@@ -2,8 +2,12 @@ package com.example.real_chat.entity.room;
 
 import com.example.real_chat.entity.rootClient.RootClient;
 import com.example.real_chat.entity.base.BaseTimeEntity;
+import com.example.real_chat.entity.userChatRoom.UserChatRoom;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -21,6 +25,9 @@ public class ChatRoom extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rootclient_id")
     private RootClient rootClient;
+
+    @OneToMany(mappedBy = "chatRoom", cascade = CascadeType.REMOVE)
+    private List<UserChatRoom> userChatRooms = new ArrayList<>();
 
     public static ChatRoom createRoom(String name, RootClient rootClient) {
         return ChatRoom.builder()
