@@ -9,6 +9,6 @@ public class GetUserChatRoomResponse {
 
     private Long userChatRoomId;
 
-    private GetUserReseponse userReseponse;
+    private GetUserReseponse userResponse;
     private GetChatRoomResponse chatRoom;
 }
