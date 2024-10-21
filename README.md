@@ -20,6 +20,7 @@ Sendbird 채팅 솔루션의 가격이 부담되는<br/>
     
 ## 기술 스택
 - Gradle 프로젝트
+
 - Spring Boot 3.x
 - Java 21
 - JPA
@@ -30,6 +31,7 @@ Sendbird 채팅 솔루션의 가격이 부담되는<br/>
 
 ## 핵심 기술 구현
 - **실시간성**: Polling이나 Long-Polling 방식 대신 **WebSocket**을 사용해 실시간 채팅 기능을 구현했습니다.
+
 - **CQS 패턴**: Command(명령)와 Query(조회)를 분리하는 **Command Query Separation (CQS)** 패턴을 적용했습니다.
 - **메시지 브로커**: 휘발성인 **Spring WebSocket**의 **SimpMessagingTemplate** 대신, **Kafka**를 사용하여 안정적인 메시지 처리를 구현했습니다.
 - **DB 연결 관리**: 데이터베이스 커넥션 풀이 고갈되지 않도록 **OSIV (Open Session In View)** 설정을 OFF하여 효율적인 DB 연결 관리를 수행했습니다.
