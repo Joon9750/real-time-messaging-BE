@@ -28,14 +28,22 @@ public class RoomQueryApiController {
     }
 
     @GetMapping()
-    public ResponseEntity<Result<?>> getAllRooms() {
+    public ResponseEntity<Result<List<RoomResponseDTO>>> getAllRooms() {
         List<ChatRoom> chatRooms = roomService.getAllRooms();
-        return ResponseEntity.ok().body(new Result<>(chatRooms));
+        List<RoomResponseDTO> response = chatRooms.stream()
+                .map(m -> new RoomResponseDTO(m.getId(), m.getName()))
+                .toList();
+
+        return ResponseEntity.ok().body(new Result<>(response));
     }
 
     @GetMapping("/undeleted")
-    public ResponseEntity<Result<?>> getUnDeleteRooms() {
+    public ResponseEntity<Result<List<RoomResponseDTO>>> getUnDeleteRooms() {
         List<ChatRoom> unDeletedRooms = roomService.getUnDeletedRooms();
-        return ResponseEntity.ok().body(new Result<>(unDeletedRooms));
+        List<RoomResponseDTO> response = unDeletedRooms.stream()
+                .map(m -> new RoomResponseDTO(m.getId(), m.getName()))
+                .toList();
+
+        return ResponseEntity.ok().body(new Result<>(response));
     }
 }
