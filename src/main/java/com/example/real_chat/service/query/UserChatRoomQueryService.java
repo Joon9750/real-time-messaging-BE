@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface UserChatRoomQueryService {
 
-    UserChatRoom findUserInChatRoom(Long userId, Long chatRoomId);
+    UserChatRoom getUserInChatRoom(Long userId, Long chatRoomId);
     List<UserChatRoom> getChatRoomsUserParticipatesIn(Long userId);
     List<UserChatRoom> getParticipantsInChatRoom(Long chatRoomId);
     Boolean doesUserExistInChatRoom(Long userId, Long chatRoomId);
