@@ -20,17 +20,12 @@ import org.springframework.web.bind.annotation.*;
 public class RoomCommandApiController {
 
     private final RoomCommandService roomService;
-    private final RootClientQueryService rootClientQueryService;
 
     @PostMapping()
     public ResponseEntity<CreateRoomResponseDTO> createRoom(
             @RequestBody @Valid CreateRoomRequestDto request
     ) {
-        RootClient rootClient = rootClientQueryService.getRootClient(request.getRootClientId());
-
-        ChatRoom chatRoom = ChatRoom.createRoom(request.getName(), rootClient);
-        Long roomId = roomService.addRoom(chatRoom);
-
+        Long roomId = roomService.addRoom(request.getName(), request.getRootClientId());
         return ResponseEntity.ok().body(new CreateRoomResponseDTO(roomId));
     }
 

@@ -1,7 +1,9 @@
 package com.example.real_chat.service.command;
 
 import com.example.real_chat.entity.room.ChatRoom;
+import com.example.real_chat.entity.rootClient.RootClient;
 import com.example.real_chat.repository.RoomRepository;
+import com.example.real_chat.service.query.RootClientQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,8 +15,12 @@ public class RoomCommandServiceImpl implements RoomCommandService {
 
     private final RoomRepository roomRepository;
 
+    private final RootClientQueryService rootClientQueryService;
+
     @Override
-    public Long addRoom(ChatRoom chatRoom) {
+    public Long addRoom(String roomName, Long clientId) {
+        RootClient rootClient = rootClientQueryService.getRootClient(clientId);
+        ChatRoom chatRoom = ChatRoom.createRoom(roomName, rootClient);
         return roomRepository.save(chatRoom);
     }
 
