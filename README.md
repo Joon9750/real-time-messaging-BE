@@ -29,7 +29,6 @@ Sendbird 채팅 솔루션의 가격이 부담되는<br/>
 
 ## ⚙️ 기술 스택
 - Gradle 프로젝트
-
 - Spring Boot 3.x
 - Java 21
 - JPA
