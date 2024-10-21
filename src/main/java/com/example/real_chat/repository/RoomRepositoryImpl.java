@@ -32,13 +32,6 @@ public class RoomRepositoryImpl implements RoomRepository {
                 .getResultList();
     }
 
-//    @Override
-//    public List<ChatRoom> findAll() {
-//        return entityManager.createQuery("select m from ChatRoom m" +
-//                        " join fetch m.rootClient rc", ChatRoom.class)
-//                .getResultList();
-//    }
-
     @Override
     public List<ChatRoom> findUnDeletedRooms() {
         return entityManager.createQuery("select m from ChatRoom m where m.deletedAt is null", ChatRoom.class)
