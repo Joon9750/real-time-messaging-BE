@@ -9,8 +9,11 @@ public class GetUserResponse {
     private final Long id;
     private final String userName;
 
+    private final Long clientId;
+
     public GetUserResponse(User user) {
         this.id = user.getId();
         this.userName = user.getUserName();
+        this.clientId = user.getClient().getId();
     }
 }

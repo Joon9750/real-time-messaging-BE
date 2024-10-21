@@ -27,7 +27,10 @@ public class UserChatRoomRepositorylmpl implements UserChatRoomRepository {
     public Optional<UserChatRoom> findByUserAndChatRoom(User user, ChatRoom chatRoom) {
         try {
             UserChatRoom userChatRoom = (UserChatRoom) entityManager.createQuery(
-                            "select uc from UserChatRoom uc where uc.user = :user and uc.chatRoom = :chatRoom")
+                            "select uc from UserChatRoom uc" +
+                                    " join fetch uc.user" +
+                                    " join fetch uc.chatRoom" +
+                                    " where uc.user = :user and uc.chatRoom = :chatRoom")
                     .setParameter("user", user)
                     .setParameter("chatRoom", chatRoom)
                     .getSingleResult();
@@ -41,7 +44,9 @@ public class UserChatRoomRepositorylmpl implements UserChatRoomRepository {
     @Override
     public List<UserChatRoom> findByUser(User user) {
         return entityManager.createQuery(
-                "select uc from UserChatRoom uc where uc.user = :user", UserChatRoom.class)
+                "select uc from UserChatRoom uc" +
+                        " join fetch uc.user" +
+                        " where uc.user = :user", UserChatRoom.class)
                 .setParameter("user", user)
                 .getResultList();
     }
@@ -49,7 +54,9 @@ public class UserChatRoomRepositorylmpl implements UserChatRoomRepository {
     @Override
     public List<UserChatRoom> findByChatRoom(ChatRoom chatRoom) {
         return entityManager.createQuery(
-                "select uc from UserChatRoom uc where uc.chatRoom = :chatRoom",UserChatRoom.class)
+                "select uc from UserChatRoom uc " +
+                        " join fetch uc.chatRoom" +
+                        " where uc.chatRoom = :chatRoom",UserChatRoom.class)
                 .setParameter("chatRoom", chatRoom)
                 .getResultList();
     }
