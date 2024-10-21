@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class GetRootClientResponseDto {
+public class GetRootClientResponse {
 
     private RootClient rootClient;
 }

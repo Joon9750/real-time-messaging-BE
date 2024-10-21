@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class CreateRootClientResponseDto {
+public class CreateRootClientResponse {
 
     private Long id;
 }

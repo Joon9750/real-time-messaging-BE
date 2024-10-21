@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 
 @Getter
-public class CreateRoomRequestDto {
+public class CreateRoomRequest {
 
     @NotBlank
     private String name;
