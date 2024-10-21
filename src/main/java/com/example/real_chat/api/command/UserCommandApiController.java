@@ -18,16 +18,12 @@ import org.springframework.web.bind.annotation.*;
 public class UserCommandApiController {
 
     private final UserCommandService userCommandService;
-    private final RootClientQueryService rootClientQueryService;
 
     @PostMapping()
     public ResponseEntity<CreateUserResponseDto> createUser(
             @RequestBody CreateUserRequestDto request
     ) {
-        RootClient rootClient = rootClientQueryService.getRootClient(request.getRootClientId());
-        User user = User.create(request.getUserName(), rootClient);
-        Long userId = userCommandService.addUser(user);
-
+        Long userId = userCommandService.addUser(request.getUserName(), request.getRootClientId());
         return ResponseEntity.ok().body(new CreateUserResponseDto(userId));
     }
 
