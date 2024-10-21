@@ -17,7 +17,7 @@ public class User extends BaseTimeEntity {
 
     private String userName;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rootclient_id")
     private RootClient client;
 
