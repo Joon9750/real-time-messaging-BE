@@ -49,6 +49,15 @@ public class UserChatRoomCommandServiceImpl implements UserChatRoomCommandServic
         }
     }
 
+    @Override
+    public void deleteUserChatRoomByChatRoomId(Long chatRoomId) {
+        ChatRoom chatRoom = getChatRoom(chatRoomId);
+        List<UserChatRoom> userChatRoom = userChatRoomRepository.findByChatRoom(chatRoom);
+        for (UserChatRoom m : userChatRoom) {
+            userChatRoomRepository.delete(m);
+        }
+    }
+
     private User getUser(Long userId) {
         return userQueryService.getUserById(userId);
     }
