@@ -39,6 +39,6 @@ public class RoomCommandServiceImpl implements RoomCommandService {
     }
 
     private void deleteUserChatRoom(Long roomId) {
-        userChatRoomCommandService.deleteUserChatRoomByChatRoomId(roomId);
+        userChatRoomCommandService.leaveUserChatRoomByChatRoomId(roomId);
     }
 }

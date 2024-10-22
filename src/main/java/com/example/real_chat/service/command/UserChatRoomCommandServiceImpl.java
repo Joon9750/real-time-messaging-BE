@@ -3,7 +3,6 @@ package com.example.real_chat.service.command;
 import com.example.real_chat.entity.room.ChatRoom;
 import com.example.real_chat.entity.user.User;
 import com.example.real_chat.entity.userChatRoom.UserChatRoom;
-import com.example.real_chat.repository.RoomRepository;
 import com.example.real_chat.repository.UserChatRoomRepository;
 import com.example.real_chat.service.query.RoomQueryService;
 import com.example.real_chat.service.query.UserQueryService;
@@ -46,11 +45,13 @@ public class UserChatRoomCommandServiceImpl implements UserChatRoomCommandServic
     }
 
     @Override
-    public void deleteUserChatRoomByChatRoomId(Long chatRoomId) {
+    public void leaveUserChatRoomByChatRoomId(Long chatRoomId) {
         ChatRoom chatRoom = getChatRoom(chatRoomId);
         List<UserChatRoom> userChatRoom = userChatRoomRepository.findByChatRoom(chatRoom);
 
         for (UserChatRoom m : userChatRoom) {
+            User user = m.getUser();
+            user.removeUserChatRoom(m);
             userChatRoomRepository.delete(m);
         }
     }
