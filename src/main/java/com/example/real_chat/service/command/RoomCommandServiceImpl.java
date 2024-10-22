@@ -38,6 +38,6 @@ public class RoomCommandServiceImpl implements RoomCommandService {
     }
 
     private void deleteUserChatRoom(Long roomId) {
-        userChatRoomCommandService.
+        userChatRoomCommandService.deleteUserChatRoomByChatRoomId(roomId);
     }
 }

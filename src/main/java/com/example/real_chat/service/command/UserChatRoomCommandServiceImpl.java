@@ -28,7 +28,7 @@ public class UserChatRoomCommandServiceImpl implements UserChatRoomCommandServic
     public Long joinChatRoom(Long userId, Long chatRoomId) {
         User user = getUser(userId);
         ChatRoom chatRoom = getChatRoom(chatRoomId);
-        
+
         boolean isUserInChatRoom = userChatRoomRepository.existsByUserAndChatRoom(user, chatRoom);
 
         if (!isUserInChatRoom) {
@@ -49,6 +49,7 @@ public class UserChatRoomCommandServiceImpl implements UserChatRoomCommandServic
     public void deleteUserChatRoomByChatRoomId(Long chatRoomId) {
         ChatRoom chatRoom = getChatRoom(chatRoomId);
         List<UserChatRoom> userChatRoom = userChatRoomRepository.findByChatRoom(chatRoom);
+
         for (UserChatRoom m : userChatRoom) {
             userChatRoomRepository.delete(m);
         }
