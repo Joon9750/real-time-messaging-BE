@@ -16,6 +16,7 @@ public class RoomCommandServiceImpl implements RoomCommandService {
     private final RoomRepository roomRepository;
 
     private final RootClientQueryService rootClientQueryService;
+    private final UserChatRoomCommandService userChatRoomCommandService;
 
     @Override
     public Long addRoom(String roomName, Long clientId) {
@@ -34,5 +35,10 @@ public class RoomCommandServiceImpl implements RoomCommandService {
     public void deleteRoom(Long roomId) {
         ChatRoom chatRoom = roomRepository.findById(roomId).orElseThrow();
         roomRepository.delete(chatRoom);
+        deleteUserChatRoom(roomId);
+    }
+
+    private void deleteUserChatRoom(Long roomId) {
+        userChatRoomCommandService.leaveUserChatRoomByChatRoomId(roomId);
     }
 }

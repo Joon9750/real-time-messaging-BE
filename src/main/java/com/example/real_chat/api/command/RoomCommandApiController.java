@@ -32,7 +32,9 @@ public class RoomCommandApiController {
             @PathVariable Long id
     ) {
         roomService.deleteRoom(id);
-        return ResponseEntity.ok(CommonApiResult.createOk("채팅방이 정상적으로 삭제 되었습니다."));
+        return ResponseEntity.ok(CommonApiResult.createOk(
+                "채팅방이 정상적으로 삭제 되었고, 채팅방에 속한 사용자들 모두 채팅방에서 나가졌습니다."
+        ));
     }
 
     @PatchMapping("/{id}")
