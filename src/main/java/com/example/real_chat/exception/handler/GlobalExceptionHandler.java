@@ -1,9 +1,12 @@
-package com.example.real_chat.exception;
+package com.example.real_chat.exception.handler;
 
+import com.example.real_chat.exception.BadRequestException;
+import com.example.real_chat.exception.dto.ErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.support.MethodArgumentNotValidException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -20,8 +23,21 @@ public class GlobalExceptionHandler {
         return exceptionResponseEntity(e.getMessage(), request.getRequestURI());
     }
 
+    @ExceptionHandler(BadRequestException.class)
+    private ResponseEntity<ErrorResponse> handleBadRequestException(
+            BadRequestException e,
+            HttpServletRequest request
+    ) {
+        return exceptionResponseEntity(e.getMessage(), request.getRequestURI());
+    }
 
-
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    private ResponseEntity<ErrorResponse> handleHttpRequestMethodNotSupportedException(
+            HttpRequestMethodNotSupportedException e,
+            HttpServletRequest request
+    ) {
+        return exceptionResponseEntity(e.getMessage(), request.getRequestURI());
+    }
 
     /**
      * exception 발생사 ResponseEntity 로 변환 후 반환
