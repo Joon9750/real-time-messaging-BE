@@ -6,6 +6,6 @@ import lombok.Getter;
 @Getter
 public class UpdateRoomRequest {
 
-    @NotBlank
+    @NotBlank(message = "변경할 채팅방 이름을 입력해주세요.")
     private String name;
 }

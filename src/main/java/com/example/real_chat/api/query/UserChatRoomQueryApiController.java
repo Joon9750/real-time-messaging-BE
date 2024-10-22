@@ -1,9 +1,8 @@
 package com.example.real_chat.api.query;
 
 import com.example.real_chat.dto.common.Result;
+import com.example.real_chat.dto.userChatRoom.request.CommonUserChatRoomRequest;
 import com.example.real_chat.dto.userChatRoom.request.GetChatRoomsRequest;
-import com.example.real_chat.dto.userChatRoom.request.GetUserChatRoomRequest;
-import com.example.real_chat.dto.userChatRoom.request.GetUserExistRequest;
 import com.example.real_chat.dto.userChatRoom.response.GetChatRoomResponse;
 import com.example.real_chat.dto.userChatRoom.response.GetUserChatRoomResponse;
 import com.example.real_chat.dto.userChatRoom.response.GetUserReseponse;
@@ -28,7 +27,7 @@ public class UserChatRoomQueryApiController {
 
     @GetMapping()
     public ResponseEntity<GetUserChatRoomResponse> getUserChatRoom(
-            @RequestBody @Valid GetUserChatRoomRequest request
+            @RequestBody @Valid CommonUserChatRoomRequest request
     ) {
         UserChatRoom userChatRoom = userChatRoomQueryService.getUserInChatRoom(request.getUserId(), request.getRoomId());
 
@@ -68,7 +67,7 @@ public class UserChatRoomQueryApiController {
 
     @GetMapping("/does-user-exist")
     public ResponseEntity<Result<Boolean>> doseUserExist(
-            @RequestBody @Valid GetUserExistRequest request
+            @RequestBody @Valid CommonUserChatRoomRequest request
     ) {
         Boolean doesUserExistInChatRoom = userChatRoomQueryService.doesUserExistInChatRoom(request.getUserId(), request.getRoomId());
         return ResponseEntity.ok(new Result<>(doesUserExistInChatRoom));

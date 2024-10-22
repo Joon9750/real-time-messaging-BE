@@ -1,16 +1,9 @@
 package com.example.real_chat.api.command;
 
-import com.example.real_chat.dto.common.CommonApiResult;
-import com.example.real_chat.dto.userChatRoom.request.CreateUserChatRoomRequest;
-import com.example.real_chat.dto.userChatRoom.request.DeleteChatRoomRequest;
-import com.example.real_chat.dto.userChatRoom.request.DeleteUserChatRoomRequest;
+import com.example.real_chat.dto.userChatRoom.request.CommonUserChatRoomRequest;
 import com.example.real_chat.dto.userChatRoom.response.CreateUserChatRoomResponse;
-import com.example.real_chat.entity.room.ChatRoom;
-import com.example.real_chat.entity.user.User;
-import com.example.real_chat.service.command.RoomCommandService;
 import com.example.real_chat.service.command.UserChatRoomCommandService;
-import com.example.real_chat.service.query.RoomQueryService;
-import com.example.real_chat.service.query.UserQueryService;
+
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +20,7 @@ public class UserChatRoomCommandApiController {
     // 이미 해당 유저가 해당 채팅방에 속한 경우 RuntimeException 던짐
     @PostMapping()
     public ResponseEntity<CreateUserChatRoomResponse> createUserChatRoom(
-            @RequestBody @Valid CreateUserChatRoomRequest request
+            @RequestBody @Valid CommonUserChatRoomRequest request
     ) {
         Long userChatRoomId = userChatRoomCommandService.joinChatRoom(request.getUserId(), request.getRoomId());
         return ResponseEntity.ok(new CreateUserChatRoomResponse(userChatRoomId));

@@ -19,7 +19,6 @@ public class UserChatRoomCommandServiceImpl implements UserChatRoomCommandServic
 
     private final UserChatRoomRepository userChatRoomRepository;
 
-    private final RoomCommandService roomCommandService;
     private final UserQueryService userQueryService;
     private final RoomQueryService roomQueryService;
 

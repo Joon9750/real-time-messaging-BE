@@ -6,7 +6,6 @@ import com.example.real_chat.dto.user.response.CreateUserResponse;
 import com.example.real_chat.service.command.UserCommandService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
