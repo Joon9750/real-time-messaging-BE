@@ -29,6 +29,8 @@ public class UserCommandApiController {
             @PathVariable Long id
     ) {
         userCommandService.delete(id);
-        return ResponseEntity.ok(CommonApiResult.createOk("유저가 정상적으로 삭제되었습니다."));
+        return ResponseEntity.ok(CommonApiResult.createOk(
+                "유저가 정상적으로 삭제되었습니다. 추가로 유저가 속한 채팅방에서 유저가 나가졌습니다."
+        ));
     }
 }
