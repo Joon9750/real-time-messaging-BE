@@ -1,24 +1,19 @@
 package com.example.real_chat.exception.handler;
 
 import com.example.real_chat.exception.CannotJoinChatRoomException;
-import com.example.real_chat.exception.NotFoundException;
 import com.example.real_chat.exception.UnauthorizedException;
 import com.example.real_chat.exception.dto.ErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.messaging.MessagingException;
 import org.springframework.messaging.handler.annotation.support.MethodArgumentNotValidException;
-import org.springframework.messaging.handler.invocation.MethodArgumentResolutionException;
-import org.springframework.validation.FieldError;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.context.request.WebRequest;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
+import java.util.NoSuchElementException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -31,9 +26,7 @@ public class GlobalExceptionHandler {
             MethodArgumentNotValidException e,
             HttpServletRequest request
     ) {
-        ResponseEntity<ErrorResponse> error = exceptionResponseEntity(e.getMessage(), request.getRequestURI());
-        ErrorResponse response = addValidationError(e, error.getBody());
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        return exceptionResponseEntity(e.getMessage(), request.getRequestURI());
     }
 
     /**
@@ -53,17 +46,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     protected ResponseEntity<ErrorResponse> handleHttpMessageNotReadableException(
             HttpMessageNotReadableException e,
-            HttpServletRequest request
-    ) {
-        return exceptionResponseEntity(e.getMessage(), request.getRequestURI());
-    }
-
-    /**
-     * 데이터를 찾을 수 없을 때 발생
-     */
-    @ExceptionHandler(NotFoundException.class)
-    protected ResponseEntity<ErrorResponse> handleNotFoundException(
-            NotFoundException e,
             HttpServletRequest request
     ) {
         return exceptionResponseEntity(e.getMessage(), request.getRequestURI());
@@ -91,6 +73,14 @@ public class GlobalExceptionHandler {
         return exceptionResponseEntity(e.getMessage(), request.getRequestURI());
     }
 
+    /**
+     * 데이터를 찾을 수 없을 때 발생
+     */
+    @ExceptionHandler(NoSuchElementException.class)
+    protected ResponseEntity<ErrorResponse> handleNoSuchElementException(NoSuchElementException e, HttpServletRequest request) {
+        return exceptionResponseEntity("존재하지 않는 값입니다.", request.getRequestURI());
+    }
+
     // 500 Uncaught Exception
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleAllUncaughtException(
@@ -101,7 +91,7 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * exception 발생사 ResponseEntity 로 변환 후 반환
+     * exception 발생시 ResponseEntity 로 변환 후 반환
      * @return ResponseEntity<ErrorResponseDto>
      */
     private ResponseEntity<ErrorResponse> exceptionResponseEntity(String message, String requestUrl) {
@@ -113,15 +103,5 @@ public class GlobalExceptionHandler {
                 .build();
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(em);
-    }
-
-    private ErrorResponse addValidationError(
-            MethodArgumentNotValidException e,
-            ErrorResponse errorResponse
-    ) {
-        for (FieldError fieldError : Objects.requireNonNull(e.getBindingResult()).getFieldErrors()) {
-            errorResponse.addValidationError(fieldError.getField(), fieldError.getDefaultMessage());
-        }
-        return errorResponse;
     }
 }
