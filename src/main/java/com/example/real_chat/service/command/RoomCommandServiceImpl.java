@@ -35,6 +35,7 @@ public class RoomCommandServiceImpl implements RoomCommandService {
     public void deleteRoom(Long roomId) {
         ChatRoom chatRoom = roomRepository.findById(roomId).orElseThrow();
         roomRepository.delete(chatRoom);
+        deleteUserChatRoom(roomId);
     }
 
     private void deleteUserChatRoom(Long roomId) {
