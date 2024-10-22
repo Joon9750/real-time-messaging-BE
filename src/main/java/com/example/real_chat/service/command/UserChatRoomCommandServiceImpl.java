@@ -39,7 +39,6 @@ public class UserChatRoomCommandServiceImpl implements UserChatRoomCommandServic
             userChatRoom.setChatRoom(chatRoom);
 
             // 연관관계 편의 메소드
-            chatRoom.addUserChatRoom(userChatRoom);
             user.addUserChatRoom(userChatRoom);
 
             userChatRoomRepository.save(userChatRoom);
