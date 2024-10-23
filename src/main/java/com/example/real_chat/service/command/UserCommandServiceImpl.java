@@ -8,6 +8,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.NoSuchElementException;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -26,7 +28,9 @@ public class UserCommandServiceImpl implements UserCommandService {
 
     @Override
     public void delete(Long userId) {
-        User user = userRepository.findById(userId).orElseThrow();
+        User user = userRepository.findById(userId).orElseThrow(
+                () -> new NoSuchElementException("User not found with id : " + userId)
+        );
         userRepository.delete(user);
     }
 }

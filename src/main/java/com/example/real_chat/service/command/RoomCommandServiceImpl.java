@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.NoSuchElementException;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -27,17 +29,21 @@ public class RoomCommandServiceImpl implements RoomCommandService {
 
     @Override
     public void updateChatRoom(Long roomId, String name) {
-        ChatRoom room = roomRepository.findById(roomId).orElseThrow();
+        ChatRoom room = getChatRoomOrThrow(roomId);
         room.update(name);
     }
 
     @Override
     public void deleteRoom(Long roomId) {
-        ChatRoom chatRoom = roomRepository.findById(roomId).orElseThrow();
+        ChatRoom chatRoom = getChatRoomOrThrow(roomId);
         roomRepository.delete(chatRoom);
         deleteUserChatRoom(roomId);
     }
 
+    private ChatRoom getChatRoomOrThrow(Long roomId) {
+        return roomRepository.findById(roomId)
+                .orElseThrow(() -> new NoSuchElementException("Room not found with id : " + roomId));
+    }
     private void deleteUserChatRoom(Long roomId) {
         userChatRoomCommandService.leaveUserChatRoomByChatRoomId(roomId);
     }

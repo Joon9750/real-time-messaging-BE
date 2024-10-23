@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.NoSuchElementException;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -22,14 +24,21 @@ public class RootClientCommandServiceImpl implements RootClientCommandService {
 
     @Override
     public void deleteRootClient(Long id) {
-        RootClient client = rootClientRepository.findById(id).orElseThrow();
+        RootClient client = getRootClientOrThrow(id);
         if (client.isDeleted()) throw new RootClientAlreadyDeletedException("ID " + id + "의 RootClient는 이미 삭제되었습니다.");
         else client.delete();
     }
 
     @Override
     public void updateRootClient(Long rootClientId, String id, String password, String name) {
-        RootClient rootClient = rootClientRepository.findById(rootClientId).orElseThrow();
+        RootClient rootClient = getRootClientOrThrow(rootClientId);
         rootClient.update(id, password, name);
+    }
+
+    private RootClient getRootClientOrThrow(Long id) {
+        RootClient rootClient = rootClientRepository.findById(id).orElseThrow(
+                () -> new NoSuchElementException("Root Client not found with id : " + id);
+        );
+        return rootClient;
     }
 }
