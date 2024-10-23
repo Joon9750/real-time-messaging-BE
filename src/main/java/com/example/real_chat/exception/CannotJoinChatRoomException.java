@@ -6,6 +6,6 @@ public class CannotJoinChatRoomException extends RuntimeException {
     }
 
     public CannotJoinChatRoomException() {
-        super("사용자가 채팅방에 추가되지 못했습니다.");
+        super("이미 해당 채팅방에 존재하는 유저입니다.");
     }
 }
