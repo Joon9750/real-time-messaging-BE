@@ -3,6 +3,7 @@ package com.example.real_chat.service.command;
 import com.example.real_chat.entity.room.ChatRoom;
 import com.example.real_chat.entity.user.User;
 import com.example.real_chat.entity.userChatRoom.UserChatRoom;
+import com.example.real_chat.exception.CannotJoinChatRoomException;
 import com.example.real_chat.repository.UserChatRoomRepository;
 import com.example.real_chat.service.query.RoomQueryService;
 import com.example.real_chat.service.query.UserQueryService;
@@ -39,7 +40,7 @@ public class UserChatRoomCommandServiceImpl implements UserChatRoomCommandServic
             userChatRoomRepository.save(userChatRoom);
             return userChatRoom.getId();
         } else {
-            throw new RuntimeException();
+            throw new CannotJoinChatRoomException();
         }
     }
 
