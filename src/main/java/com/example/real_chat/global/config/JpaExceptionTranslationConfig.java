@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 
 @Configuration
-public class jpaExceptionTranslationConfig {
+public class JpaExceptionTranslationConfig {
 
     @Bean
     public PersistenceExceptionTranslationPostProcessor persistenceExceptionTranslationPostProcessor() {
