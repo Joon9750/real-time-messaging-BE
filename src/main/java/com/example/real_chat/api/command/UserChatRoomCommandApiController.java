@@ -17,7 +17,7 @@ public class UserChatRoomCommandApiController {
     private final UserChatRoomCommandService userChatRoomCommandService;
 
     // 채팅방을 만들고 유저를 만들 이후 채팅방에 유저가 들어갈 경우 호출되는 api
-    // 이미 해당 유저가 해당 채팅방에 속한 경우 CannorJoinChatRoomException 던짐
+    // 이미 해당 유저가 해당 채팅방에 속한 경우 CannotJoinChatRoomException 던짐
     @PostMapping()
     public ResponseEntity<CreateUserChatRoomResponse> createUserChatRoom(
             @RequestBody @Valid CreateUserChatRoomRequest request
