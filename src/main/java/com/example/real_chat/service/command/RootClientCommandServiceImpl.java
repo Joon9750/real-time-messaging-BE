@@ -1,7 +1,7 @@
 package com.example.real_chat.service.command;
 
 import com.example.real_chat.entity.rootClient.RootClient;
-import com.example.real_chat.exception.RootClientAlreadyDeletedException;
+import com.example.real_chat.global.exception.RootClientAlreadyDeletedException;
 import com.example.real_chat.repository.RootClientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

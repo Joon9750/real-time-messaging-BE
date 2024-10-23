@@ -1,4 +1,4 @@
-package com.example.real_chat.exception;
+package com.example.real_chat.global.exception;
 
 public class UnauthorizedException extends RuntimeException {
     public UnauthorizedException(String message) {

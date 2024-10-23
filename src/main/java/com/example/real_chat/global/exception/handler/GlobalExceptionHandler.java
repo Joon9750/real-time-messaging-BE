@@ -1,9 +1,9 @@
-package com.example.real_chat.exception.handler;
+package com.example.real_chat.global.exception.handler;
 
-import com.example.real_chat.exception.CannotJoinChatRoomException;
-import com.example.real_chat.exception.RootClientAlreadyDeletedException;
-import com.example.real_chat.exception.UnauthorizedException;
-import com.example.real_chat.exception.dto.ErrorResponse;
+import com.example.real_chat.global.exception.CannotJoinChatRoomException;
+import com.example.real_chat.global.exception.RootClientAlreadyDeletedException;
+import com.example.real_chat.global.exception.UnauthorizedException;
+import com.example.real_chat.global.exception.dto.ErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

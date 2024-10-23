@@ -1,4 +1,4 @@
-package com.example.real_chat.exception.dto;
+package com.example.real_chat.global.exception.dto;
 
 import lombok.*;
 import java.time.LocalDateTime;
