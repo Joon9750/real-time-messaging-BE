@@ -60,8 +60,8 @@ public class UserChatRoomQueryApiController {
         return ResponseEntity.ok(new Result<>(response));
     }
 
-    @GetMapping("/{userId}/{roomId}")
-    public ResponseEntity<Result<Boolean>> doseUserExist(
+    @GetMapping("/does-user-exist/{userId}/{roomId}")
+    public ResponseEntity<Result<Boolean>> doesUserExist(
             @PathVariable Long userId,
             @PathVariable Long roomId
     ) {
