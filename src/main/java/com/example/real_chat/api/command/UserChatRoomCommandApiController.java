@@ -1,6 +1,6 @@
 package com.example.real_chat.api.command;
 
-import com.example.real_chat.dto.userChatRoom.request.CommonUserChatRoomRequest;
+import com.example.real_chat.dto.userChatRoom.request.CreateUserChatRoomRequest;
 import com.example.real_chat.dto.userChatRoom.response.CreateUserChatRoomResponse;
 import com.example.real_chat.service.command.UserChatRoomCommandService;
 
@@ -20,7 +20,7 @@ public class UserChatRoomCommandApiController {
     // 이미 해당 유저가 해당 채팅방에 속한 경우 CannorJoinChatRoomException 던짐
     @PostMapping()
     public ResponseEntity<CreateUserChatRoomResponse> createUserChatRoom(
-            @RequestBody @Valid CommonUserChatRoomRequest request
+            @RequestBody @Valid CreateUserChatRoomRequest request
     ) {
         Long userChatRoomId = userChatRoomCommandService.joinChatRoom(request.getUserId(), request.getRoomId());
         return ResponseEntity.ok(new CreateUserChatRoomResponse(userChatRoomId));

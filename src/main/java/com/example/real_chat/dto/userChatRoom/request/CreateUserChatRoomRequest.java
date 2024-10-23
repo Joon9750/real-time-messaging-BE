@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 
 @Getter
-public class CommonUserChatRoomRequest {
+public class CreateUserChatRoomRequest {
 
     @NotNull(message = "유저 식별자 아이디를 입력해주세요.")
     private Long userId;

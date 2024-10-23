@@ -1,20 +1,14 @@
 package com.example.real_chat.api.query;
 
 import com.example.real_chat.dto.common.Result;
-import com.example.real_chat.dto.userChatRoom.request.CommonUserChatRoomRequest;
-import com.example.real_chat.dto.userChatRoom.request.GetChatRoomsRequest;
 import com.example.real_chat.dto.userChatRoom.response.GetChatRoomResponse;
 import com.example.real_chat.dto.userChatRoom.response.GetUserChatRoomResponse;
 import com.example.real_chat.dto.userChatRoom.response.GetUserReseponse;
 import com.example.real_chat.entity.userChatRoom.UserChatRoom;
 import com.example.real_chat.service.query.UserChatRoomQueryService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,11 +19,12 @@ public class UserChatRoomQueryApiController {
 
     private final UserChatRoomQueryService userChatRoomQueryService;
 
-    @GetMapping()
+    @GetMapping("/{userId}/{roomId}")
     public ResponseEntity<GetUserChatRoomResponse> getUserChatRoom(
-            @RequestBody @Valid CommonUserChatRoomRequest request
+        @PathVariable Long userId,
+        @PathVariable Long roomId
     ) {
-        UserChatRoom userChatRoom = userChatRoomQueryService.getUserInChatRoom(request.getUserId(), request.getRoomId());
+        UserChatRoom userChatRoom = userChatRoomQueryService.getUserInChatRoom(userId, roomId);
 
         GetUserReseponse getUserReseponse = new GetUserReseponse(userChatRoom);
         GetChatRoomResponse getChatRoomResponse = new GetChatRoomResponse(userChatRoom);
@@ -39,11 +34,11 @@ public class UserChatRoomQueryApiController {
         );
     }
 
-    @GetMapping("/user/chat-room-list")
+    @GetMapping("/user/chat-room-list/{userId}")
     public ResponseEntity<Result<List<GetChatRoomResponse>>> getChatRoomsUserParticipatesIn(
-            @RequestBody @Valid GetChatRoomsRequest request
+            @PathVariable Long userId
     ) {
-        List<UserChatRoom> chatRoomList = userChatRoomQueryService.getChatRoomsUserParticipatesIn(request.getUserId());
+        List<UserChatRoom> chatRoomList = userChatRoomQueryService.getChatRoomsUserParticipatesIn(userId);
 
         List<GetChatRoomResponse> response = chatRoomList.stream()
                 .map(GetChatRoomResponse::new)
@@ -52,11 +47,11 @@ public class UserChatRoomQueryApiController {
         return  ResponseEntity.ok(new Result<>(response));
     }
 
-    @GetMapping("/chat/user-list")
+    @GetMapping("/chat/user-list/{userId}")
     public ResponseEntity<Result<List<GetUserReseponse>>> getParticipantsInChatRoom(
-            @RequestBody @Valid GetChatRoomsRequest request
+            @PathVariable Long userId
     ) {
-        List<UserChatRoom> userList = userChatRoomQueryService.getParticipantsInChatRoom(request.getUserId());
+        List<UserChatRoom> userList = userChatRoomQueryService.getParticipantsInChatRoom(userId);
 
         List<GetUserReseponse> response = userList.stream()
                 .map(GetUserReseponse::new)
@@ -65,11 +60,12 @@ public class UserChatRoomQueryApiController {
         return ResponseEntity.ok(new Result<>(response));
     }
 
-    @GetMapping("/does-user-exist")
+    @GetMapping("/{userId}/{roomId}")
     public ResponseEntity<Result<Boolean>> doseUserExist(
-            @RequestBody @Valid CommonUserChatRoomRequest request
+            @PathVariable Long userId,
+            @PathVariable Long roomId
     ) {
-        Boolean doesUserExistInChatRoom = userChatRoomQueryService.doesUserExistInChatRoom(request.getUserId(), request.getRoomId());
+        Boolean doesUserExistInChatRoom = userChatRoomQueryService.doesUserExistInChatRoom(userId, roomId);
         return ResponseEntity.ok(new Result<>(doesUserExistInChatRoom));
     }
 }
