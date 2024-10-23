@@ -27,7 +27,6 @@ public class RoomCommandApiController {
     }
 
     @DeleteMapping("/{id}")
-    @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<CommonApiResult> deleteRoom(
             @PathVariable Long id
     ) {

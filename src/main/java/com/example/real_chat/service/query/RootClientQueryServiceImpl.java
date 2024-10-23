@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.NoSuchElementException;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -15,6 +17,8 @@ public class RootClientQueryServiceImpl implements RootClientQueryService {
 
     @Override
     public RootClient getRootClient(Long id) {
-        return rootClientRepository.findById(id).orElseThrow();
+        return rootClientRepository.findById(id).orElseThrow(
+                () -> new NoSuchElementException("Root client not found with id : " + id)
+        );
     }
 }

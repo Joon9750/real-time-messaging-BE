@@ -1,4 +1,4 @@
-package com.example.real_chat.config;
+package com.example.real_chat.global.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;

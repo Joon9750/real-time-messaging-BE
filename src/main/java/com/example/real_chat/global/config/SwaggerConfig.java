@@ -1,4 +1,4 @@
-package com.example.real_chat.config;
+package com.example.real_chat.global.config;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;

@@ -63,12 +63,14 @@ public class UserChatRoomRepositorylmpl implements UserChatRoomRepository {
 
     @Override
     public boolean existsByUserAndChatRoom(User user, ChatRoom chatRoom) {
-        return (boolean) entityManager.createQuery(
+         List<Boolean> result = entityManager.createQuery(
                 "select case when count(uc) > 0 then true else false end" +
-                        " from UserChatRoom uc where uc.user = :user and uc.chatRoom = :chatRoom")
+                        " from UserChatRoom uc where uc.user = :user and uc.chatRoom = :chatRoom", Boolean.class)
                 .setParameter("user", user)
                 .setParameter("chatRoom", chatRoom)
-                .getSingleResult();
+                .getResultList();
+
+        return !result.isEmpty() && result.getFirst();
     }
 
     @Override

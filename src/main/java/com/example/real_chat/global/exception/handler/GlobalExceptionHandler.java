@@ -1,8 +1,9 @@
-package com.example.real_chat.exception.handler;
+package com.example.real_chat.global.exception.handler;
 
-import com.example.real_chat.exception.CannotJoinChatRoomException;
-import com.example.real_chat.exception.UnauthorizedException;
-import com.example.real_chat.exception.dto.ErrorResponse;
+import com.example.real_chat.global.exception.CannotJoinChatRoomException;
+import com.example.real_chat.global.exception.RootClientAlreadyDeletedException;
+import com.example.real_chat.global.exception.UnauthorizedException;
+import com.example.real_chat.global.exception.dto.ErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -79,6 +80,14 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(NoSuchElementException.class)
     protected ResponseEntity<ErrorResponse> handleNoSuchElementException(NoSuchElementException e, HttpServletRequest request) {
         return exceptionResponseEntity("존재하지 않는 값입니다.", request.getRequestURI());
+    }
+
+    @ExceptionHandler(RootClientAlreadyDeletedException.class)
+    protected ResponseEntity<ErrorResponse> handleRootClientAlreadyDeletedException(
+            RootClientAlreadyDeletedException e,
+            HttpServletRequest request
+    ) {
+        return exceptionResponseEntity(e.getMessage(), request.getRequestURI()); // 또는 적절한 상태 코드
     }
 
     // 500 Uncaught Exception

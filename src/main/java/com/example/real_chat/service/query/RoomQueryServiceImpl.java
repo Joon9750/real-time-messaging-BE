@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @Transactional(readOnly = true)
@@ -17,7 +18,9 @@ public class RoomQueryServiceImpl implements RoomQueryService {
 
     @Override
     public ChatRoom getRoom(Long roomId) {
-        return roomRepository.findById(roomId).orElseThrow();
+        return roomRepository.findById(roomId).orElseThrow(
+                () -> new NoSuchElementException("Room not found with id: " + roomId)
+        );
     }
 
     @Override

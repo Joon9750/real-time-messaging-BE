@@ -1,4 +1,4 @@
-package com.example.real_chat.exception;
+package com.example.real_chat.global.exception;
 
 public class CannotJoinChatRoomException extends RuntimeException {
     public CannotJoinChatRoomException(String message) {
