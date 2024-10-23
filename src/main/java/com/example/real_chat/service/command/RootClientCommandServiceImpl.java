@@ -1,6 +1,7 @@
 package com.example.real_chat.service.command;
 
 import com.example.real_chat.entity.rootClient.RootClient;
+import com.example.real_chat.exception.RootClientAlreadyDeletedException;
 import com.example.real_chat.repository.RootClientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class RootClientCommandServiceImpl implements RootClientCommandService {
     @Override
     public void deleteRootClient(Long id) {
         RootClient client = rootClientRepository.findById(id).orElseThrow();
-        if (client.isDeleted()) throw new RuntimeException();
+        if (client.isDeleted()) throw new RootClientAlreadyDeletedException("ID " + id + "의 RootClient는 이미 삭제되었습니다.");
         else client.delete();
     }
 
