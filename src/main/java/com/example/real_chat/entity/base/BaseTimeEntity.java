@@ -28,9 +28,3 @@ public abstract class BaseTimeEntity {
     @LastModifiedDate
     private LocalDateTime modifiedDate;
 }
-
-//@Override
-//public List<ChatRoom> findUnDeletedRooms() {
-//    return entityManager.createQuery("select m from ChatRoom m where m.deletedAt is null", ChatRoom.class)
-//            .getResultList();
-//}
