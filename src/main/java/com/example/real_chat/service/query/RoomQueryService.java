@@ -8,5 +8,4 @@ public interface RoomQueryService {
 
     ChatRoom getRoom(Long roomId);
     List<ChatRoom> getAllRooms();
-    List<ChatRoom> getUnDeletedRooms();
 }

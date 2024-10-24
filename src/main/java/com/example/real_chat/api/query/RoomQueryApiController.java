@@ -36,14 +36,4 @@ public class RoomQueryApiController {
 
         return ResponseEntity.ok().body(new Result<>(response));
     }
-
-    @GetMapping("/undeleted")
-    public ResponseEntity<Result<List<RoomResponse>>> getUnDeleteRooms() {
-        List<ChatRoom> unDeletedRooms = roomService.getUnDeletedRooms();
-        List<RoomResponse> response = unDeletedRooms.stream()
-                .map(RoomResponse::new)
-                .toList();
-
-        return ResponseEntity.ok().body(new Result<>(response));
-    }
 }

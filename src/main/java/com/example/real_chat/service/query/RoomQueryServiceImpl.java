@@ -25,9 +25,4 @@ public class RoomQueryServiceImpl implements RoomQueryService {
 
     @Override
     public List<ChatRoom> getAllRooms() { return roomRepository.findAll(); }
-
-    @Override
-    public List<ChatRoom> getUnDeletedRooms() {
-        return roomRepository.findUnDeletedRooms();
-    }
 }

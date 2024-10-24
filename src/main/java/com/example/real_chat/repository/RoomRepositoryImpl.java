@@ -35,12 +35,6 @@ public class RoomRepositoryImpl implements RoomRepository {
     }
 
     @Override
-    public List<ChatRoom> findUnDeletedRooms() {
-        return entityManager.createQuery("select m from ChatRoom m where m.deletedAt is null", ChatRoom.class)
-                .getResultList();
-    }
-
-    @Override
     public void delete(ChatRoom chatRoom) {
         if (entityManager.contains(chatRoom)) {
             entityManager.remove(chatRoom); // 만약 이미 영속 상태라면 제거

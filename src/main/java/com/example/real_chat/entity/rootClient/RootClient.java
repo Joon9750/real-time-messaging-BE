@@ -4,6 +4,8 @@ import com.example.real_chat.entity.base.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @Builder
@@ -22,6 +24,9 @@ public class RootClient extends BaseTimeEntity {
 
     private String clientName;
 
+    @Column(name = "deleted_at", columnDefinition = "DATETIME")
+    private LocalDateTime deletedAt;
+
     public static RootClient createRootClient(String clientId, String clientPassword, String clientName) {
         return RootClient.builder()
                 .clientId(clientId)
@@ -34,5 +39,13 @@ public class RootClient extends BaseTimeEntity {
         this.clientId = clientId;
         this.clientPassword = clientPassword;
         this.clientName = clientName;
+    }
+
+    public void delete() {
+        this.deletedAt = LocalDateTime.now();
+    }
+
+    public boolean isDeleted() {
+        return this.deletedAt != null;
     }
 }

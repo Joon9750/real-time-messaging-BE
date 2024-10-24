@@ -8,5 +8,4 @@ public interface UserQueryService {
 
     User getUserById(Long userId);
     List<User> getAllUsers();
-    List<User> getUndeletedUsers();
 }

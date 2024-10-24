@@ -27,9 +27,4 @@ public class UserQueryServiceImpl implements UserQueryService {
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
-
-    @Override
-    public List<User> getUndeletedUsers() {
-        return userRepository.findUnDeletedUsers();
-    }
 }

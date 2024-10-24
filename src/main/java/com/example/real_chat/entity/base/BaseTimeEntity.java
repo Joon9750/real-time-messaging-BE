@@ -1,5 +1,6 @@
 package com.example.real_chat.entity.base;
 
+import com.example.real_chat.entity.room.ChatRoom;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -25,15 +27,10 @@ public abstract class BaseTimeEntity {
 
     @LastModifiedDate
     private LocalDateTime modifiedDate;
-
-    @Column(name = "deleted_at", columnDefinition = "DATETIME")
-    private LocalDateTime deletedAt;
-
-    public void delete() {
-        this.deletedAt = LocalDateTime.now();
-    }
-
-    public boolean isDeleted() {
-        return this.deletedAt != null;
-    }
 }
+
+//@Override
+//public List<ChatRoom> findUnDeletedRooms() {
+//    return entityManager.createQuery("select m from ChatRoom m where m.deletedAt is null", ChatRoom.class)
+//            .getResultList();
+//}
