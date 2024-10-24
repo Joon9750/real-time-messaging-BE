@@ -19,10 +19,10 @@ public class UserChatRoomQueryApiController {
 
     private final UserChatRoomQueryService userChatRoomQueryService;
 
-    @GetMapping("/{userId}/{roomId}")
+    @GetMapping()
     public ResponseEntity<GetUserChatRoomResponse> getUserChatRoom(
-        @PathVariable Long userId,
-        @PathVariable Long roomId
+            @RequestParam Long userId,
+            @RequestParam Long roomId
     ) {
         UserChatRoom userChatRoom = userChatRoomQueryService.getUserInChatRoom(userId, roomId);
 
@@ -34,7 +34,7 @@ public class UserChatRoomQueryApiController {
         );
     }
 
-    @GetMapping("/user/chat-room-list/{userId}")
+    @GetMapping("/user/{userId}/chat-rooms")
     public ResponseEntity<Result<List<GetChatRoomResponse>>> getChatRoomsUserParticipatesIn(
             @PathVariable Long userId
     ) {
@@ -47,7 +47,7 @@ public class UserChatRoomQueryApiController {
         return  ResponseEntity.ok(new Result<>(response));
     }
 
-    @GetMapping("/chat/user-list/{userId}")
+    @GetMapping("/chat-room/{roomId}/participants")
     public ResponseEntity<Result<List<GetUserReseponse>>> getParticipantsInChatRoom(
             @PathVariable Long userId
     ) {
@@ -60,7 +60,7 @@ public class UserChatRoomQueryApiController {
         return ResponseEntity.ok(new Result<>(response));
     }
 
-    @GetMapping("/does-user-exist/{userId}/{roomId}")
+    @GetMapping("/user/{userId}/chat-room/{roomId}/exists")
     public ResponseEntity<Result<Boolean>> doesUserExist(
             @PathVariable Long userId,
             @PathVariable Long roomId

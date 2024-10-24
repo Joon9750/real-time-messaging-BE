@@ -27,7 +27,7 @@ public class RoomQueryApiController {
         return ResponseEntity.ok().body(new RoomResponse(chatRoom));
     }
 
-    @GetMapping()
+    @GetMapping("/all")
     public ResponseEntity<Result<List<RoomResponse>>> getAllRooms() {
         List<ChatRoom> chatRooms = roomService.getAllRooms();
         List<RoomResponse> response = chatRooms.stream()
