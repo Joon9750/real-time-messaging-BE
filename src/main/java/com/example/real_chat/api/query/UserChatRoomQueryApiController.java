@@ -19,10 +19,10 @@ public class UserChatRoomQueryApiController {
 
     private final UserChatRoomQueryService userChatRoomQueryService;
 
-    @GetMapping("/{userId}/{roomId}")
+    @GetMapping()
     public ResponseEntity<GetUserChatRoomResponse> getUserChatRoom(
-        @PathVariable Long userId,
-        @PathVariable Long roomId
+            @RequestParam Long userId,
+            @RequestParam Long roomId
     ) {
         UserChatRoom userChatRoom = userChatRoomQueryService.getUserInChatRoom(userId, roomId);
 
@@ -34,7 +34,7 @@ public class UserChatRoomQueryApiController {
         );
     }
 
-    @GetMapping("/user/chat-room-list/{userId}")
+    @GetMapping("/user/room-list/{userId}")
     public ResponseEntity<Result<List<GetChatRoomResponse>>> getChatRoomsUserParticipatesIn(
             @PathVariable Long userId
     ) {
