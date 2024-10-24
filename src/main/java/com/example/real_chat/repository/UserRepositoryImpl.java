@@ -34,12 +34,6 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<User> findUnDeletedUsers() {
-        return entityManager.createQuery("select u from User u where u.deletedAt is null", User.class)
-                .getResultList();
-    }
-
-    @Override
     public void delete(User user) {
         if (entityManager.contains(user)) {
             entityManager.remove(user); // 만약 이미 영속 상태라면 제거

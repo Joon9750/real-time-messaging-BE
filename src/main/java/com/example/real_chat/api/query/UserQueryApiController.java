@@ -37,14 +37,4 @@ public class UserQueryApiController {
 
         return ResponseEntity.ok().body(new Result<>(response));
     }
-
-    @GetMapping("/undeleted")
-    public ResponseEntity<Result<List<GetUserResponse>>> getUndeletedUsers() {
-        List<User> users = userQueryService.getUndeletedUsers();
-        List<GetUserResponse> response = users.stream()
-                .map(GetUserResponse::new)
-                .toList();
-
-        return ResponseEntity.ok().body(new Result<>(response));
-    }
 }
