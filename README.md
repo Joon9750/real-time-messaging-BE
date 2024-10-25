@@ -19,7 +19,7 @@ Sendbird 채팅 솔루션의 가격이 부담되는<br/>
   - 실시간 채팅에 참여할 회원 등록 및 관리 기능을 제공합니다.
 
 ## 🛠️ 핵심 기술 구현
-- **실시간성** : Polling이나 Long-Polling 방식 대신 **WebSocket**을 사용해 실시간 채팅 기능을 구현했습니다.
+- **실시간성** : Polling이나 Long-Polling 방식 대신 **WebSocket과 STOMP 프로토콜**을 사용해 실시간 채팅 기능을 구현했습니다.
 
 - **CQS 패턴** : Command(명령)와 Query(조회)를 분리하는 **Command Query Separation (CQS)** 패턴을 적용했습니다.
 - **메시지 브로커** : 휘발성인 **Spring WebSocket**의 **SimpMessagingTemplate** 대신, **Kafka**를 사용하여 안정적인 메시지 처리를 구현했습니다.
