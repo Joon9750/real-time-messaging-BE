@@ -20,7 +20,7 @@ public abstract class Resource<T> extends BaseTimeEntity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "room_id")
+    @JoinColumn(name = "chatroom_id")
     private ChatRoom chatRoom;
 
     private String sender;
