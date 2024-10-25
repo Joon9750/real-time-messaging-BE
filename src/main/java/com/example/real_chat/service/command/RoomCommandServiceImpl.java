@@ -37,14 +37,15 @@ public class RoomCommandServiceImpl implements RoomCommandService {
     @Override
     public void deleteRoom(Long roomId) {
         ChatRoom chatRoom = getChatRoomOrThrow(roomId);
-        roomRepository.delete(chatRoom);
         deleteUserChatRoom(roomId);
+        roomRepository.delete(chatRoom);
     }
 
     private ChatRoom getChatRoomOrThrow(Long roomId) {
         return roomRepository.findById(roomId)
                 .orElseThrow(() -> new NoSuchElementException("Room not found with id : " + roomId));
     }
+
     private void deleteUserChatRoom(Long roomId) {
         userChatRoomCommandService.leaveUserChatRoomByChatRoomId(roomId);
     }
