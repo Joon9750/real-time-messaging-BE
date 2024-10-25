@@ -49,9 +49,9 @@ public class UserChatRoomQueryApiController {
 
     @GetMapping("/chat-room/{roomId}/participants")
     public ResponseEntity<Result<List<GetUserReseponse>>> getParticipantsInChatRoom(
-            @PathVariable Long userId
+            @PathVariable Long roomId
     ) {
-        List<UserChatRoom> userList = userChatRoomQueryService.getParticipantsInChatRoom(userId);
+        List<UserChatRoom> userList = userChatRoomQueryService.getParticipantsInChatRoom(roomId);
 
         List<GetUserReseponse> response = userList.stream()
                 .map(GetUserReseponse::new)
