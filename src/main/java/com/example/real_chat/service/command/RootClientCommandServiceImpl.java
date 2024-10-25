@@ -34,7 +34,7 @@ public class RootClientCommandServiceImpl implements RootClientCommandService {
     @Override
     public void updateRootClient(Long rootClientId, String id, String password, String name) {
         RootClient rootClient = getRootClientOrThrow(rootClientId);
-        
+
         id = Optional.ofNullable(id).filter(s -> !s.isBlank()).orElse(rootClient.getClientId());
         password = Optional.ofNullable(password).filter(s -> !s.isBlank()).orElse(rootClient.getClientPassword());
         name = Optional.ofNullable(name).filter(s -> !s.isBlank()).orElse(rootClient.getClientName());
