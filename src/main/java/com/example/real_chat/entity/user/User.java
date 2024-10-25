@@ -11,7 +11,7 @@ import java.util.List;
 
 @Entity
 @Getter
-@Table(name = "memeber") // 에러의 원인은 H2에서 "user"라는 이름이 어떠한 명령어로 예약되어 있기 때문입니다! 따라서 user 테이블을 사용하면, H2는 예약된 명령어라고 에러를 발생시키게 되요. 이를 막기 위해서는 테이블의 이름을 변경할 수도 있고
+@Table(name = "\"User\"")
 public class User extends BaseTimeEntity {
 
     @Id
