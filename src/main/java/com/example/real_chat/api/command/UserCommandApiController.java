@@ -4,6 +4,7 @@ import com.example.real_chat.dto.common.CommonApiResult;
 import com.example.real_chat.dto.user.request.CreateUserRequest;
 import com.example.real_chat.dto.user.response.CreateUserResponse;
 import com.example.real_chat.service.command.UserCommandService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ public class UserCommandApiController {
 
     @PostMapping()
     public ResponseEntity<CreateUserResponse> createUser(
-            @RequestBody CreateUserRequest request
+            @RequestBody @Valid CreateUserRequest request
     ) {
         Long userId = userCommandService.addUser(request.getUserName(), request.getRootClientId());
         return ResponseEntity.ok().body(new CreateUserResponse(userId));
