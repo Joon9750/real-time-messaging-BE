@@ -1,0 +1,9 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/test
+    username: hong
+    password: 1111
+    driver-class-name: org.h2.Driver
