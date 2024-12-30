@@ -1,17 +1,11 @@
 spring:
-  datasource:
-    url: jdbc:h2:tcp://localhost/~/test
-    username: hong
-    password: 1111
-    driver-class-name: org.h2.Driver
-  jpa:
-    hibernate:
-      ddl-auto: create-drop
-    properties:
-      hibernate:
-        show_sql: true
-        format_sql: true
-    open-in-view: false
-logging.level:
-  org.hibernate.SQL: debug
-  # org.hibernate.type: trace
+  config:
+    import:
+      - classpath:/yaml/application-dev.yml
+      - classpath:/yaml/application-local.yml
+      - classpath:/yaml/application-log.yml
+  profiles:
+    group:
+      logging: dev, log
+    active: logging
+#    active: local
