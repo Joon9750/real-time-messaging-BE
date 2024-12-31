@@ -43,9 +43,8 @@ public class RootClientCommandServiceImpl implements RootClientCommandService {
     }
 
     private RootClient getRootClientOrThrow(Long id) {
-        RootClient rootClient = rootClientRepository.findById(id).orElseThrow(
+        return rootClientRepository.findById(id).orElseThrow(
                 () -> new NoSuchElementException("Root Client not found with id : " + id)
         );
-        return rootClient;
     }
 }
