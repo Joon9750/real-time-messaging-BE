@@ -41,6 +41,7 @@ public class RootClientCommandApiController {
         return ResponseEntity.ok(CommonApiResult.createOk("루트 클라이언트가 정상적으로 삭제 되었습니다."));
     }
 
+    // clientId, clientPassword, clientName 중 변경 소요가 없는 경우 null 또는 "" 빈 문자열로 넣어주시면 됩니다.
     @PatchMapping("/{id}")
     public ResponseEntity<CommonApiResult> updateRootClient(
             @PathVariable Long id,
