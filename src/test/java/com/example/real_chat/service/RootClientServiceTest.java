@@ -81,4 +81,46 @@ class RootClientServiceTest {
         verify(mockRootClient, never()).delete(); // RootClient class delete 메서드가 호출되지 않았는지 확인
         verify(rootClientRepository, times(1)).findById(id); // findById 호출 확인
     }
+
+    @Test
+    @DisplayName("루트 회원 업데이트 테스트")
+    void testUpdateRootClient() {
+        // Given
+        Long id = 1L;
+        RootClient mockRootClient = mock(RootClient.class);
+        when(rootClientRepository.findById(id)).thenReturn(Optional.of(mockRootClient));
+
+        String newName = "Updated Name";
+        String newPassword = "UpdatedPassword";
+        String newId = null; // Null 값은 업데이트되지 않아야 함
+
+        // When
+        rootClientCommandService.updateRootClient(id, newId, newPassword, newName);
+
+        // Then
+//        verify(mockRootClient, times(0)).setId(any()); // Null 값은 호출되지 않아야 함
+//        verify(mockRootClient, times(1)).setPassword(newPassword); // 업데이트되어야 함
+//        verify(mockRootClient, times(1)).setName(newName); // 업데이트되어야 함
+
+        verify(rootClientRepository, times(1)).save(mockRootClient); // 저장이 호출되었는지 확인
+    }
+
+    @Test
+    @DisplayName("존재하지 않는 루트 회원 업데이트 시 예외 발생 테스트")
+    void testUpdateRootClient_NotFound() {
+        // Given
+        Long id = 1L;
+        when(rootClientRepository.findById(id)).thenReturn(Optional.empty());
+
+        // When & Then
+        assertThrows(EntityNotFoundException.class,
+                () -> rootClientService.updateRootClient(id, "newId", "newPassword", "newName"));
+    }
+
+
+    @Test
+    @DisplayName("루트 회원 조회 테스트")
+    void testGetRootClient() {
+
+    }
 }
