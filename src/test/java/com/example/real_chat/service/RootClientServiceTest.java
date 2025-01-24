@@ -32,7 +32,7 @@ class RootClientServiceTest {
 
     @Test
     @DisplayName("루트 회원 생성 테스트")
-    void addRootClient() {
+    void testAddRootClient() {
         // given
         RootClient rootClient = RootClient.createRootClient("1", "11111", "hong");
         when(rootClientRepository.save(any(RootClient.class))).thenReturn(rootClient.getId());
@@ -111,7 +111,7 @@ class RootClientServiceTest {
 
     @Test
     @DisplayName("루트 회원 업데이트 테스트 - 정상 동작")
-    void testUpdateRootClient() {
+    void testUpdateRootClient_Success() {
         // Given
         Long rootClientId = 1L;
 
