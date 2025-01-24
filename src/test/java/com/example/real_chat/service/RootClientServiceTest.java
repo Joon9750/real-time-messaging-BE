@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.junit.jupiter.api.DisplayName;
@@ -83,27 +84,35 @@ class RootClientServiceTest {
     }
 
     @Test
-    @DisplayName("루트 회원 업데이트 테스트")
+    @DisplayName("루트 회원 업데이트 테스트 - 정상 동작")
     void testUpdateRootClient() {
         // Given
-        Long id = 1L;
-        RootClient mockRootClient = mock(RootClient.class);
-        when(rootClientRepository.findById(id)).thenReturn(Optional.of(mockRootClient));
+        Long rootClientId = 1L;
 
-        String newName = "Updated Name";
+        // Mock 객체 생성 및 초기값 설정
+        RootClient mockRootClient = mock(RootClient.class);
+        when(mockRootClient.getClientId()).thenReturn("originalId");
+        when(mockRootClient.getClientPassword()).thenReturn("originalPassword");
+        when(mockRootClient.getClientName()).thenReturn("originalName");
+
+        when(rootClientRepository.findById(rootClientId)).thenReturn(Optional.of(mockRootClient));
+
+        // 업데이트 값
+        String newId = null; // Null 값 -> 기존 값 유지
         String newPassword = "UpdatedPassword";
-        String newId = null; // Null 값은 업데이트되지 않아야 함
+        String newName = "UpdatedName";
 
         // When
-        rootClientCommandService.updateRootClient(id, newId, newPassword, newName);
+        rootClientCommandService.updateRootClient(rootClientId, newId, newPassword, newName);
 
         // Then
-//        verify(mockRootClient, times(0)).setId(any()); // Null 값은 호출되지 않아야 함
-//        verify(mockRootClient, times(1)).setPassword(newPassword); // 업데이트되어야 함
-//        verify(mockRootClient, times(1)).setName(newName); // 업데이트되어야 함
+        // getClientId()가 null일 경우, 기존 값 사용
+        verify(mockRootClient, times(1)).update(newId, newPassword, newName);
 
-        verify(rootClientRepository, times(1)).save(mockRootClient); // 저장이 호출되었는지 확인
+        // Mock Repository를 통해 findById 호출 여부 확인
+        verify(rootClientRepository, times(1)).findById(rootClientId);
     }
+
 
     @Test
     @DisplayName("존재하지 않는 루트 회원 업데이트 시 예외 발생 테스트")
@@ -113,8 +122,8 @@ class RootClientServiceTest {
         when(rootClientRepository.findById(id)).thenReturn(Optional.empty());
 
         // When & Then
-        assertThrows(EntityNotFoundException.class,
-                () -> rootClientService.updateRootClient(id, "newId", "newPassword", "newName"));
+        assertThrows(NoSuchElementException.class,
+                () -> rootClientCommandService.updateRootClient(id, "newId", "newPassword", "newName"));
     }
 
 
