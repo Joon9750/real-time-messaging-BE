@@ -35,8 +35,7 @@ class RootClientServiceTest {
     void addRootClient() {
         // given
         RootClient rootClient = RootClient.createRootClient("1", "11111", "hong");
-        when(rootClientRepository.save(any(RootClient.class)))
-                .thenReturn(rootClient.getId());
+        when(rootClientRepository.save(any(RootClient.class))).thenReturn(rootClient.getId());
 
         // when
         Long id = rootClientCommandService.addRootClient(rootClient);
@@ -44,6 +43,33 @@ class RootClientServiceTest {
         // then
         assertEquals(id, rootClient.getId());
         verify(rootClientRepository, times(1)).save(any(RootClient.class));
+    }
+
+    @Test
+    @DisplayName("루트 회원 조회 테스트 - 존재하는 아이디로 조회")
+    void testGetRootClient_Success() {
+        // Given
+        Long id = 1L;
+        RootClient rootClient = RootClient.createRootClient("1", "11111", "hong");
+        when(rootClientRepository.findById(id)).thenReturn(Optional.ofNullable(rootClient));
+
+        // when
+        rootClientQueryService.getRootClient(id);
+
+        // then
+        verify(rootClientRepository, times(1)).findById(id);
+    }
+
+    @Test
+    @DisplayName("루트 회원 조회 테스트 - 존재하는 않는 아이디로 조회")
+    void testGetRootClient_NotFound() {
+        // Given
+        Long id = 1L;
+        when(rootClientRepository.findById(id)).thenReturn(Optional.empty());
+
+        // When & Then
+        assertThrows(NoSuchElementException.class,
+                () -> rootClientQueryService.getRootClient(id));
     }
 
     @Test
@@ -124,12 +150,5 @@ class RootClientServiceTest {
         // When & Then
         assertThrows(NoSuchElementException.class,
                 () -> rootClientCommandService.updateRootClient(id, "newId", "newPassword", "newName"));
-    }
-
-
-    @Test
-    @DisplayName("루트 회원 조회 테스트")
-    void testGetRootClient() {
-
     }
 }
