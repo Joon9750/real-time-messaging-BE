@@ -35,9 +35,9 @@ public class RootClientCommandServiceImpl implements RootClientCommandService {
     public void updateRootClient(Long rootClientId, String id, String password, String name) {
         RootClient rootClient = getRootClientOrThrow(rootClientId);
 
-        String updatedId = getUpdatedValue(id, rootClient.getClientId());
-        String updatedPassword = getUpdatedValue(password, rootClient.getClientPassword());
-        String updatedName = getUpdatedValue(name, rootClient.getClientName());
+        id = getUpdatedValue(id, rootClient.getClientId());
+        password = getUpdatedValue(password, rootClient.getClientPassword());
+        name = getUpdatedValue(name, rootClient.getClientName());
 
         rootClient.update(id, password, name);
     }
@@ -45,10 +45,12 @@ public class RootClientCommandServiceImpl implements RootClientCommandService {
     private RootClient getRootClientOrThrow(Long id) {
         return rootClientRepository.findById(id).orElseThrow(
                 () -> new NoSuchElementException("Root Client not found with id : " + id)
-        );
-    }
+    ) ;
+}
 
     private String getUpdatedValue(String newValue, String currentValue) {
-        return (newValue != null && !newValue.isBlank()) ? newValue : currentValue;
+        return Optional.ofNullable(newValue)
+                .filter(s -> !s.isBlank())
+                .orElse(currentValue);
     }
 }

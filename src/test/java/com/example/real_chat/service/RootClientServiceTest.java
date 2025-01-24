@@ -106,8 +106,8 @@ class RootClientServiceTest {
         rootClientCommandService.updateRootClient(rootClientId, newId, newPassword, newName);
 
         // Then
-        // getClientId()가 null일 경우, 기존 값 사용
-        verify(mockRootClient, times(1)).update(newId, newPassword, newName);
+        // getClientId()가 null일 경우와 빈 문자열의 경우, 기존 값 사용
+        verify(mockRootClient, times(1)).update("originalId", newPassword, newName);
 
         // Mock Repository를 통해 findById 호출 여부 확인
         verify(rootClientRepository, times(1)).findById(rootClientId);
