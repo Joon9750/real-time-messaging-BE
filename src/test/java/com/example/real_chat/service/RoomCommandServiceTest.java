@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -82,7 +83,7 @@ public class RoomCommandServiceTest {
         when(rootClientQueryService.getRootClient(any())).thenThrow(NoSuchElementException.class);
 
         // when & then
-        NoSuchElementException exception = assertThrows(NoSuchElementException.class,
+        RuntimeException exception = assertThrows(NoSuchElementException.class,
                 () -> roomCommandService.addRoom(chatRoom.getName(), rootClient.getId()));
 
         // then
@@ -107,6 +108,18 @@ public class RoomCommandServiceTest {
         // chatRoom 수정이 Entity Dirty Checking으로 이루어지기 때문에 save가 0번 호출된다.
         verify(roomRepository, times(0)).save(any(ChatRoom.class));
         assertEquals(chatRoom.getName(), roomNewName);
+    }
+
+    @Test
+    @DisplayName("채팅방 수정 테스트 - chatRoom이 존재하지 않는 경우")
+    void testUpdateChatRoomFailureWhenChatRoomNotFound() {
+        // given
+        when(roomRepository.findById(anyLong())).thenReturn(Optional.empty());
+
+        RuntimeException exception = assertThrows(NoSuchElementException.class,
+                () -> roomCommandService.updateChatRoom(0L, "name"));
+
+        assertEquals("NoSuchElementException", exception.getClass().getSimpleName());
     }
 
     @Test
