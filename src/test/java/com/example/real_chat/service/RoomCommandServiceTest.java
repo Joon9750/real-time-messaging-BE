@@ -26,15 +26,10 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 public class RoomCommandServiceTest {
 
-    @Mock
-    private RoomRepository roomRepository;
-
-    @Mock
-    private RootClientQueryServiceImpl rootClientQueryService;
-
+    @Mock private RoomRepository roomRepository;
+    @Mock private RootClientQueryServiceImpl rootClientQueryService;
     // 호출부는 없으나 testDeleteRoomSuccess 메소드에서 deleteUserChatRoom 메소드를 호출할 때 의존성 주입되어야 한다.
-    @Mock
-    private UserChatRoomCommandServiceImpl userChatRoomCommandService;
+    @Mock private UserChatRoomCommandServiceImpl userChatRoomCommandService;
 
     @InjectMocks
     private RoomCommandServiceImpl roomCommandService;
