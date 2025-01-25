@@ -128,7 +128,7 @@ public class RoomCommandServiceTest {
     }
 
     @Test
-    @DisplayName("채팅방 삭제 테스트")
+    @DisplayName("채팅방 삭제 테스트 - 채팅방 삭제 경우 방에 속해 있는 사람들도 방에서 탈퇴됨.")
     void testDeleteRoomSuccess() {
         // given
         when(roomRepository.findById(anyLong())).thenReturn(Optional.ofNullable(chatRoom));
@@ -137,6 +137,9 @@ public class RoomCommandServiceTest {
         roomCommandService.deleteRoom(chatRoom.getId());
 
         // then
+        verify(userChatRoomCommandService, times(1)).leaveUserChatRoomByChatRoomId(chatRoom.getId());
         verify(roomRepository, times(1)).delete(chatRoom);
     }
+
+    
 }
