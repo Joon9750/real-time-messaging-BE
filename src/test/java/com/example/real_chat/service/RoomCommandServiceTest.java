@@ -4,6 +4,7 @@ import com.example.real_chat.entity.room.ChatRoom;
 import com.example.real_chat.entity.rootClient.RootClient;
 import com.example.real_chat.repository.RoomRepository;
 import com.example.real_chat.service.command.RoomCommandServiceImpl;
+import com.example.real_chat.service.command.UserChatRoomCommandServiceImpl;
 import com.example.real_chat.service.query.RootClientQueryServiceImpl;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -30,6 +31,10 @@ public class RoomCommandServiceTest {
 
     @Mock
     private RootClientQueryServiceImpl rootClientQueryService;
+
+    // 호출부는 없으나 testDeleteRoomSuccess 메소드에서 deleteUserChatRoom 메소드를 호출할 때 의존성 주입되어야 한다.
+    @Mock
+    private UserChatRoomCommandServiceImpl userChatRoomCommandService;
 
     @InjectMocks
     private RoomCommandServiceImpl roomCommandService;
@@ -123,8 +128,15 @@ public class RoomCommandServiceTest {
     }
 
     @Test
-    @DisplayName("채팅방 삭제 테스트 - 방에 속해 있던 사용자들 모두 방에서 나가짐")
+    @DisplayName("채팅방 삭제 테스트")
     void testDeleteRoomSuccess() {
+        // given
+        when(roomRepository.findById(anyLong())).thenReturn(Optional.ofNullable(chatRoom));
 
+        // when
+        roomCommandService.deleteRoom(chatRoom.getId());
+
+        // then
+        verify(roomRepository, times(1)).delete(chatRoom);
     }
 }
