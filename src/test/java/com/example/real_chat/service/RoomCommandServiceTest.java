@@ -4,10 +4,8 @@ import com.example.real_chat.entity.room.ChatRoom;
 import com.example.real_chat.entity.rootClient.RootClient;
 import com.example.real_chat.repository.RoomRepository;
 import com.example.real_chat.service.command.RoomCommandServiceImpl;
-import com.example.real_chat.service.command.UserChatRoomCommandService;
-import com.example.real_chat.service.query.RootClientQueryService;
 import com.example.real_chat.service.query.RootClientQueryServiceImpl;
-import jakarta.validation.constraints.NotNull;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,6 +15,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -30,9 +29,6 @@ public class RoomCommandServiceTest {
 
     @Mock
     private RootClientQueryServiceImpl rootClientQueryService;
-
-    @Mock
-    private UserChatRoomCommandService userChatRoomCommandService;
 
     @InjectMocks
     private RoomCommandServiceImpl roomCommandService;
@@ -95,9 +91,22 @@ public class RoomCommandServiceTest {
     }
 
     @Test
-    @DisplayName("채팅방 수정 테스트")
+    @DisplayName("채팅방 수정 테스트 - chatRoom이 존재하는 경우")
     void testUpdateChatRoomSuccess() {
+        // given
+        String roomNewName = "newRoomName";
+        when(roomRepository.findById(anyLong())).thenReturn(Optional.ofNullable(chatRoom));
 
+        // // Unnecessary stubbings detected. 발생한다. 불필요한 Stub에 해당되기 때문
+        // when(roomRepository.save(any(ChatRoom.class))).thenReturn(chatRoom.getId());
+
+        // when
+        roomCommandService.updateChatRoom(chatRoom.getId(), roomNewName);
+
+        // then
+        // chatRoom 수정이 Entity Dirty Checking으로 이루어지기 때문에 save가 0번 호출된다.
+        verify(roomRepository, times(0)).save(any(ChatRoom.class));
+        assertEquals(chatRoom.getName(), roomNewName);
     }
 
     @Test
