@@ -4,6 +4,10 @@ import com.example.real_chat.entity.room.ChatRoom;
 import com.example.real_chat.entity.rootClient.RootClient;
 import com.example.real_chat.repository.RoomRepository;
 import com.example.real_chat.service.command.RoomCommandServiceImpl;
+import com.example.real_chat.service.command.UserChatRoomCommandService;
+import com.example.real_chat.service.query.RootClientQueryService;
+import com.example.real_chat.service.query.RootClientQueryServiceImpl;
+import jakarta.validation.constraints.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,16 +26,20 @@ public class RoomCommandServiceTest {
     @Mock
     private RoomRepository roomRepository;
 
+    @Mock
+    private RootClientQueryServiceImpl rootClientQueryService;
+
+    @Mock
+    private UserChatRoomCommandService userChatRoomCommandService;
+
     @InjectMocks
     private RoomCommandServiceImpl roomCommandService;
 
-    // given
     private RootClient rootClient;
     private ChatRoom chatRoom;
 
     @BeforeEach
     void setUp() {
-        // 테스트를 위한 RootClient와 ChatRoom 객체 초기화
         rootClient = setUpRootClient();
         chatRoom = setUpChatRoom(rootClient);
     }
@@ -58,6 +66,7 @@ public class RoomCommandServiceTest {
     void testAddRoomSuccess() {
         // given
         Long roomId = 1L;
+        when(rootClientQueryService.getRootClient(any())).thenReturn(rootClient);
         when(roomRepository.save(any(ChatRoom.class))).thenReturn(roomId);
 
         // when
