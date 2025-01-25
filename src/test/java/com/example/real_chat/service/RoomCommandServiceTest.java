@@ -39,25 +39,8 @@ public class RoomCommandServiceTest {
 
     @BeforeEach
     void setUp() {
-        rootClient = setUpRootClient();
-        chatRoom = setUpChatRoom(rootClient);
-    }
-
-    private ChatRoom setUpChatRoom(RootClient rootClient) {
-        return ChatRoom.builder()
-                .id(1L)
-                .name("newChatRoom")
-                .rootClient(rootClient)
-                .build();
-    }
-
-    private RootClient setUpRootClient() {
-        return RootClient.builder()
-                .id(1L)
-                .clientId("clientId")
-                .clientPassword("clientPassword")
-                .clientName("clientName")
-                .build();
+        rootClient = RoomServiceTestDataBuilder.createRootClient();
+        chatRoom = RoomServiceTestDataBuilder.createChatRoom(rootClient);
     }
 
     @Test
