@@ -47,8 +47,8 @@ class RootClientServiceTest {
 
     @Test
     @DisplayName("루트 회원 조회 테스트 - 존재하는 아이디로 조회")
-    void testGetRootClient_Success() {
-        // Given
+    void testGetRootClientSuccess() {
+        // given
         Long id = 1L;
         RootClient rootClient = RootClient.createRootClient("1", "11111", "hong");
         when(rootClientRepository.findById(id)).thenReturn(Optional.ofNullable(rootClient));
@@ -62,29 +62,29 @@ class RootClientServiceTest {
 
     @Test
     @DisplayName("루트 회원 조회 테스트 - 존재하는 않는 아이디로 조회")
-    void testGetRootClient_NotFound() {
-        // Given
+    void testGetRootClientNotFound() {
+        // given
         Long id = 1L;
         when(rootClientRepository.findById(id)).thenReturn(Optional.empty());
 
-        // When & Then
+        // when & then
         assertThrows(NoSuchElementException.class,
                 () -> rootClientQueryService.getRootClient(id));
     }
 
     @Test
     @DisplayName("루트 회원 삭제 성공")
-    void testDeleteRootClient_Success() {
-        // Given
+    void testDeleteRootClientSuccess() {
+        // given
         Long id = 1L;
         RootClient mockRootClient = mock(RootClient.class);
         when(rootClientRepository.findById(id)).thenReturn(Optional.of(mockRootClient));
         when(mockRootClient.isDeleted()).thenReturn(false);
 
-        // When
+        // when
         rootClientCommandService.deleteRootClient(id);
 
-        // Then
+        // then
         verify(mockRootClient, times(1)).delete(); // RootClient class delete 메서드가 호출되었는지 확인
         verify(rootClientRepository, times(1)).findById(id); // findById 호출 확인
         assertNotNull(rootClientRepository.findById(id)); // RootClient는 삭제되더라도 서버에서 값 유지
@@ -92,14 +92,14 @@ class RootClientServiceTest {
 
     @Test
     @DisplayName("이미 삭제된 루트 회원 삭제시 RootClientAlreadyDeletedException 발생")
-    void testDeleteRootClient_AlreadyDeleted() {
-        // Given
+    void testDeleteRootClientAlreadyDeleted() {
+        // given
         Long id = 1L;
         RootClient mockRootClient = mock(RootClient.class);
         when(rootClientRepository.findById(id)).thenReturn(Optional.of(mockRootClient));
         when(mockRootClient.isDeleted()).thenReturn(true);
 
-        // When & Then
+        // when & then
         RootClientAlreadyDeletedException exception = assertThrows(RootClientAlreadyDeletedException.class, () -> {
             rootClientCommandService.deleteRootClient(id);
         });
@@ -111,8 +111,8 @@ class RootClientServiceTest {
 
     @Test
     @DisplayName("루트 회원 업데이트 테스트 - 정상 동작")
-    void testUpdateRootClient_Success() {
-        // Given
+    void testUpdateRootClientSuccess() {
+        // given
         Long rootClientId = 1L;
 
         // Mock 객체 생성 및 초기값 설정
@@ -128,10 +128,10 @@ class RootClientServiceTest {
         String newPassword = "UpdatedPassword";
         String newName = "UpdatedName";
 
-        // When
+        // when
         rootClientCommandService.updateRootClient(rootClientId, newId, newPassword, newName);
 
-        // Then
+        // then
         // getClientId()가 null일 경우와 빈 문자열의 경우, 기존 값 사용
         verify(mockRootClient, times(1)).update("originalId", newPassword, newName);
 
@@ -142,12 +142,12 @@ class RootClientServiceTest {
 
     @Test
     @DisplayName("존재하지 않는 루트 회원 업데이트 시 예외 발생 테스트")
-    void testUpdateRootClient_NotFound() {
-        // Given
+    void testUpdateRootClientNotFound() {
+        // given
         Long id = 1L;
         when(rootClientRepository.findById(id)).thenReturn(Optional.empty());
 
-        // When & Then
+        // when & then
         assertThrows(NoSuchElementException.class,
                 () -> rootClientCommandService.updateRootClient(id, "newId", "newPassword", "newName"));
     }
