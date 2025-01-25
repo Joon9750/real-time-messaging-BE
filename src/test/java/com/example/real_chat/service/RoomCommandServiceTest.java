@@ -16,7 +16,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.NoSuchElementException;
+
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -81,7 +83,15 @@ public class RoomCommandServiceTest {
     @DisplayName("체팅방 생성 실패 테스트 - rootClient가 존재하지 않을 때")
     void testAddRoomFailureWhenRootClientNotFound() {
         // given
+        when(rootClientQueryService.getRootClient(any())).thenThrow(NoSuchElementException.class);
 
+        // when & then
+        NoSuchElementException exception = assertThrows(NoSuchElementException.class,
+                () -> roomCommandService.addRoom(chatRoom.getName(), rootClient.getId()));
+
+        // then
+        assertEquals("NoSuchElementException", exception.getClass().getSimpleName());
+        verify(roomRepository, times(0)).save(any(ChatRoom.class));
     }
 
     @Test
