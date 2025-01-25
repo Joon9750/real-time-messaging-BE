@@ -1,4 +1,4 @@
-package com.example.real_chat.service;
+package com.example.real_chat.service.builder;
 
 import com.example.real_chat.entity.room.ChatRoom;
 import com.example.real_chat.entity.rootClient.RootClient;
