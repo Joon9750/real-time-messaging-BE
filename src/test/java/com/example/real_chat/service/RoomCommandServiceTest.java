@@ -121,9 +121,11 @@ public class RoomCommandServiceTest {
         // given
         when(roomRepository.findById(anyLong())).thenReturn(Optional.empty());
 
+        // when & then
         RuntimeException exception = assertThrows(NoSuchElementException.class,
                 () -> roomCommandService.updateChatRoom(0L, "name"));
 
+        // then
         assertEquals("NoSuchElementException", exception.getClass().getSimpleName());
     }
 
@@ -141,5 +143,18 @@ public class RoomCommandServiceTest {
         verify(roomRepository, times(1)).delete(chatRoom);
     }
 
-    
+    @Test
+    @DisplayName("채팅방 삭제 테스트 - 삭제하려는 채팅방이 없는 경우")
+    void testDeleteRoomFailureWhenChatRoomNotFound() {
+        // given
+        when(roomRepository.findById(anyLong())).thenReturn(Optional.empty());
+
+        // when & then
+        RuntimeException exception = assertThrows(NoSuchElementException.class,
+                () -> roomCommandService.deleteRoom(0L));
+
+        // then
+        verify(userChatRoomCommandService, times(0)).leaveUserChatRoomByChatRoomId(chatRoom.getId());
+        verify(roomRepository, times(0)).delete(chatRoom);
+    }
 }
