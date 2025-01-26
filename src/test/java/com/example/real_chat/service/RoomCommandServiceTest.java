@@ -3,6 +3,7 @@ package com.example.real_chat.service;
 import com.example.real_chat.entity.room.ChatRoom;
 import com.example.real_chat.entity.rootClient.RootClient;
 import com.example.real_chat.repository.RoomRepository;
+import com.example.real_chat.service.builder.RoomServiceTestDataBuilder;
 import com.example.real_chat.service.command.RoomCommandServiceImpl;
 import com.example.real_chat.service.command.UserChatRoomCommandServiceImpl;
 import com.example.real_chat.service.query.RootClientQueryServiceImpl;
@@ -26,15 +27,10 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 public class RoomCommandServiceTest {
 
-    @Mock
-    private RoomRepository roomRepository;
-
-    @Mock
-    private RootClientQueryServiceImpl rootClientQueryService;
-
+    @Mock private RoomRepository roomRepository;
+    @Mock private RootClientQueryServiceImpl rootClientQueryService;
     // 호출부는 없으나 testDeleteRoomSuccess 메소드에서 deleteUserChatRoom 메소드를 호출할 때 의존성 주입되어야 한다.
-    @Mock
-    private UserChatRoomCommandServiceImpl userChatRoomCommandService;
+    @Mock private UserChatRoomCommandServiceImpl userChatRoomCommandService;
 
     @InjectMocks
     private RoomCommandServiceImpl roomCommandService;
@@ -44,25 +40,8 @@ public class RoomCommandServiceTest {
 
     @BeforeEach
     void setUp() {
-        rootClient = setUpRootClient();
-        chatRoom = setUpChatRoom(rootClient);
-    }
-
-    private ChatRoom setUpChatRoom(RootClient rootClient) {
-        return ChatRoom.builder()
-                .id(1L)
-                .name("newChatRoom")
-                .rootClient(rootClient)
-                .build();
-    }
-
-    private RootClient setUpRootClient() {
-        return RootClient.builder()
-                .id(1L)
-                .clientId("clientId")
-                .clientPassword("clientPassword")
-                .clientName("clientName")
-                .build();
+        rootClient = RoomServiceTestDataBuilder.createRootClient();
+        chatRoom = RoomServiceTestDataBuilder.createChatRoom(rootClient);
     }
 
     @Test
@@ -82,8 +61,8 @@ public class RoomCommandServiceTest {
     }
 
     @Test
-    @DisplayName("체팅방 생성 실패 테스트 - rootClient가 존재하지 않을 때")
-    void testAddRoomFailureWhenRootClientNotFound() {
+    @DisplayName("체팅방 생성 테스트 - rootClient가 존재하지 않을 때")
+    void testAddRoomFailure_WhenRootClientNotFound() {
         // given
         when(rootClientQueryService.getRootClient(any())).thenThrow(NoSuchElementException.class);
 
@@ -117,7 +96,7 @@ public class RoomCommandServiceTest {
 
     @Test
     @DisplayName("채팅방 수정 테스트 - chatRoom이 존재하지 않는 경우")
-    void testUpdateChatRoomFailureWhenChatRoomNotFound() {
+    void testUpdateChatRoomFailure_WhenChatRoomNotFound() {
         // given
         when(roomRepository.findById(anyLong())).thenReturn(Optional.empty());
 
@@ -145,7 +124,7 @@ public class RoomCommandServiceTest {
 
     @Test
     @DisplayName("채팅방 삭제 테스트 - 삭제하려는 채팅방이 없는 경우")
-    void testDeleteRoomFailureWhenChatRoomNotFound() {
+    void testDeleteRoomFailure_WhenChatRoomNotFound() {
         // given
         when(roomRepository.findById(anyLong())).thenReturn(Optional.empty());
 
