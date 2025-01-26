@@ -32,14 +32,12 @@ Sendbird 채팅 솔루션의 가격이 부담되는<br/>
 - **API 문서화** : **Swagger**를 통해 API 문서를 자동으로 생성하고 관리했습니다.
 
 ## ⚙️ 기술 스택
-- Gradle 프로젝트
-- Spring Boot 3.x
-- Java 21
+- Spring Boot 3.x와 Java 21을 사용하는 Gradle 기반 프로젝트입니다.
 - JPA
-- Spring WebSocket with STOMP protocol
-- Apache Kafka for message broker
-- Mockito for unit testing
-- H2 Database for testing (배포용 DB는 미정)
+- STOMP 프로토콜을 사용하는 Spring WebSocket
+- 메시지 브로커로 Apache Kafka 사용
+- Mockito를 활용한 통합 테스트 및 단위 테스트
+- 테스트용 H2 데이터베이스 사용 (배포용 데이터베이스는 미정)
 
 ## 샘플 앱
 - 해당 오픈 API를 사용한 iOS 샘플 앱 제작 예정입니다.
