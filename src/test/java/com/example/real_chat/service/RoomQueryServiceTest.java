@@ -27,13 +27,12 @@ public class RoomQueryServiceTest {
 
     @InjectMocks
     private RoomQueryServiceImpl roomQueryService;
-
-    private RootClient rootClient;
+    
     private ChatRoom chatRoom;
 
     @BeforeEach
     void setUp() {
-        rootClient = RoomServiceTestDataBuilder.createRootClient();
+        RootClient rootClient = RoomServiceTestDataBuilder.createRootClient();
         chatRoom = RoomServiceTestDataBuilder.createChatRoom(rootClient);
     }
 
