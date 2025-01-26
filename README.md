@@ -1,9 +1,8 @@
 ![image](https://github.com/user-attachments/assets/f3b2fccf-4922-4ee9-841a-c038c3da09bf)
 
 # 실시간 채팅 솔루션
-> _updated at 2024.10.21_
+> _updated at 2025.01.26_
 
-Sendbird 채팅 솔루션의 가격이 부담되는<br/>
 학생 개발팀 및 스타트업을 위한 실시간 채팅 솔루션입니다.
 
 ## 📄 핵심 기능
