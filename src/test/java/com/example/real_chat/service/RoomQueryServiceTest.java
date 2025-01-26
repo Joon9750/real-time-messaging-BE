@@ -5,6 +5,8 @@ import com.example.real_chat.entity.rootClient.RootClient;
 import com.example.real_chat.service.builder.RoomServiceTestDataBuilder;
 import com.example.real_chat.service.query.RoomQueryServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -22,5 +24,23 @@ public class RoomQueryServiceTest {
     void setUp() {
         rootClient = RoomServiceTestDataBuilder.createRootClient();
         chatRoom = RoomServiceTestDataBuilder.createChatRoom(rootClient);
+    }
+
+    @Test
+    @DisplayName("단일 채팅방 조회 테스트")
+    void testGetChatRoomSuccess() {
+
+    }
+
+    @Test
+    @DisplayName("단일 채팅방 조회 테스트 - 채팅방이 존재하지 않을 경우")
+    void testGetChatRoomFailure_WhenChatRoomNotFound() {
+
+    }
+
+    @Test
+    @DisplayName("")
+    void testGetAllChatRoomSuccess() {
+
     }
 }

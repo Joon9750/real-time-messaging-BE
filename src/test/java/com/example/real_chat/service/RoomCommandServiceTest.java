@@ -61,8 +61,8 @@ public class RoomCommandServiceTest {
     }
 
     @Test
-    @DisplayName("체팅방 생성 실패 테스트 - rootClient가 존재하지 않을 때")
-    void testAddRoomFailureWhenRootClientNotFound() {
+    @DisplayName("체팅방 생성 테스트 - rootClient가 존재하지 않을 때")
+    void testAddRoomFailure_WhenRootClientNotFound() {
         // given
         when(rootClientQueryService.getRootClient(any())).thenThrow(NoSuchElementException.class);
 
@@ -96,7 +96,7 @@ public class RoomCommandServiceTest {
 
     @Test
     @DisplayName("채팅방 수정 테스트 - chatRoom이 존재하지 않는 경우")
-    void testUpdateChatRoomFailureWhenChatRoomNotFound() {
+    void testUpdateChatRoomFailure_WhenChatRoomNotFound() {
         // given
         when(roomRepository.findById(anyLong())).thenReturn(Optional.empty());
 
@@ -124,7 +124,7 @@ public class RoomCommandServiceTest {
 
     @Test
     @DisplayName("채팅방 삭제 테스트 - 삭제하려는 채팅방이 없는 경우")
-    void testDeleteRoomFailureWhenChatRoomNotFound() {
+    void testDeleteRoomFailure_WhenChatRoomNotFound() {
         // given
         when(roomRepository.findById(anyLong())).thenReturn(Optional.empty());
 

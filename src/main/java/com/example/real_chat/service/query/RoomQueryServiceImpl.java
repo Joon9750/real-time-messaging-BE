@@ -23,6 +23,7 @@ public class RoomQueryServiceImpl implements RoomQueryService {
         );
     }
 
+    // !! 여기서 루트 클라이언트 구분은??!...
     @Override
     public List<ChatRoom> getAllRooms() { return roomRepository.findAll(); }
 }
