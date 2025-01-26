@@ -7,7 +7,7 @@
 
 ## 📄 핵심 기능
 
-- 루트 애플리케이션 (Admin 페이지)
+- 루트 애플리케이션(Admin 페이지)
   - API를 사용하는 개발자를 위한 Admin 페이지를 제공합니다.
   - 실시간 채팅 솔루션 사용을 위한 인증 기능을 제공합니다.
   - 애플리케이션에 등록된 채팅방과 회원을 관리할 수 있습니다.
@@ -24,9 +24,9 @@
 ## 🛠️ 핵심 기술 구현
 - 실시간성 : Polling이나 Long-Polling 방식 대신 WebSocket과 STOMP 프로토콜을 사용해 실시간 채팅 기능을 구현했습니다.
 
-- CQS 패턴 : Command(명령)와 Query(조회)를 분리하는 Command Query Separation (CQS 패턴을 적용했습니다.
+- CQS 패턴 : Command(명령)와 Query(조회)를 분리하는 CQS(Command Query Separation) 패턴을 적용했습니다.
 - 메시지 브로커 : 데이터 휘발성 문제로 Spring WebSocket의 SimpMessagingTemplate 대신, Kafka를 사용하여 안정적인 메시지 처리를 구현했습니다.
-- 데이터베이스 커넥션 관리 : 데이터베이스 커넥션 풀이 고갈되지 않도록 OSIV (Open Session In View) 설정을 OFF하여 효율적인 DB 연결 관리를 수행했습니다.
+- 데이터베이스 커넥션 관리 : 데이터베이스 커넥션 풀이 고갈되지 않도록 OSIV(Open Session In View) 설정을 OFF하여 효율적인 DB 연결 관리를 수행했습니다.
 - 테스트 : Mockito를 활용해 단위 테스트와 SpringBootTest를 활용해 통합 테스트를 모두 작성하여 비즈니스 로직의 안정성을 보장합니다.
 - API 문서화 : Swagger를 통해 API 문서를 자동으로 생성하고 관리했습니다.
 
