@@ -1,9 +1,9 @@
-package com.example.real_chat.service;
+package com.example.real_chat.service.room;
 
 import com.example.real_chat.entity.room.ChatRoom;
 import com.example.real_chat.entity.rootClient.RootClient;
 import com.example.real_chat.repository.RoomRepository;
-import com.example.real_chat.service.builder.RoomServiceTestDataBuilder;
+import com.example.real_chat.service.room.builder.RoomServiceTestDataBuilder;
 import com.example.real_chat.service.query.RoomQueryServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,7 +27,7 @@ public class RoomQueryServiceTest {
 
     @InjectMocks
     private RoomQueryServiceImpl roomQueryService;
-    
+
     private ChatRoom chatRoom;
 
     @BeforeEach

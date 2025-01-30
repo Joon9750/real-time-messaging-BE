@@ -1,4 +1,4 @@
-package com.example.real_chat.service;
+package com.example.real_chat.service.root_client;
 
 import com.example.real_chat.entity.rootClient.RootClient;
 import com.example.real_chat.global.exception.RootClientAlreadyDeletedException;

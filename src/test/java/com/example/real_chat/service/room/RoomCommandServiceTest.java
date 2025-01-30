@@ -1,9 +1,9 @@
-package com.example.real_chat.service;
+package com.example.real_chat.service.room;
 
 import com.example.real_chat.entity.room.ChatRoom;
 import com.example.real_chat.entity.rootClient.RootClient;
 import com.example.real_chat.repository.RoomRepository;
-import com.example.real_chat.service.builder.RoomServiceTestDataBuilder;
+import com.example.real_chat.service.room.builder.RoomServiceTestDataBuilder;
 import com.example.real_chat.service.command.RoomCommandServiceImpl;
 import com.example.real_chat.service.command.UserChatRoomCommandServiceImpl;
 import com.example.real_chat.service.query.RootClientQueryServiceImpl;
