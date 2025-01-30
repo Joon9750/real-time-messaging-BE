@@ -1,10 +1,7 @@
 package com.example.real_chat.service.root_client;
 
-import com.example.real_chat.entity.rootClient.RootClient;
-import com.example.real_chat.service.ServiceTest;
-import com.example.real_chat.service.builder.ServiceTestDataBuilder;
+import com.example.real_chat.service.global.ServiceTest;
 import com.example.real_chat.service.command.RootClientCommandServiceImpl;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -16,13 +13,6 @@ public class RootClientCommandServiceTest extends ServiceTest {
 
     @InjectMocks
     private RootClientCommandServiceImpl rootClientCommandService;
-
-    private RootClient rootClient;
-
-    @BeforeEach
-    void setUp() {
-        rootClient = ServiceTestDataBuilder.createRootClient();
-    }
 
     @Test
     @DisplayName("루트 회원 생성 테스트")

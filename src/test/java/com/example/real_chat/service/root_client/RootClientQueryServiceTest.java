@@ -1,10 +1,8 @@
 package com.example.real_chat.service.root_client;
 
 import com.example.real_chat.entity.rootClient.RootClient;
-import com.example.real_chat.service.ServiceTest;
-import com.example.real_chat.service.builder.ServiceTestDataBuilder;
+import com.example.real_chat.service.global.ServiceTest;
 import com.example.real_chat.service.query.RootClientQueryServiceImpl;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -20,13 +18,6 @@ public class RootClientQueryServiceTest extends ServiceTest {
 
     @InjectMocks
     private RootClientQueryServiceImpl rootClientQueryService;
-
-    private RootClient rootClient;
-
-    @BeforeEach
-    void setUp() {
-        rootClient = ServiceTestDataBuilder.createRootClient();
-    }
 
     @Test
     @DisplayName("루트 회원 조회 테스트 - 존재하는 아이디로 조회")
