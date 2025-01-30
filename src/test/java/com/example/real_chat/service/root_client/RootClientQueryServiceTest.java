@@ -11,11 +11,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -34,7 +35,7 @@ public class RootClientQueryServiceTest {
     }
 
     @Test
-    @DisplayName("")
+    @DisplayName("루트 회원 조회 테스트 - 존재하는 아이디로 조회")
     void testGetRootClientSuccess() {
         // given
         when(rootClientRepository.findById(rootClient.getId())).thenReturn(Optional.ofNullable(rootClient));
@@ -45,5 +46,17 @@ public class RootClientQueryServiceTest {
         // then
         verify(rootClientRepository, times(1)).findById(rootClient.getId());
         assertEquals(rootClient.getId(), response.getId());
+    }
+
+    @Test
+    @DisplayName("루트 회원 조회 테스트 - 존재하는 않는 아이디로 조회")
+    void testGetRootClientFailure_WhenRootClientNotFound() {
+        // given
+        Long id = 1L;
+        when(rootClientRepository.findById(id)).thenReturn(Optional.empty());
+
+        // when & then
+        assertThrows(NoSuchElementException.class,
+                () -> rootClientQueryService.getRootClient(id));
     }
 }
