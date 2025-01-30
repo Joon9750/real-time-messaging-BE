@@ -3,17 +3,16 @@ package com.example.real_chat.service.room;
 import com.example.real_chat.entity.room.ChatRoom;
 import com.example.real_chat.entity.rootClient.RootClient;
 import com.example.real_chat.repository.RoomRepository;
+import com.example.real_chat.service.ServiceTest;
 import com.example.real_chat.service.builder.ServiceTestDataBuilder;
 import com.example.real_chat.service.query.RoomQueryServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.util.Optional;
 
@@ -21,11 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
-@ExtendWith(MockitoExtension.class)
-@ActiveProfiles("local")
-public class RoomQueryServiceTest {
-
-    @Mock private RoomRepository roomRepository;
+public class RoomQueryServiceTest extends ServiceTest {
 
     @InjectMocks
     private RoomQueryServiceImpl roomQueryService;

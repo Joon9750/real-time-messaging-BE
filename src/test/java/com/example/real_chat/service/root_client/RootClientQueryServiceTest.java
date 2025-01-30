@@ -1,16 +1,13 @@
 package com.example.real_chat.service.root_client;
 
 import com.example.real_chat.entity.rootClient.RootClient;
-import com.example.real_chat.repository.RootClientRepository;
+import com.example.real_chat.service.ServiceTest;
 import com.example.real_chat.service.builder.ServiceTestDataBuilder;
 import com.example.real_chat.service.query.RootClientQueryServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -19,10 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
-@ExtendWith(MockitoExtension.class)
-public class RootClientQueryServiceTest {
-
-    @Mock private RootClientRepository rootClientRepository;
+public class RootClientQueryServiceTest extends ServiceTest {
 
     @InjectMocks
     private RootClientQueryServiceImpl rootClientQueryService;

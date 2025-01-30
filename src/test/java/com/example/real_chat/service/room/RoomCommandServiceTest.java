@@ -2,7 +2,7 @@ package com.example.real_chat.service.room;
 
 import com.example.real_chat.entity.room.ChatRoom;
 import com.example.real_chat.entity.rootClient.RootClient;
-import com.example.real_chat.repository.RoomRepository;
+import com.example.real_chat.service.ServiceTest;
 import com.example.real_chat.service.builder.ServiceTestDataBuilder;
 import com.example.real_chat.service.command.RoomCommandServiceImpl;
 import com.example.real_chat.service.command.UserChatRoomCommandServiceImpl;
@@ -11,11 +11,9 @@ import com.example.real_chat.service.query.RootClientQueryServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -24,10 +22,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-@ExtendWith(MockitoExtension.class)
-public class RoomCommandServiceTest {
+public class RoomCommandServiceTest extends ServiceTest {
 
-    @Mock private RoomRepository roomRepository;
     @Mock private RootClientQueryServiceImpl rootClientQueryService;
     // 호출부는 없으나 testDeleteRoomSuccess 메소드에서 deleteUserChatRoom 메소드를 호출할 때 의존성 주입되어야 한다.
     @Mock private UserChatRoomCommandServiceImpl userChatRoomCommandService;

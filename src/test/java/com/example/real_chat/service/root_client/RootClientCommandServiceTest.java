@@ -1,24 +1,18 @@
 package com.example.real_chat.service.root_client;
 
 import com.example.real_chat.entity.rootClient.RootClient;
-import com.example.real_chat.repository.RootClientRepository;
+import com.example.real_chat.service.ServiceTest;
 import com.example.real_chat.service.builder.ServiceTestDataBuilder;
 import com.example.real_chat.service.command.RootClientCommandServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@ExtendWith(MockitoExtension.class)
-public class RootClientCommandServiceTest {
-
-    @Mock private RootClientRepository rootClientRepository;
+public class RootClientCommandServiceTest extends ServiceTest {
 
     @InjectMocks
     private RootClientCommandServiceImpl rootClientCommandService;
