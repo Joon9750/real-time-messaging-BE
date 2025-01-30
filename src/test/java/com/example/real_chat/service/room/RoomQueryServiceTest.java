@@ -43,10 +43,11 @@ public class RoomQueryServiceTest {
         when(roomRepository.findById(anyLong())).thenReturn(Optional.ofNullable(chatRoom));
 
         // when
-        roomQueryService.getRoom(chatRoom.getId());
+        ChatRoom response = roomQueryService.getRoom(chatRoom.getId());
 
         // then
-        verify(roomRepository, times(1)).findById(anyLong());
+        verify(roomRepository, times(1)).findById(chatRoom.getId());
+        assertEquals(chatRoom.getId(), response.getId());
     }
 
     @Test
