@@ -45,12 +45,12 @@ public class RootClientCommandServiceTest {
     }
 
     @Test
-    @DisplayName("루트 회원 삭제 성공")
+    @DisplayName("루트 회원 삭제 성공 테스트")
     void testDeleteRootClientSuccess() {
     }
 
     @Test
-    @DisplayName("이미 삭제된 루트 회원 삭제시 RootClientAlreadyDeletedException 발생")
+    @DisplayName("이미 삭제된 루트 회원 삭제시 RootClientAlreadyDeletedException 발생 테스트")
     void testDeleteRootClientFailure_WhenAlreadyDeleted() {
     }
 
