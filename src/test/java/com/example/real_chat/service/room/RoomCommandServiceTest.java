@@ -3,7 +3,7 @@ package com.example.real_chat.service.room;
 import com.example.real_chat.entity.room.ChatRoom;
 import com.example.real_chat.entity.rootClient.RootClient;
 import com.example.real_chat.repository.RoomRepository;
-import com.example.real_chat.service.room.builder.RoomServiceTestDataBuilder;
+import com.example.real_chat.service.builder.ServiceTestDataBuilder;
 import com.example.real_chat.service.command.RoomCommandServiceImpl;
 import com.example.real_chat.service.command.UserChatRoomCommandServiceImpl;
 import com.example.real_chat.service.query.RootClientQueryServiceImpl;
@@ -40,8 +40,8 @@ public class RoomCommandServiceTest {
 
     @BeforeEach
     void setUp() {
-        rootClient = RoomServiceTestDataBuilder.createRootClient();
-        chatRoom = RoomServiceTestDataBuilder.createChatRoom(rootClient);
+        rootClient = ServiceTestDataBuilder.createRootClient();
+        chatRoom = ServiceTestDataBuilder.createChatRoom(rootClient);
     }
 
     @Test

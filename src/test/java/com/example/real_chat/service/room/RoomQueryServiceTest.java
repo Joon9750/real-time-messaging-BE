@@ -3,7 +3,7 @@ package com.example.real_chat.service.room;
 import com.example.real_chat.entity.room.ChatRoom;
 import com.example.real_chat.entity.rootClient.RootClient;
 import com.example.real_chat.repository.RoomRepository;
-import com.example.real_chat.service.room.builder.RoomServiceTestDataBuilder;
+import com.example.real_chat.service.builder.ServiceTestDataBuilder;
 import com.example.real_chat.service.query.RoomQueryServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,8 +32,8 @@ public class RoomQueryServiceTest {
 
     @BeforeEach
     void setUp() {
-        RootClient rootClient = RoomServiceTestDataBuilder.createRootClient();
-        chatRoom = RoomServiceTestDataBuilder.createChatRoom(rootClient);
+        RootClient rootClient = ServiceTestDataBuilder.createRootClient();
+        chatRoom = ServiceTestDataBuilder.createChatRoom(rootClient);
     }
 
     @Test
