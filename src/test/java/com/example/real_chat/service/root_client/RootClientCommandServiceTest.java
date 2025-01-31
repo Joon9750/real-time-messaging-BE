@@ -8,7 +8,6 @@ import com.example.real_chat.service.command.RootClientCommandServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -85,8 +84,17 @@ public class RootClientCommandServiceTest extends ServiceTest {
     }
 
     @Test
-    @DisplayName("루트 회원 업데이트 테스트 - 정상 동작")
+    @DisplayName("루트 회원 정보 업데이트 성공 테스트 - 빈 문자열로 수정을 할 경우 수정 사항이 반영되지 않음")
     void testUpdateRootClientSuccess() {
+        // given
+        RootClient spyRootClient = spy(ServiceTestDataBuilder.createRootClient());
+        when(rootClientRepository.findById(spyRootClient.getId())).thenReturn(Optional.of(spyRootClient));
+
+        // when
+        rootClientCommandService.updateRootClient(spyRootClient.getId(), "newId", "", "newName");
+
+        // then
+        verify(spyRootClient, times(1)).update("newId", spyRootClient.getClientPassword(), "newName");
     }
 
     @Test
