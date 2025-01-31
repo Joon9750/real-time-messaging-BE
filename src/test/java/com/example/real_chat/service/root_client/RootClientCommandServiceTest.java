@@ -61,7 +61,7 @@ public class RootClientCommandServiceTest extends ServiceTest {
 
         // when & then
         assertThrows(NoSuchElementException.class, () -> {
-            rootClientCommandService.deleteRootClient(rootClient.getId()); // 존재하지 않는 ID로 삭제 요청
+            rootClientCommandService.deleteRootClient(rootClient.getId());
         });
     }
 
@@ -70,7 +70,7 @@ public class RootClientCommandServiceTest extends ServiceTest {
     void testDeleteRootClientFailure_WhenAlreadyDeleted() {
         // given
         RootClient spyRootClient = spy(ServiceTestDataBuilder.createRootClient());
-        doReturn(true).when(spyRootClient).isDeleted(); // client.isDeleted()가 true로 설정
+        doReturn(true).when(spyRootClient).isDeleted();
 
         when(rootClientRepository.findById(spyRootClient.getId())).thenReturn(Optional.of(spyRootClient));
 
@@ -80,8 +80,8 @@ public class RootClientCommandServiceTest extends ServiceTest {
         });
 
         // verify: isDeleted()가 호출되었는지 확인
-        verify(spyRootClient, times(1)).isDeleted();  // isDeleted() 호출 검증
-        verify(spyRootClient, times(0)).delete();    // delete()는 호출되지 않았어야 함
+        verify(spyRootClient, times(1)).isDeleted();
+        verify(spyRootClient, times(0)).delete();
     }
 
     @Test
@@ -92,5 +92,12 @@ public class RootClientCommandServiceTest extends ServiceTest {
     @Test
     @DisplayName("존재하지 않는 루트 회원 업데이트 시 예외 발생 테스트")
     void testUpdateRootClientFailure_WhenNotFound() {
+        // given
+        when(rootClientRepository.findById(rootClient.getId())).thenReturn(Optional.empty());
+
+        // when & then
+        assertThrows(NoSuchElementException.class, () -> {
+            rootClientCommandService.updateRootClient(rootClient.getId(), "newId", "newPassword", "newName");
+        });
     }
 }
