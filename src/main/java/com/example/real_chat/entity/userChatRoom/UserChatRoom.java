@@ -4,11 +4,13 @@ import com.example.real_chat.entity.base.BaseTimeEntity;
 import com.example.real_chat.entity.room.ChatRoom;
 import com.example.real_chat.entity.user.User;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
+@Builder
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class UserChatRoom {
 
     @Id

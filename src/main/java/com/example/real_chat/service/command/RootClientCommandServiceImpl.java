@@ -45,8 +45,8 @@ public class RootClientCommandServiceImpl implements RootClientCommandService {
     private RootClient getRootClientOrThrow(Long id) {
         return rootClientRepository.findById(id).orElseThrow(
                 () -> new NoSuchElementException("Root Client not found with id : " + id)
-    ) ;
-}
+        );
+    }
 
     private String getUpdatedValue(String newValue, String currentValue) {
         return Optional.ofNullable(newValue)

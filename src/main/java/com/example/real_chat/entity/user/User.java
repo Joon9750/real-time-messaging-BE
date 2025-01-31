@@ -4,13 +4,16 @@ import com.example.real_chat.entity.base.BaseTimeEntity;
 import com.example.real_chat.entity.rootClient.RootClient;
 import com.example.real_chat.entity.userChatRoom.UserChatRoom;
 import jakarta.persistence.*;
-import lombok.Getter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Getter
+@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "\"User\"")
 public class User extends BaseTimeEntity {
 
