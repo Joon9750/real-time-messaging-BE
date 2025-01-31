@@ -41,12 +41,14 @@ public class RootClientCommandServiceTest extends ServiceTest {
         when(rootClientRepository.findById(spyRootClient.getId())).thenReturn(Optional.of(spyRootClient));
 
         // when
-        rootClientCommandService.deleteRootClient(rootClient.getId());
+        rootClientCommandService.deleteRootClient(spyRootClient.getId());
 
         // then
         verify(rootClientRepository, times(1)).findById(rootClient.getId());
         verify(spyRootClient, times(1)).isDeleted();
         verify(spyRootClient, times(1)).delete();
+        assertTrue(spyRootClient.isDeleted());
+        assertNotNull(spyRootClient.getDeletedAt());
     }
 
     @Test
