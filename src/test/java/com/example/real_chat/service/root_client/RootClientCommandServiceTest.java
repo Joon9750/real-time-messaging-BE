@@ -1,6 +1,7 @@
 package com.example.real_chat.service.root_client;
 
 import com.example.real_chat.entity.rootClient.RootClient;
+import com.example.real_chat.global.exception.RootClientAlreadyDeletedException;
 import com.example.real_chat.service.builder.ServiceTestDataBuilder;
 import com.example.real_chat.service.global.ServiceTest;
 import com.example.real_chat.service.command.RootClientCommandServiceImpl;
@@ -9,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -52,8 +54,34 @@ public class RootClientCommandServiceTest extends ServiceTest {
     }
 
     @Test
-    @DisplayName("이미 삭제된 루트 회원 삭제시 RootClientAlreadyDeletedException 발생 테스트")
+    @DisplayName("존재하지 않은 루트 회원을 삭제하려 할 때")
+    void testDeleteRootClientFailure_WhenRootClientIsNotFound() {
+        // given
+        when(rootClientRepository.findById(rootClient.getId())).thenReturn(Optional.empty());
+
+        // when & then
+        assertThrows(NoSuchElementException.class, () -> {
+            rootClientCommandService.deleteRootClient(rootClient.getId()); // 존재하지 않는 ID로 삭제 요청
+        });
+    }
+
+    @Test
+    @DisplayName("이미 삭제된 루트 회원 삭제 시 RootClientAlreadyDeletedException 발생 테스트")
     void testDeleteRootClientFailure_WhenAlreadyDeleted() {
+        // given
+        RootClient spyRootClient = spy(ServiceTestDataBuilder.createRootClient());
+        doReturn(true).when(spyRootClient).isDeleted(); // client.isDeleted()가 true로 설정
+
+        when(rootClientRepository.findById(spyRootClient.getId())).thenReturn(Optional.of(spyRootClient));
+
+        // when & then
+        assertThrows(RootClientAlreadyDeletedException.class, () -> {
+            rootClientCommandService.deleteRootClient(spyRootClient.getId());
+        });
+
+        // verify: isDeleted()가 호출되었는지 확인
+        verify(spyRootClient, times(1)).isDeleted();  // isDeleted() 호출 검증
+        verify(spyRootClient, times(0)).delete();    // delete()는 호출되지 않았어야 함
     }
 
     @Test
