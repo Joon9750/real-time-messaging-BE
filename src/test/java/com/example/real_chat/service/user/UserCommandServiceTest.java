@@ -51,7 +51,7 @@ public class UserCommandServiceTest extends ServiceTest {
     @Test
     @DisplayName("유저 삭제 테스트")
     void testRemoveUserSuccess() {
-
+        
     }
 
     @Test

@@ -20,10 +20,7 @@ public class UserCommandServiceImpl implements UserCommandService {
 
     @Override
     public Long addUser(String userName, Long clientId) {
-        RootClient rootClient = rootClientRepository.findById(clientId).orElseThrow(
-                () -> new NoSuchElementException("Root client not found with id : " + clientId)
-        );
-
+        RootClient rootClient = getRootClient(clientId);
         User user = User.create(userName, rootClient);
         return userRepository.save(user);
     }
@@ -35,5 +32,11 @@ public class UserCommandServiceImpl implements UserCommandService {
         );
 
         userRepository.delete(user);
+    }
+
+    private RootClient getRootClient(Long clientId) {
+        return rootClientRepository.findById(clientId).orElseThrow(
+                () -> new NoSuchElementException("Root client not found with id : " + clientId)
+        );
     }
 }
