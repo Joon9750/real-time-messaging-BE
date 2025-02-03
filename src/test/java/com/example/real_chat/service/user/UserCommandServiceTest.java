@@ -1,21 +1,17 @@
 package com.example.real_chat.service.user;
 
 import com.example.real_chat.entity.user.User;
-import com.example.real_chat.repository.UserRepository;
 import com.example.real_chat.service.command.UserCommandServiceImpl;
 import com.example.real_chat.service.global.ServiceTest;
-import com.example.real_chat.service.query.RootClientQueryService;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.longThat;
 import static org.mockito.Mockito.*;
 
 public class UserCommandServiceTest extends ServiceTest {
@@ -46,17 +42,33 @@ public class UserCommandServiceTest extends ServiceTest {
         // when & then
         assertThrows(NoSuchElementException.class,
                 () -> userCommandService.addUser(user.getUserName(), rootClient.getId()));
+        verify(userRepository, times(0)).save(any(User.class));
     }
 
     @Test
     @DisplayName("유저 삭제 테스트")
     void testRemoveUserSuccess() {
-        
+        // given
+        when(userRepository.findById(user.getId())).thenReturn(Optional.ofNullable(user));
+
+        // when
+        userCommandService.delete(user.getId());
+
+        // then
+        verify(userRepository, times(1)).findById(user.getId());
+        verify(userRepository, times(1)).delete(user);
     }
 
     @Test
     @DisplayName("유저 삭테 테스트 - 이미 삭제되었거나 없는 유저를 삭제할 경우")
     void testRemoveUserFailure_WhenUserNotFound() {
+        // given
+        when(userRepository.findById(user.getId())).thenReturn(Optional.empty());
 
+        // when & then
+        assertThrows(NoSuchElementException.class,
+                () -> userCommandService.delete(user.getId()));
+        verify(userRepository, times(1)).findById(user.getId());
+        verify(userRepository, times(0)).delete(user);
     }
 }

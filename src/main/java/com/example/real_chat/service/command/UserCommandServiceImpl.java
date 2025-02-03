@@ -27,16 +27,19 @@ public class UserCommandServiceImpl implements UserCommandService {
 
     @Override
     public void delete(Long userId) {
-        User user = userRepository.findById(userId).orElseThrow(
-                () -> new NoSuchElementException("User not found with id : " + userId)
-        );
-
+        User user = getUser(userId);
         userRepository.delete(user);
     }
 
-    private RootClient getRootClient(Long clientId) {
+    private RootClient getRootClient(Long clientId) throws RuntimeException {
         return rootClientRepository.findById(clientId).orElseThrow(
                 () -> new NoSuchElementException("Root client not found with id : " + clientId)
+        );
+    }
+
+    private User getUser(Long userId) throws RuntimeException {
+        return userRepository.findById(userId).orElseThrow(
+                () -> new NoSuchElementException("User not found with id : " + userId)
         );
     }
 }
