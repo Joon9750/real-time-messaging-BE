@@ -1,7 +1,7 @@
 package com.example.real_chat.api.command;
 
-import com.example.real_chat.dto.userChatRoom.request.CreateUserChatRoomRequest;
-import com.example.real_chat.dto.userChatRoom.response.CreateUserChatRoomResponse;
+import com.example.real_chat.dto.userchatroom.request.CreateUserChatRoomRequest;
+import com.example.real_chat.dto.userchatroom.response.CreateUserChatRoomResponse;
 import com.example.real_chat.service.command.UserChatRoomCommandService;
 
 import jakarta.validation.Valid;

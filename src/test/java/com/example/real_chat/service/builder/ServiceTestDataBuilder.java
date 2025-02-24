@@ -1,9 +1,9 @@
 package com.example.real_chat.service.builder;
 
 import com.example.real_chat.entity.room.ChatRoom;
-import com.example.real_chat.entity.rootClient.RootClient;
+import com.example.real_chat.entity.rootclient.RootClient;
 import com.example.real_chat.entity.user.User;
-import com.example.real_chat.entity.userChatRoom.UserChatRoom;
+import com.example.real_chat.entity.userchatroom.UserChatRoom;
 
 public class ServiceTestDataBuilder {
 

@@ -1,6 +1,6 @@
 package com.example.real_chat.service.command;
 
-import com.example.real_chat.entity.rootClient.RootClient;
+import com.example.real_chat.entity.rootclient.RootClient;
 import com.example.real_chat.entity.user.User;
 import com.example.real_chat.repository.RootClientRepository;
 import com.example.real_chat.repository.UserRepository;

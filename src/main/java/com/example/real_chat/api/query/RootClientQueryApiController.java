@@ -1,7 +1,7 @@
 package com.example.real_chat.api.query;
 
-import com.example.real_chat.dto.rootClient.response.GetRootClientResponse;
-import com.example.real_chat.entity.rootClient.RootClient;
+import com.example.real_chat.dto.rootclient.response.GetRootClientResponse;
+import com.example.real_chat.entity.rootclient.RootClient;
 import com.example.real_chat.service.query.RootClientQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

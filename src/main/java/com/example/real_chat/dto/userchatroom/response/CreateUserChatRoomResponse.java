@@ -1,4 +1,4 @@
-package com.example.real_chat.dto.userChatRoom.response;
+package com.example.real_chat.dto.userchatroom.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

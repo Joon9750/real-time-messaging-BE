@@ -2,7 +2,7 @@ package com.example.real_chat.service.command;
 
 import com.example.real_chat.entity.room.ChatRoom;
 import com.example.real_chat.entity.user.User;
-import com.example.real_chat.entity.userChatRoom.UserChatRoom;
+import com.example.real_chat.entity.userchatroom.UserChatRoom;
 import com.example.real_chat.global.exception.CannotJoinChatRoomException;
 import com.example.real_chat.repository.UserChatRoomRepository;
 import com.example.real_chat.service.query.RoomQueryService;

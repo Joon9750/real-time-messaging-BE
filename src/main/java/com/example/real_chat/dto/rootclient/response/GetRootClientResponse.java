@@ -1,6 +1,6 @@
-package com.example.real_chat.dto.rootClient.response;
+package com.example.real_chat.dto.rootclient.response;
 
-import com.example.real_chat.entity.rootClient.RootClient;
+import com.example.real_chat.entity.rootclient.RootClient;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

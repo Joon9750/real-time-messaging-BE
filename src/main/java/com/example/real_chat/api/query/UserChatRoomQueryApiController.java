@@ -1,10 +1,10 @@
 package com.example.real_chat.api.query;
 
 import com.example.real_chat.dto.common.Result;
-import com.example.real_chat.dto.userChatRoom.response.GetChatRoomResponse;
-import com.example.real_chat.dto.userChatRoom.response.GetUserChatRoomResponse;
-import com.example.real_chat.dto.userChatRoom.response.GetUserReseponse;
-import com.example.real_chat.entity.userChatRoom.UserChatRoom;
+import com.example.real_chat.dto.userchatroom.response.GetChatRoomResponse;
+import com.example.real_chat.dto.userchatroom.response.GetUserChatRoomResponse;
+import com.example.real_chat.dto.userchatroom.response.GetUserReseponse;
+import com.example.real_chat.entity.userchatroom.UserChatRoom;
 import com.example.real_chat.service.query.UserChatRoomQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

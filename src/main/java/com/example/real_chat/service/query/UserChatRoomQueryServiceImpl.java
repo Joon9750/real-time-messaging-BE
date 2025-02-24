@@ -2,7 +2,7 @@ package com.example.real_chat.service.query;
 
 import com.example.real_chat.entity.room.ChatRoom;
 import com.example.real_chat.entity.user.User;
-import com.example.real_chat.entity.userChatRoom.UserChatRoom;
+import com.example.real_chat.entity.userchatroom.UserChatRoom;
 import com.example.real_chat.repository.UserChatRoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

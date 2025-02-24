@@ -1,10 +1,10 @@
 package com.example.real_chat.api.command;
 
 import com.example.real_chat.dto.common.CommonApiResult;
-import com.example.real_chat.dto.rootClient.request.CreateRootClientRequest;
-import com.example.real_chat.dto.rootClient.request.UpdateRootClientRequest;
-import com.example.real_chat.dto.rootClient.response.CreateRootClientResponse;
-import com.example.real_chat.entity.rootClient.RootClient;
+import com.example.real_chat.dto.rootclient.request.CreateRootClientRequest;
+import com.example.real_chat.dto.rootclient.request.UpdateRootClientRequest;
+import com.example.real_chat.dto.rootclient.response.CreateRootClientResponse;
+import com.example.real_chat.entity.rootclient.RootClient;
 import com.example.real_chat.service.command.RootClientCommandService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
