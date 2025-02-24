@@ -11,9 +11,8 @@ import java.util.List;
 
 @Entity
 @Getter
-@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
+//@AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "\"User\"")
 public class User extends BaseTimeEntity {
 
@@ -31,11 +30,13 @@ public class User extends BaseTimeEntity {
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<UserChatRoom> userChatRooms = new ArrayList<>();
 
+    private User(String userName, RootClient client) {
+        this.userName = userName;
+        this.client = client;
+    }
+
     public static User create(String name, RootClient client) {
-        User user = new User();
-        user.userName = name;
-        user.client = client;
-        return user;
+        return new User(name, client);
     }
 
     public void update(String name) {
