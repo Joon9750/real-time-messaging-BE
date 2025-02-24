@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
+import java.util.NoSuchElementException;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
@@ -31,8 +33,7 @@ public class UserChatRoomCommandServiceTest extends ServiceTest {
         when(userQueryService.getUserById(user.getId())).thenReturn(user);
         when(roomQueryService.getRoom(chatRoom.getId())).thenReturn(chatRoom);
 
-        // joinChat 메소드에서 userChatRoom 객체를 따로 생성하기 때문에 ServiceTest의 UserChatRoom 객체랑 다르다.
-        // 따라서 any() 사용했다.
+        // joinChat 메소드에서 userChatRoom 객체를 따로 생성하기 때문에 ServiceTest의 UserChatRoom 객체랑 다르다. 따라서 any() 사용했다.
         when(userChatRoomRepository.save(any(UserChatRoom.class))).thenReturn(userChatRoom.getId());
 
         // when
@@ -50,7 +51,7 @@ public class UserChatRoomCommandServiceTest extends ServiceTest {
     }
 
     @Test
-    @DisplayName("이미 해당 유저가 채팅방에 들어가 있는 경우 - CannotJoinChatRoomException 던짐")
+    @DisplayName("이미 해당 유저가 채팅방에 들어가 있는 경우 - CannotJoinChatRoomException 예외 발생")
     void testJoinChatRoomFailure_WhenAlreadyUserJoinedChatRoom() {
         // given
         when(userChatRoomRepository.existsByUserAndChatRoom(user, chatRoom)).thenReturn(true);
@@ -66,19 +67,32 @@ public class UserChatRoomCommandServiceTest extends ServiceTest {
         verify(userQueryService, times(1)).getUserById(user.getId());
         verify(userChatRoomRepository, times(1)).existsByUserAndChatRoom(user, chatRoom);
         verify(userChatRoomRepository, times(0)).save(any(UserChatRoom.class));
+
+        assertThat(user.getUserChatRooms()).hasSize(0);
     }
 
     @Test
-    @DisplayName("채팅방을 찾을 수 없는 경우 - ")
+    @DisplayName("채팅방을 찾을 수 없는 경우 - NoSuchElementException 예외 발생")
     void testJoinChatRoomFailure_WhenCannotFoundChatRoom() {
         // given
+        when(userQueryService.getUserById(user.getId())).thenThrow(new NoSuchElementException());
 
+        // when & then
+        assertThrows(NoSuchElementException.class, () -> {
+           userChatRoomCommandService.joinChatRoom(user.getId(), chatRoom.getId());
+        });
     }
 
     @Test
-    @DisplayName("유저를 찾을 수 없는 경우 - ")
+    @DisplayName("유저를 찾을 수 없는 경우 - NoSuchElementException 예외 발생")
     void testJoinChatRoomFailure_WhenCannotFoundUser() {
         // given
+        when(userQueryService.getUserById(user.getId())).thenReturn(user);
+        when(roomQueryService.getRoom(chatRoom.getId())).thenThrow(new NoSuchElementException());
 
+        // when & then
+        assertThrows(NoSuchElementException.class, () -> {
+            userChatRoomCommandService.joinChatRoom(user.getId(), chatRoom.getId());
+        });
     }
 }
