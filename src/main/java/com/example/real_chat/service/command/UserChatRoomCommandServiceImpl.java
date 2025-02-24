@@ -31,9 +31,7 @@ public class UserChatRoomCommandServiceImpl implements UserChatRoomCommandServic
         boolean isUserInChatRoom = userChatRoomRepository.existsByUserAndChatRoom(user, chatRoom);
 
         if (!isUserInChatRoom) {
-            UserChatRoom userChatRoom = new UserChatRoom();
-            userChatRoom.setUser(user);
-            userChatRoom.setChatRoom(chatRoom);
+            UserChatRoom userChatRoom = UserChatRoom.create(user, chatRoom);
 
             user.addUserChatRoom(userChatRoom);
 

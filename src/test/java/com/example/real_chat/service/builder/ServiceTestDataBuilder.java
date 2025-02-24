@@ -41,10 +41,6 @@ public class ServiceTestDataBuilder {
     }
 
     public static UserChatRoom createUserChatRoom(User user, ChatRoom chatRoom) {
-        return UserChatRoom.builder()
-                .id(1L)
-                .chatRoom(chatRoom)
-                .user(user)
-                .build();
+        return UserChatRoom.create(user, chatRoom);
     }
 }
