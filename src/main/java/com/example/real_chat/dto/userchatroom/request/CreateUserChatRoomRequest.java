@@ -1,4 +1,4 @@
-package com.example.real_chat.dto.userChatRoom.request;
+package com.example.real_chat.dto.userchatroom.request;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;

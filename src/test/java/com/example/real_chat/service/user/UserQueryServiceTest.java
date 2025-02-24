@@ -54,11 +54,11 @@ public class UserQueryServiceTest extends ServiceTest {
     void testGetAllUsersSuccess() {
         // given
         List<User> mockUsers = List.of(
-                ServiceTestDataBuilder.createSpecificUser(rootClient, 1L, "firstUser"),
-                ServiceTestDataBuilder.createSpecificUser(rootClient, 2L, "secondUser"),
-                ServiceTestDataBuilder.createSpecificUser(rootClient, 3L, "thirdUser"),
-                ServiceTestDataBuilder.createSpecificUser(rootClient, 4L, "fourthUser"),
-                ServiceTestDataBuilder.createSpecificUser(rootClient, 5L, "fifthUser")
+                ServiceTestDataBuilder.createSpecificUser(rootClient, "firstUser"),
+                ServiceTestDataBuilder.createSpecificUser(rootClient, "secondUser"),
+                ServiceTestDataBuilder.createSpecificUser(rootClient, "thirdUser"),
+                ServiceTestDataBuilder.createSpecificUser(rootClient, "fourthUser"),
+                ServiceTestDataBuilder.createSpecificUser(rootClient, "fifthUser")
         );
 
         when(userRepository.findAll()).thenReturn(mockUsers);

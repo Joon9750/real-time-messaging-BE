@@ -1,4 +1,4 @@
-package com.example.real_chat.dto.rootClient.request;
+package com.example.real_chat.dto.rootclient.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

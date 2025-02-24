@@ -1,11 +1,10 @@
 package com.example.real_chat.service.command;
 
 import com.example.real_chat.entity.room.ChatRoom;
-import com.example.real_chat.entity.rootClient.RootClient;
+import com.example.real_chat.entity.rootclient.RootClient;
 import com.example.real_chat.repository.RoomRepository;
 import com.example.real_chat.service.query.RootClientQueryService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

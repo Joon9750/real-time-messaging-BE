@@ -1,6 +1,6 @@
 package com.example.real_chat.service.command;
 
-import com.example.real_chat.entity.rootClient.RootClient;
+import com.example.real_chat.entity.rootclient.RootClient;
 
 public interface RootClientCommandService {
 

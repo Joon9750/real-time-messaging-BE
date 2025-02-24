@@ -2,7 +2,7 @@ package com.example.real_chat.repository;
 
 import com.example.real_chat.entity.room.ChatRoom;
 import com.example.real_chat.entity.user.User;
-import com.example.real_chat.entity.userChatRoom.UserChatRoom;
+import com.example.real_chat.entity.userchatroom.UserChatRoom;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;

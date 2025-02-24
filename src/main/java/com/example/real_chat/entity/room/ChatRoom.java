@@ -1,13 +1,9 @@
 package com.example.real_chat.entity.room;
 
-import com.example.real_chat.entity.rootClient.RootClient;
+import com.example.real_chat.entity.rootclient.RootClient;
 import com.example.real_chat.entity.base.BaseTimeEntity;
-import com.example.real_chat.entity.userChatRoom.UserChatRoom;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter

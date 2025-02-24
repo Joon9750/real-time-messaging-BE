@@ -1,6 +1,6 @@
-package com.example.real_chat.dto.userChatRoom.response;
+package com.example.real_chat.dto.userchatroom.response;
 
-import com.example.real_chat.entity.userChatRoom.UserChatRoom;
+import com.example.real_chat.entity.userchatroom.UserChatRoom;
 import lombok.Getter;
 
 @Getter

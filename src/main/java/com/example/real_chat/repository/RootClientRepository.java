@@ -1,6 +1,6 @@
 package com.example.real_chat.repository;
 
-import com.example.real_chat.entity.rootClient.RootClient;
+import com.example.real_chat.entity.rootclient.RootClient;
 
 import java.util.Optional;
 

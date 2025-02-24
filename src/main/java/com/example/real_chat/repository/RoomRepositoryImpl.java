@@ -1,11 +1,9 @@
 package com.example.real_chat.repository;
 
 import com.example.real_chat.entity.room.ChatRoom;
-import com.example.real_chat.entity.userChatRoom.UserChatRoom;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
-import org.springframework.util.Assert;
 
 import java.util.List;
 import java.util.Optional;
