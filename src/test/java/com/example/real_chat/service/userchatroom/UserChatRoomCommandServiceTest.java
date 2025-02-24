@@ -27,6 +27,21 @@ public class UserChatRoomCommandServiceTest extends ServiceTest {
     void testJoinChatRoomSuccess() {
         // given
         when(userChatRoomRepository.existsByUserAndChatRoom(user, chatRoom)).thenReturn(false);
+        when(userQueryService.getUserById(user.getId())).thenReturn(user);
+        when(roomQueryService.getRoom(chatRoom.getId())).thenReturn(chatRoom);
+
+        // joinChat 메소드에서 userChatRoom 객체를 따로 생성하기 때문에 ServiceTest의 UserChatRoom 객체랑 다르다.
+        // 따라서 any() 사용했다.
+        when(userChatRoomRepository.save(any(UserChatRoom.class))).thenReturn(userChatRoom.getId());
+
+        // when
+        userChatRoomCommandService.joinChatRoom(user.getId(), chatRoom.getId());
+
+        // then
+        verify(roomQueryService, times(1)).getRoom(chatRoom.getId());
+        verify(roomQueryService, times(1)).getRoom(chatRoom.getId());
+        verify(userChatRoomRepository, times(1)).existsByUserAndChatRoom(user, chatRoom);
+        verify(userChatRoomRepository, times(1)).save(any(UserChatRoom.class));
     }
 
     @Test
@@ -42,6 +57,8 @@ public class UserChatRoomCommandServiceTest extends ServiceTest {
             userChatRoomCommandService.joinChatRoom(user.getId(), chatRoom.getId());
         });
 
+        verify(roomQueryService, times(1)).getRoom(chatRoom.getId());
+        verify(roomQueryService, times(1)).getRoom(chatRoom.getId());
         verify(userChatRoomRepository, times(1)).existsByUserAndChatRoom(user, chatRoom);
         verify(userChatRoomRepository, times(0)).save(any(UserChatRoom.class));
     }
