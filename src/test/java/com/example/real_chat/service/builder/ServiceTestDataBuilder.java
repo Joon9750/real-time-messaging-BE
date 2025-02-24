@@ -30,7 +30,14 @@ public class ServiceTestDataBuilder {
                 .userName("name")
                 .client(rootClient)
                 .build();
+    }
 
+    public static User createSpecificUser(RootClient rootClient, long id, String name) {
+        return User.builder()
+                .id(id)
+                .userName(name)
+                .client(rootClient)
+                .build();
     }
 
     public static UserChatRoom createUserChatRoom(User user, ChatRoom chatRoom) {
