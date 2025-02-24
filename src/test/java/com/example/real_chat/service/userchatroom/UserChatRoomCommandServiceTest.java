@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
@@ -35,13 +36,17 @@ public class UserChatRoomCommandServiceTest extends ServiceTest {
         when(userChatRoomRepository.save(any(UserChatRoom.class))).thenReturn(userChatRoom.getId());
 
         // when
-        userChatRoomCommandService.joinChatRoom(user.getId(), chatRoom.getId());
+        Long userChatRoomId = userChatRoomCommandService.joinChatRoom(user.getId(), chatRoom.getId());
 
         // then
         verify(roomQueryService, times(1)).getRoom(chatRoom.getId());
-        verify(roomQueryService, times(1)).getRoom(chatRoom.getId());
+        verify(userQueryService, times(1)).getUserById(user.getId());
         verify(userChatRoomRepository, times(1)).existsByUserAndChatRoom(user, chatRoom);
         verify(userChatRoomRepository, times(1)).save(any(UserChatRoom.class));
+
+        // 엔티티 연관관계 설정 - user.getUserChatRooms()에 userChatRoom이 추가되었는지 검증
+        assertThat(user.getUserChatRooms()).hasSize(1);
+        assertThat(user.getUserChatRooms()).extracting("chatRoom").contains(chatRoom);
     }
 
     @Test
@@ -58,7 +63,7 @@ public class UserChatRoomCommandServiceTest extends ServiceTest {
         });
 
         verify(roomQueryService, times(1)).getRoom(chatRoom.getId());
-        verify(roomQueryService, times(1)).getRoom(chatRoom.getId());
+        verify(userQueryService, times(1)).getUserById(user.getId());
         verify(userChatRoomRepository, times(1)).existsByUserAndChatRoom(user, chatRoom);
         verify(userChatRoomRepository, times(0)).save(any(UserChatRoom.class));
     }
