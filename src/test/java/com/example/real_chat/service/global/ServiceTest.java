@@ -13,6 +13,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
+
 @ExtendWith(MockitoExtension.class)
 public abstract class ServiceTest {
 
@@ -25,4 +27,5 @@ public abstract class ServiceTest {
     protected ChatRoom chatRoom = ServiceTestDataBuilder.createChatRoom(rootClient);
     protected User user = ServiceTestDataBuilder.createUser(rootClient);
     protected UserChatRoom userChatRoom = ServiceTestDataBuilder.createUserChatRoom(user, chatRoom);
+    protected List<UserChatRoom> userChatRoomList = ServiceTestDataBuilder.createUserChatRooms();
 }

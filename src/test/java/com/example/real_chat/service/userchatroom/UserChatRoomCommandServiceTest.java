@@ -2,6 +2,7 @@ package com.example.real_chat.service.userchatroom;
 
 import com.example.real_chat.entity.userchatroom.UserChatRoom;
 import com.example.real_chat.global.exception.CannotJoinChatRoomException;
+import com.example.real_chat.service.builder.ServiceTestDataBuilder;
 import com.example.real_chat.service.command.UserChatRoomCommandServiceImpl;
 import com.example.real_chat.service.global.ServiceTest;
 import com.example.real_chat.service.query.RoomQueryService;
@@ -99,7 +100,6 @@ public class UserChatRoomCommandServiceTest extends ServiceTest {
     @Test
     @DisplayName("채팅방이 삭제되면 방에 속한 유저들 모두 해당 방에서 삭제된다.")
     void testLeaveUserChatRoomByChatRoomIdSuccess() {
-
     }
 
     @Test
