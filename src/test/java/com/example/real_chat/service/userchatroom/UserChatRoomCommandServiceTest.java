@@ -95,4 +95,25 @@ public class UserChatRoomCommandServiceTest extends ServiceTest {
             userChatRoomCommandService.joinChatRoom(user.getId(), chatRoom.getId());
         });
     }
+
+    @Test
+    @DisplayName("채팅방이 삭제되면 방에 속한 유저들 모두 해당 방에서 삭제된다.")
+    void testLeaveUserChatRoomByChatRoomIdSuccess() {
+
+    }
+
+    @Test
+    @DisplayName("삭제할 채팅방을 찾을 수 없는 경우 - NoSuchElementException 예외 발생")
+    void testLeaveUserChatRoomByChatRoomIdFailure_WhenCannotFoundChatRoom() {
+        // when
+        when(roomQueryService.getRoom(chatRoom.getId())).thenThrow(new NoSuchElementException());
+
+        // when & then
+        assertThrows(NoSuchElementException.class, () -> {
+            userChatRoomCommandService.leaveUserChatRoomByChatRoomId(chatRoom.getId());
+        });
+
+        verify(userChatRoomRepository, times(0)).findByChatRoom(chatRoom);
+        verify(userChatRoomRepository, times(0)).delete(any(UserChatRoom.class));
+    }
 }

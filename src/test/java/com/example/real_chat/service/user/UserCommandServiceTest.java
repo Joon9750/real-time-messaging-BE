@@ -47,6 +47,8 @@ public class UserCommandServiceTest extends ServiceTest {
 
     @Test
     @DisplayName("유저 삭제 테스트")
+    // 이때 해당 유저가 삭제 방에 있으면 해당 방에서 나가지는지 검증 필요하다.
+    // User 엔티티의 CascadeType.REMOVE로 설정되어 있다.
     void testRemoveUserSuccess() {
         // given
         when(userRepository.findById(user.getId())).thenReturn(Optional.ofNullable(user));

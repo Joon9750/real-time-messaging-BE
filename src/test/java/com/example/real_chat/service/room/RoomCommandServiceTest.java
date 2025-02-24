@@ -45,7 +45,7 @@ public class RoomCommandServiceTest extends ServiceTest {
     }
 
     @Test
-    @DisplayName("체팅방 생성 테스트 - rootClient가 존재하지 않을 때")
+    @DisplayName("채팅방 생성 테스트 - rootClient가 존재하지 않을 때")
     void testAddRoomFailure_WhenRootClientNotFound() {
         // given
         when(rootClientQueryService.getRootClient(any())).thenThrow(NoSuchElementException.class);
