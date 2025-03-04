@@ -38,7 +38,9 @@ public class RootClientCommandApiController {
     }
 
     @DeleteMapping("/{id}")
-    @Operation(summary = "루트 클라이언트 삭제", description = "기존 루트 클라이언트를 삭제합니다. 루트 클라이언트 삭제 시 실제로 DB에서 삭제하지 않고 isDelete 인스턴스로 삭제 여부 표기합니다.")
+    @Operation(
+            summary = "루트 클라이언트 삭제",
+            description = "기존 루트 클라이언트를 삭제합니다. 루트 클라이언트 삭제 시 실제로 DB에서 삭제하지 않고 isDelete 인스턴스로 삭제 여부 표기합니다.")
     public ResponseEntity<CommonApiResult> deleteRootClient(
             @PathVariable Long id
     ) {
@@ -47,7 +49,9 @@ public class RootClientCommandApiController {
     }
 
     @PatchMapping("/{id}")
-    @Operation(summary = "루트 클라이언트 수정", description = "clientId, clientPassword, clientName 중 변경 소요가 없는 경우 null 또는 \"\" 빈 문자열로 넣어주시면 됩니다.")
+    @Operation(
+            summary = "루트 클라이언트 수정",
+            description = "clientId, clientPassword, clientName 중 변경 소요가 없는 경우 null 또는 \"\" 빈 문자열로 넣어주시면 됩니다.")
     public ResponseEntity<CommonApiResult> updateRootClient(
             @PathVariable Long id,
             @RequestBody @Valid UpdateRootClientRequest requestDto

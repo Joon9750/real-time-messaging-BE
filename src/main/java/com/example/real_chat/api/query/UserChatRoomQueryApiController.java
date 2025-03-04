@@ -23,7 +23,9 @@ public class UserChatRoomQueryApiController {
     private final UserChatRoomQueryService userChatRoomQueryService;
 
     @GetMapping()
-    @Operation(summary = "채팅방과 사용자의 연결테이블 조회", description = "채팅방과 사용자의 연결테이블인 UserChatRoom의 id를 조회합니다.")
+    @Operation(
+            summary = "채팅방과 사용자의 연결테이블 조회",
+            description = "채팅방과 사용자의 연결테이블인 UserChatRoom의 id를 조회합니다.")
     public ResponseEntity<GetUserChatRoomResponse> getUserChatRoom(
             @RequestParam Long userId,
             @RequestParam Long roomId
