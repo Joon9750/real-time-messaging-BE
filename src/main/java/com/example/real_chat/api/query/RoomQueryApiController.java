@@ -28,7 +28,7 @@ public class RoomQueryApiController {
     }
 
     @GetMapping("/{rootClientId}/all")
-    public ResponseEntity<Result<List<RoomResponse>>> getAllRooms(
+    public ResponseEntity<Result<List<RoomResponse>>> getRootClientRooms(
             @PathVariable Long rootClientId
     ) {
         List<ChatRoom> chatRooms = roomService.getRootClientRooms(rootClientId);
