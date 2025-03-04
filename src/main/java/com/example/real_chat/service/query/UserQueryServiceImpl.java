@@ -24,7 +24,7 @@ public class UserQueryServiceImpl implements UserQueryService {
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public List<User> getRootClientUsers(Long clientId) {
+        return userRepository.findUserByRootClientId(clientId);
     }
 }

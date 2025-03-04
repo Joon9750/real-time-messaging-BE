@@ -49,28 +49,28 @@ public class UserQueryServiceTest extends ServiceTest {
                 () -> userQueryService.getUserById(user.getId()));
     }
 
-    @Test
-    @DisplayName("모든 유저 조회 테스트")
-    void testGetAllUsersSuccess() {
-        // given
-        List<User> mockUsers = List.of(
-                ServiceTestDataBuilder.createSpecificUser(rootClient, "firstUser"),
-                ServiceTestDataBuilder.createSpecificUser(rootClient, "secondUser"),
-                ServiceTestDataBuilder.createSpecificUser(rootClient, "thirdUser"),
-                ServiceTestDataBuilder.createSpecificUser(rootClient, "fourthUser"),
-                ServiceTestDataBuilder.createSpecificUser(rootClient, "fifthUser")
-        );
-
-        when(userRepository.findAll()).thenReturn(mockUsers);
-
-        // when
-        List<User> responseUsers = userQueryService.getAllUsers();
-
-        // then
-        verify(userRepository, times(1)).findAll();
-        assertEquals(mockUsers.size(), responseUsers.size());
-        assertEquals(mockUsers.getFirst().getId(), responseUsers.getFirst().getId());
-        assertEquals(mockUsers.get(1).getId(), responseUsers.get(1).getId());
-        assertEquals(mockUsers.getLast().getId(), responseUsers.getLast().getId());
-    }
+//    @Test
+//    @DisplayName("모든 유저 조회 테스트")
+//    void testGetAllUsersSuccess() {
+//        // given
+//        List<User> mockUsers = List.of(
+//                ServiceTestDataBuilder.createSpecificUser(rootClient, "firstUser"),
+//                ServiceTestDataBuilder.createSpecificUser(rootClient, "secondUser"),
+//                ServiceTestDataBuilder.createSpecificUser(rootClient, "thirdUser"),
+//                ServiceTestDataBuilder.createSpecificUser(rootClient, "fourthUser"),
+//                ServiceTestDataBuilder.createSpecificUser(rootClient, "fifthUser")
+//        );
+//
+//        when(userRepository.findAll()).thenReturn(mockUsers);
+//
+//        // when
+//        List<User> responseUsers = userQueryService.getAllUsers();
+//
+//        // then
+//        verify(userRepository, times(1)).findAll();
+//        assertEquals(mockUsers.size(), responseUsers.size());
+//        assertEquals(mockUsers.getFirst().getId(), responseUsers.getFirst().getId());
+//        assertEquals(mockUsers.get(1).getId(), responseUsers.get(1).getId());
+//        assertEquals(mockUsers.getLast().getId(), responseUsers.getLast().getId());
+//    }
 }

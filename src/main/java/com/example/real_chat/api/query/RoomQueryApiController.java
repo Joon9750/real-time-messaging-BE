@@ -27,14 +27,13 @@ public class RoomQueryApiController {
         return ResponseEntity.ok().body(new RoomResponse(chatRoom));
     }
 
-    // // No longer supported
-//    @GetMapping("/all")
-//    public ResponseEntity<Result<List<RoomResponse>>> getAllRooms() {
-//        List<ChatRoom> chatRooms = roomService.getAllRooms();
-//        List<RoomResponse> response = chatRooms.stream()
-//                .map(RoomResponse::new)
-//                .toList();
-//
-//        return ResponseEntity.ok().body(new Result<>(response));
-//    }
+    @GetMapping("/{rootClientId}/all")
+    public ResponseEntity<Result<List<RoomResponse>>> getAllRooms() {
+        List<ChatRoom> chatRooms = roomService.getAllRooms();
+        List<RoomResponse> response = chatRooms.stream()
+                .map(RoomResponse::new)
+                .toList();
+
+        return ResponseEntity.ok().body(new Result<>(response));
+    }
 }

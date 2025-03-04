@@ -10,7 +10,7 @@ public interface UserRepository {
     Long save(User user);
 
     Optional<User> findById(Long id);
-    List<User> findAll();
+    List<User> findUserByRootClientId(Long rootClientId);
 
     void delete(User user);
 }
