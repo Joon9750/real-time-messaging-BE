@@ -5,6 +5,7 @@ import com.example.real_chat.dto.room.response.RoomResponse;
 import com.example.real_chat.entity.room.ChatRoom;
 import com.example.real_chat.service.query.RoomQueryService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/v1/query/room")
+@Tag(name = "Chat room")
 public class RoomQueryApiController {
 
     private final RoomQueryService roomService;

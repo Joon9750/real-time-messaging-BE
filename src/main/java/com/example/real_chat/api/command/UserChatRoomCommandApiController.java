@@ -4,6 +4,7 @@ import com.example.real_chat.dto.userchatroom.request.CreateUserChatRoomRequest;
 import com.example.real_chat.dto.userchatroom.response.CreateUserChatRoomResponse;
 import com.example.real_chat.service.command.UserChatRoomCommandService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/command/user-chat-room")
+@Tag(name = "UserChatRoom", description = "유저와 채팅방 연결테이블 관련 API")
 public class UserChatRoomCommandApiController {
 
     private final UserChatRoomCommandService userChatRoomCommandService;

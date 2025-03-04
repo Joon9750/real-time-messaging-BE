@@ -6,6 +6,7 @@ import com.example.real_chat.dto.userchatroom.response.GetUserChatRoomResponse;
 import com.example.real_chat.dto.userchatroom.response.GetUserReseponse;
 import com.example.real_chat.entity.userchatroom.UserChatRoom;
 import com.example.real_chat.service.query.UserChatRoomQueryService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/query/user-chat-room")
+@Tag(name = "UserChatRoom")
 public class UserChatRoomQueryApiController {
 
     private final UserChatRoomQueryService userChatRoomQueryService;

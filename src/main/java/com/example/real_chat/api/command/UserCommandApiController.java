@@ -4,6 +4,7 @@ import com.example.real_chat.dto.common.CommonApiResult;
 import com.example.real_chat.dto.user.request.CreateUserRequest;
 import com.example.real_chat.dto.user.response.CreateUserResponse;
 import com.example.real_chat.service.command.UserCommandService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/command/user")
+@Tag(name = "User", description = "유저 관련 API")
 public class UserCommandApiController {
 
     private final UserCommandService userCommandService;

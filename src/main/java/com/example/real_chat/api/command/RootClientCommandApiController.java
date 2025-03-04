@@ -6,6 +6,7 @@ import com.example.real_chat.dto.rootclient.request.UpdateRootClientRequest;
 import com.example.real_chat.dto.rootclient.response.CreateRootClientResponse;
 import com.example.real_chat.entity.rootclient.RootClient;
 import com.example.real_chat.service.command.RootClientCommandService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/v1/command/root-client")
+@Tag(name = "Root client", description = "루트 클라이언트 관련 API")
 public class RootClientCommandApiController {
 
     private final RootClientCommandService rootClientCommandService;

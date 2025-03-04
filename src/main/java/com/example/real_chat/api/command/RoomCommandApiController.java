@@ -6,6 +6,7 @@ import com.example.real_chat.dto.room.request.UpdateRoomRequest;
 import com.example.real_chat.dto.room.response.CreateRoomResponse;
 import com.example.real_chat.service.command.RoomCommandService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/v1/command/room")
+@Tag(name = "Chat room", description = "채팅방 관련 API")
 public class RoomCommandApiController {
 
     private final RoomCommandService roomService;
