@@ -28,10 +28,12 @@ public class UserQueryApiController {
         return ResponseEntity.ok().body(new GetUserResponse(user));
     }
 
-    @GetMapping("/all")
-    public ResponseEntity<Result<List<GetUserResponse>>> getAllUsers() {
-        List<User> users = userQueryService.getAllUsers();
-        List<GetUserResponse> response = users.stream()
+    @GetMapping("/{rootClientId}/all")
+    public ResponseEntity<Result<List<GetUserResponse>>> getRootClientUsers(
+            @PathVariable Long rootClientId
+    ) {
+        List<User> userList = userQueryService.getRootClientUsers(rootClientId);
+        List<GetUserResponse> response = userList.stream()
                 .map(GetUserResponse::new)
                 .toList();
 

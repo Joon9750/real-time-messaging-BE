@@ -28,8 +28,11 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<User> findAll() {
-        return entityManager.createQuery("select u from User u", User.class)
+    public List<User> findUserByRootClientId(Long rootClientId) {
+        return entityManager.createQuery("select user from User user" +
+                " join fetch user.client" +
+                " where user.client.id = :rootClientId", User.class)
+                .setParameter("rootClientId", rootClientId)
                 .getResultList();
     }
 

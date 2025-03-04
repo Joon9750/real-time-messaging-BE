@@ -7,5 +7,5 @@ import java.util.List;
 public interface UserQueryService {
 
     User getUserById(Long userId);
-    List<User> getAllUsers();
+    List<User> getRootClientUsers(Long clientId);
 }

@@ -27,8 +27,11 @@ public class RoomRepositoryImpl implements RoomRepository {
     }
 
     @Override
-    public List<ChatRoom> findAll() {
-        return entityManager.createQuery("select m from ChatRoom m", ChatRoom.class)
+    public List<ChatRoom> findRootClientRooms(Long rootClientId) {
+        return entityManager.createQuery("select m from ChatRoom m" +
+                " join fetch m.rootClient" +
+                " where m.rootClient.id = :rootClientId", ChatRoom.class)
+                .setParameter("rootClientId", rootClientId)
                 .getResultList();
     }
 
