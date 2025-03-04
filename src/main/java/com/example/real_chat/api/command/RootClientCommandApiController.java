@@ -6,6 +6,7 @@ import com.example.real_chat.dto.rootclient.request.UpdateRootClientRequest;
 import com.example.real_chat.dto.rootclient.response.CreateRootClientResponse;
 import com.example.real_chat.entity.rootclient.RootClient;
 import com.example.real_chat.service.command.RootClientCommandService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,7 @@ public class RootClientCommandApiController {
     private final RootClientCommandService rootClientCommandService;
 
     @PostMapping()
+    @Operation(summary = "루트 클라이언트 생성", description = "새로운 루트 클라이언트를 생성합니다.")
     public ResponseEntity<CreateRootClientResponse> createRootClient(
             @RequestBody @Valid CreateRootClientRequest requestDto
     ) {
@@ -36,6 +38,7 @@ public class RootClientCommandApiController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "루트 클라이언트 삭제", description = "기존 루트 클라이언트를 삭제합니다. 루트 클라이언트 삭제 시 실제로 DB에서 삭제하지 않고 isDelete 인스턴스로 삭제 여부 표기합니다.")
     public ResponseEntity<CommonApiResult> deleteRootClient(
             @PathVariable Long id
     ) {
@@ -43,8 +46,8 @@ public class RootClientCommandApiController {
         return ResponseEntity.ok(CommonApiResult.createOk("루트 클라이언트가 정상적으로 삭제 되었습니다."));
     }
 
-    // clientId, clientPassword, clientName 중 변경 소요가 없는 경우 null 또는 "" 빈 문자열로 넣어주시면 됩니다.
     @PatchMapping("/{id}")
+    @Operation(summary = "루트 클라이언트 수정", description = "clientId, clientPassword, clientName 중 변경 소요가 없는 경우 null 또는 \"\" 빈 문자열로 넣어주시면 됩니다.")
     public ResponseEntity<CommonApiResult> updateRootClient(
             @PathVariable Long id,
             @RequestBody @Valid UpdateRootClientRequest requestDto
