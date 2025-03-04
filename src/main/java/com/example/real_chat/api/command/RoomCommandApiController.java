@@ -6,6 +6,8 @@ import com.example.real_chat.dto.room.request.UpdateRoomRequest;
 import com.example.real_chat.dto.room.response.CreateRoomResponse;
 import com.example.real_chat.service.command.RoomCommandService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +16,13 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/v1/command/room")
+@Tag(name = "Chat room", description = "채팅방 관련 API")
 public class RoomCommandApiController {
 
     private final RoomCommandService roomService;
 
     @PostMapping()
+    @Operation(summary = "채팅방 생성", description = "새로운 채팅방을 생성합니다.")
     public ResponseEntity<CreateRoomResponse> createRoom(
             @RequestBody @Valid CreateRoomRequest request
     ) {
@@ -27,6 +31,7 @@ public class RoomCommandApiController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "채팅방 삭제", description = "채팅방을 삭제합니다.")
     public ResponseEntity<CommonApiResult> deleteRoom(
             @PathVariable Long id
     ) {
@@ -37,6 +42,7 @@ public class RoomCommandApiController {
     }
 
     @PatchMapping("/{id}")
+    @Operation(summary = "채팅방 이름 수정", description = "기존 채팅방 이름을 수정합니다.")
     public ResponseEntity<CommonApiResult> updateRoom(
             @PathVariable Long id,
             @RequestBody @Valid UpdateRoomRequest requestDto
