@@ -36,12 +36,6 @@ public class UserRepositoryImpl implements UserRepository {
                 .getResultList();
     }
 
-//    @Override
-//    public List<User> findAll() {
-//        return entityManager.createQuery("select u from User u", User.class)
-//                .getResultList();
-//    }
-
     @Override
     public void delete(User user) {
         if (entityManager.contains(user)) {

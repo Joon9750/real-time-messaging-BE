@@ -24,5 +24,7 @@ public class RoomQueryServiceImpl implements RoomQueryService {
     }
 
     @Override
-    public List<ChatRoom> getAllRooms() { return roomRepository.findAll(); }
+    public List<ChatRoom> getRootClientRooms(Long rootClientId) {
+        return roomRepository.findRootClientRooms(rootClientId);
+    }
 }

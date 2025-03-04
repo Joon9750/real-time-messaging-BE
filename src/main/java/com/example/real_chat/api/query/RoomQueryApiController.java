@@ -28,8 +28,10 @@ public class RoomQueryApiController {
     }
 
     @GetMapping("/{rootClientId}/all")
-    public ResponseEntity<Result<List<RoomResponse>>> getAllRooms() {
-        List<ChatRoom> chatRooms = roomService.getAllRooms();
+    public ResponseEntity<Result<List<RoomResponse>>> getAllRooms(
+            @PathVariable Long rootClientId
+    ) {
+        List<ChatRoom> chatRooms = roomService.getRootClientRooms(rootClientId);
         List<RoomResponse> response = chatRooms.stream()
                 .map(RoomResponse::new)
                 .toList();

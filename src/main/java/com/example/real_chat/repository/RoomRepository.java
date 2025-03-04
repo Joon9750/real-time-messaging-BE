@@ -10,7 +10,7 @@ public interface RoomRepository {
     Long save(ChatRoom chatRoom);
 
     Optional<ChatRoom> findById(Long id);
-    List<ChatRoom> findAll();
+    List<ChatRoom> findRootClientRooms(Long rootClientId);
 
     void delete(ChatRoom chatRoom);
 }

@@ -7,5 +7,5 @@ import java.util.List;
 public interface RoomQueryService {
 
     ChatRoom getRoom(Long roomId);
-    List<ChatRoom> getAllRooms();
+    List<ChatRoom> getRootClientRooms(Long rootClientId);
 }
