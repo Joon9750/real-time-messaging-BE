@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/v1/command/root-client")
-@Tag(name = "Root client", description = "루트 클라이언트 관련 API")
+@Tag(name = "Root client", description = "루트 클라이언트 관련 API, ")
 public class RootClientCommandApiController {
 
     private final RootClientCommandService rootClientCommandService;
