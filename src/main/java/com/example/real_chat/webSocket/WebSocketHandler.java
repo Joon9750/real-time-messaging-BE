@@ -6,57 +6,33 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import java.io.IOException;
-import java.util.Map;
-import java.util.StringTokenizer;
-import java.util.concurrent.ConcurrentHashMap;
 
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class WebSocketHandler extends TextWebSocketHandler {
 
-    private final Map<String, WebSocketSession> sessionMap = new ConcurrentHashMap<>();
-    private static StringTokenizer st;
+    private final Map<String, Set<UserInfo>> sessionMap = new ConcurrentHashMap<>();
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+        super.afterConnectionEstablished(session);
+        UserInfo userInfo = extractUserInfo(session);
 
-        // 세션의 ID는 서버가 클라이언트와의 WebSocket 연결을 수립할 때 자동으로 생성
-        String sessionId = session.getId();
-
-        // 세션 저장
-        sessionMap.put(sessionId, session);
-
-        sessionMap.values().forEach(s -> {
-            try {
-                s.sendMessage(new TextMessage(sessionId + "님이 대화방에 들어오셨습니다."));
-            } catch (IOException e) {
-                throw new RuntimeException("message 전송 실패!!!");
-            }
-        });
+        sessionMap.computeIfAbsent(userInfo.getChatRoomId(), k -> new HashSet<>()).add(userInfo);
+        sendMessageToChatRoom(userInfo.getChatRoomId(), userInfo.getName() + "님이 대화방에 들어오셨습니다.");
     }
 
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage textMessage) throws Exception {
-        String sessionId = session.getId();
-        String[] sessionIdStrings = sessionId.split("-");
+        super.handleTextMessage(session, textMessage);
+        UserInfo userInfo = extractUserInfo(session);
 
-        // 대화창에 표시할 보낸 사람 아이디
-        String senderId = sessionIdStrings[0];
-
-        // 메시지 내용 파싱
         String textMessagePayload = textMessage.getPayload();
-
-        // 대화방 전체에 메시지 전달
-        sessionMap.values().forEach(s -> {
-            try {
-                // 자신을 제외한 참가자들에게 메시지 전달
-                if (!sessionId.equals(s.getId())) {
-                    s.sendMessage(new TextMessage(senderId + " : " + textMessagePayload));
-                }
-
-            } catch (IOException e) {
-                throw new RuntimeException("message 전송 실패!!!");
-            }
-        });
+        String message = userInfo.getName() + " : " + textMessagePayload;
+        sendMessageToChatRoomExceptSelf(userInfo.getChatRoomId(), message, userInfo);
     }
 
     @Override
@@ -66,16 +42,57 @@ public class WebSocketHandler extends TextWebSocketHandler {
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-        String sessionId = session.getId();
+        UserInfo userInfo = extractUserInfo(session);
 
-        sessionMap.remove(sessionId);
+        sessionMap.remove(userInfo.getSession().getId());
+        sendMessageToChatRoom(userInfo.getChatRoomId(), userInfo.getName() + "님이 대화방을 나가셨습니다.");
+    }
 
-        sessionMap.values().forEach(s -> {
-            try {
-                s.sendMessage(new TextMessage(sessionId + "님이 대화방을 나가셨습니다."));
-            } catch (IOException e) {
-                throw new RuntimeException("message 전송 실패!!!");
+    private void sendMessageToChatRoom(String chatRoomId, String message) throws IOException {
+        Set<UserInfo> users = sessionMap.get(chatRoomId);
+
+        if (users != null) {
+            for (UserInfo user : users) {
+                try {
+                    user.getSession().sendMessage(new TextMessage(message));
+                } catch (IOException e) {
+                    // 오류 처리
+                    throw new RuntimeException(e);
+                }
             }
-        });
+        }
+    }
+
+    private void sendMessageToChatRoomExceptSelf(String chatRoomId, String message, UserInfo userInfo) throws IOException {
+        Set<UserInfo> users = sessionMap.get(chatRoomId);
+        WebSocketSession session = userInfo.getSession();
+
+        if (users != null) {
+            for (UserInfo user : users) {
+                try {
+                    if(!session.getId().equals(user.getSession().getId())) {
+                        user.getSession().sendMessage(new TextMessage(message));
+                    }
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+    }
+
+    private UserInfo extractUserInfo(WebSocketSession session) throws IOException {
+        String name = session.getHandshakeHeaders().get("name").getFirst();
+        String clientIdInString = session.getHandshakeHeaders().get("clientId").getFirst();
+        String chatRoomId = session.getHandshakeHeaders().get("chatRoomId").getFirst();
+
+        if (name == null || clientIdInString == null || chatRoomId == null) {
+            session.sendMessage(new TextMessage("Error: Missing required headers."));
+            session.close();
+            throw new IllegalArgumentException("Missing required headers.");
+        }
+
+        Long clientId = Long.valueOf(clientIdInString);
+
+        return new UserInfo(name, clientId, chatRoomId, session);
     }
 }
