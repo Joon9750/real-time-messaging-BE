@@ -82,7 +82,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
 
     private UserInfo extractUserInfo(WebSocketSession session) throws IOException {
         String name = session.getHandshakeHeaders().get("name").getFirst();
-        String clientIdInString = session.getHandshakeHeaders().get("clientId").getFirst();
+        String clientIdInString = session.getHandshakeHeaders().get("userId").getFirst();
         String chatRoomId = session.getHandshakeHeaders().get("chatRoomId").getFirst();
 
         if (name == null || clientIdInString == null || chatRoomId == null) {

@@ -8,7 +8,7 @@ import org.springframework.web.socket.WebSocketSession;
 @AllArgsConstructor
 public class UserInfo {
     private String name;
-    private Long clientId;
+    private Long userId;
     private String chatRoomId;
     private WebSocketSession session;
 }
