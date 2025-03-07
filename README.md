@@ -19,7 +19,7 @@
 - 회원 관리
   - 실시간 채팅에 참여할 회원 등록 및 관리 기능을 제공합니다.
 
-## 🛠️ 핵심 기술 구현
+## 🛠️ 핵심 기술 구현 목표
 - 실시간성 : Polling이나 Long-Polling 방식 대신 WebSocket과 STOMP 프로토콜을 사용해 실시간 채팅 기능을 구현했습니다.
 
 - CQS 패턴 : Command(명령)와 Query(조회)를 분리하는 CQS(Command Query Separation) 패턴을 적용했습니다.
