@@ -14,6 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class WebSocketHandler extends TextWebSocketHandler {
 
+    // sessionMap Key - UserInfo chatRoomId
     private final Map<String, Set<UserInfo>> sessionMap = new ConcurrentHashMap<>();
 
     @Override
@@ -44,7 +45,16 @@ public class WebSocketHandler extends TextWebSocketHandler {
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
         UserInfo userInfo = extractUserInfo(session);
 
-        sessionMap.remove(userInfo.getSession().getId());
+        Set<UserInfo> usersInChatRoom = sessionMap.get(userInfo.getChatRoomId());
+        if (usersInChatRoom != null) {
+            usersInChatRoom.removeIf(user -> user.getUserId().equals(userInfo.getUserId()));
+
+            // 만약 해당 채팅방에 남아있는 유저가 없다면 채팅방 삭제
+            if (usersInChatRoom.isEmpty()) {
+                sessionMap.remove(userInfo.getChatRoomId());
+            }
+        }
+
         sendMessageToChatRoom(userInfo.getChatRoomId(), userInfo.getName() + "님이 대화방을 나가셨습니다.");
     }
 
@@ -81,18 +91,33 @@ public class WebSocketHandler extends TextWebSocketHandler {
     }
 
     private UserInfo extractUserInfo(WebSocketSession session) throws IOException {
-        String name = session.getHandshakeHeaders().get("name").getFirst();
-        String clientIdInString = session.getHandshakeHeaders().get("userId").getFirst();
-        String chatRoomId = session.getHandshakeHeaders().get("chatRoomId").getFirst();
+        try {
+            String name = session.getHandshakeHeaders().getFirst("name");
+            String clientIdInString = session.getHandshakeHeaders().getFirst("userId");
+            String chatRoomId = session.getHandshakeHeaders().getFirst("chatRoomId");
 
-        if (name == null || clientIdInString == null || chatRoomId == null) {
-            session.sendMessage(new TextMessage("Error: Missing required headers."));
+            // 필수 헤더 값이 누락된 경우 예외 처리
+            if (name == null || clientIdInString == null || chatRoomId == null) {
+                session.sendMessage(new TextMessage("Error: Missing required headers."));
+                session.close();
+                return null; // 조기 종료
+            }
+
+            long clientId;
+            try {
+                clientId = Long.parseLong(clientIdInString);
+            } catch (NumberFormatException e) {
+                session.sendMessage(new TextMessage("Error: Invalid userId format: " + clientIdInString));
+                session.close();
+                return null; // 조기 종료
+            }
+
+            return new UserInfo(name, clientId, chatRoomId, session);
+
+        } catch (Exception e) {
+            session.sendMessage(new TextMessage("Error: Unexpected server error."));
             session.close();
-            throw new IllegalArgumentException("Missing required headers.");
+            throw new RuntimeException("WebSocket header processing failed", e);
         }
-
-        Long clientId = Long.valueOf(clientIdInString);
-
-        return new UserInfo(name, clientId, chatRoomId, session);
     }
 }
