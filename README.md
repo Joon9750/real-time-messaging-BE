@@ -30,7 +30,7 @@
 
 ## ⚙️ 기술 스택
 - Spring Boot 3.x, Java 21, Gradle
-- MySql, MongoDB(메시징 기능용), H2 DataBase(테스트용)
+- MySql, MongoDB(메시징 저장용), H2 DataBase(테스트용)
 - JPA
 - Redis Pub/Sub
 - Mockito
